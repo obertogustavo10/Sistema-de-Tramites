@@ -1,0 +1,47 @@
+@extends('plantilla')
+
+@section('titulo', "Listado")
+
+@section('scripts')
+<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('js/datatables.min.js') }}"></script>
+@endsection
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+    <li class="breadcrumb-item">Legajos</li>
+</ol>
+@endsection
+@section('contenido')
+<?php
+if (isset($msg)) {
+    echo '<div id = "msg"></div>';
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+}
+?>
+
+<input type="button" class="btn btn-success" value="Nuevo legajo" onclick="location.href = '/legajo/nuevo';">
+<table id="grilla" class="display">
+    <thead>
+        <tr>
+            <th>Nro documento</th>
+            <th>Nombre y apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+</table> 
+<script>
+	var dataTable = $('#grilla').DataTable({
+	    "processing": true,
+        "serverSide": true,
+	    "bFilter": true,
+	    "bInfo": true,
+	    "bSearchable": true,
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+	    "ajax": "{{ route('legajo.cargarGrilla') }}"
+	});
+</script>
+@endsection
