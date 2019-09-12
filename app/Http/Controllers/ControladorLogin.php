@@ -54,7 +54,6 @@ class ControladorLogin extends Controller
             $lstUsuario= $entidad->validarUsuario($usuario);
             // si el usuario y la contraseña ingresado es igual a lo obtenido del modelo redirect al form usuarios, sino from login
 
-print_r($lstUsuario);exit;
 
             if (count($lstUsuario) > 0){
                 $titulo='Inicio';

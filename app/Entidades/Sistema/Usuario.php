@@ -73,7 +73,6 @@ class Usuario extends Model
                 A.apellido,
                 A.areapredeterminada
                 FROM sistema_usuarios A WHERE usuario = '$usuario' AND activo= 1"; 
-print_r($sql);exit;
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
