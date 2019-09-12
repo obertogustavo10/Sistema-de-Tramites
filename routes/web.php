@@ -12,7 +12,7 @@
 */
 
 
- Route::group(array('domain' => 'autogestion.depcsuite.com'), function()
+ Route::group(array('domain' => 'autogestion.localhost'), function()
 {
 	
 Route::get('/', 'ControladorAutogestionLogin@indexLogin');
@@ -60,7 +60,7 @@ Route::get('/publico/pais/buscarProvincia', 'ControladorPais@buscarProvincia');
 });
 
 
-  Route::group(array('domain' => 'sistema.depcsuite.com'), function()
+  Route::group(array('domain' => 'admin.localhost'), function()
 {
 
 Route::get('/', 'ControladorHome@index');
