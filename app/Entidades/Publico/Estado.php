@@ -8,7 +8,7 @@ use Session;
 
 class Estado extends Model
 {
-    protected $table = 'public.t_estado';
+    protected $table = 'public_estado';
     public $timestamps = false;
 
     protected $fillable = [
@@ -24,7 +24,7 @@ class Estado extends Model
                   A.idestado,
                   A.descestado,
                   A.ncestado
-                From public.t_estado A";
+                From public_estado A";
 
         $sql .= " ORDER BY A.descestado";
         $lstRetorno = DB::select($sql);
@@ -36,7 +36,7 @@ class Estado extends Model
                 idestado,
                 descestado,
                 ncestado
-                FROM public.t_estado WHERE idestado = '$idestado'";
+                FROM public_estado WHERE idestado = '$idestado'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -49,7 +49,7 @@ class Estado extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE public.t_estado SET
+        $sql = "UPDATE public_estado SET
             descestado='$this->descestado',
             ncestado='$this->ncestado'
             WHERE idestado=?";
@@ -57,13 +57,13 @@ class Estado extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM public.t_estado WHERE 
+        $sql = "DELETE FROM public_estado WHERE 
             idestado=?";
         $affected = DB::delete($sql, [$this->idestado]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO public.t_estado (
+        $sql = "INSERT INTO public_estado (
         descestado,
         ncestado
         ) VALUES (?, ?);";

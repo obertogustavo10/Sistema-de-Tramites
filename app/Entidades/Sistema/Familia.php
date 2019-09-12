@@ -8,7 +8,7 @@ use Session;
 
 class Familia extends Model
 {
-    protected $table = 'sistema.familias';
+    protected $table = 'sistema_familias';
     public $timestamps = false;
 
     protected $fillable = [
@@ -22,7 +22,7 @@ class Familia extends Model
     }
 
     public function insertar() {
-        $sql = "INSERT INTO sistema.familias (
+        $sql = "INSERT INTO sistema_familias (
                 nombre,
                 descripcion
                 ) VALUES (?, ?);";
@@ -31,7 +31,7 @@ class Familia extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE sistema.familias SET
+        $sql = "UPDATE sistema_familias SET
             nombre='$this->nombre',
             descripcion='$this->descripcion'
             WHERE idfamilia=?;";
@@ -44,9 +44,9 @@ class Familia extends Model
             idfamilia,
             nombre,
             descripcion
-            FROM sistema.familias WHERE TRUE ";
+            FROM sistema_familias WHERE TRUE ";
         $sql .= " ORDER BY nombre";
-        $lstRetorno = $dacy->exeQueryEntity($sql, "sistema.familias");
+        $lstRetorno = $dacy->exeQueryEntity($sql, "sistema_familias");
 
         return $lstRetorno;
     }
@@ -62,7 +62,7 @@ class Familia extends Model
                 idfamilia,
                 nombre,
                 descripcion
-                FROM sistema.familias  WHERE 1=1 ";
+                FROM sistema_familias  WHERE 1=1 ";
 
         if (!empty($request['search']['value'])) {         
             $sql.=" AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
@@ -79,7 +79,7 @@ class Familia extends Model
                 A.idfamilia,
                 A.nombre,
                 A.descripcion
-                FROM sistema.familias A 
+                FROM sistema_familias A 
                 INNER JOIN sistema.usuario_familia B ON B.fk_idfamilia = A.idfamilia
                 WHERE B.fk_idusuario = $usuarioID ";
         $sql .= " ORDER BY nombre";
@@ -104,13 +104,13 @@ class Familia extends Model
                 A.nombre,
                 A.descripcion,
                 D.modulo
-                FROM sistema.familias A 
+                FROM sistema_familias A 
                 INNER JOIN sistema.usuario_familia B ON B.fk_idfamilia = A.idfamilia
                 INNER JOIN sistema.patente_familia C ON C.fk_idfamilia = A.idfamilia
                 INNER JOIN sistema.patentes D ON D.idpatente = C.fk_idpatente
                 WHERE B.fk_idusuario = $usuarioID AND D.modulo = '$modulo'";
         $sql .= " ORDER BY nombre";
-        $lstRetorno = $dacy->exeQueryEntity($sql, "sistema.familias");
+        $lstRetorno = $dacy->exeQueryEntity($sql, "sistema_familias");
 
         return $lstRetorno;
     }
@@ -120,7 +120,7 @@ class Familia extends Model
             idfamilia,
             nombre,
             descripcion
-            FROM sistema.familias WHERE idfamilia = '$idfamilia'";
+            FROM sistema_familias WHERE idfamilia = '$idfamilia'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){

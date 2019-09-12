@@ -8,7 +8,7 @@ use Session;
 
 class Departamento extends Model
 {
-    protected $table = 'public.departamentos';
+    protected $table = 'public_departamentos';
     public $timestamps = false;
 
     protected $fillable = [
@@ -24,7 +24,7 @@ class Departamento extends Model
                 A.iddepto, 
                 A.descdepto,
                 A.ncdepto
-                FROM public.departamentos A";
+                FROM public_departamentos A";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }

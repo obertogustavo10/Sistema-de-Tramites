@@ -8,7 +8,7 @@ use Session;
 
 class Sede extends Model
 {
-    protected $table = 'public.sedes';
+    protected $table = 'public_sedes';
     public $timestamps = false;
 
     protected $fillable = [
@@ -47,7 +47,7 @@ class Sede extends Model
                   A.telefono,
                   A.contacto,
                   A.comentarios
-                From public.sedes A WHERE 1=1";
+                From public_sedes A WHERE 1=1";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
@@ -73,7 +73,7 @@ class Sede extends Model
                   A.telefono,
                   A.contacto,
                   A.comentarios
-                From public.sedes A";
+                From public_sedes A";
 
         $sql .= " ORDER BY A.descsede";
         $lstRetorno = DB::select($sql);
@@ -90,7 +90,7 @@ class Sede extends Model
                 A.telefono,
                 A.contacto,
                 A.comentarios
-                FROM public.sedes A WHERE idsede = $id";
+                FROM public_sedes A WHERE idsede = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){

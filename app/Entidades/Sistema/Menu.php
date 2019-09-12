@@ -8,7 +8,7 @@ use Session;
 
 class Menu extends Model
 {
-    protected $table = 'sistema.menues';
+    protected $table = 'sistema_menues';
     public $timestamps = false;
 
     protected $fillable = [
@@ -43,8 +43,8 @@ class Menu extends Model
                     B.nombre as padre,
                     A.url,
                     A.activo
-                    FROM sistema.menues A
-                    LEFT JOIN sistema.menues B ON A.id_padre = B.idmenu
+                    FROM sistema_menues A
+                    LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
                 WHERE 1=1
                 ";
 
@@ -65,7 +65,7 @@ class Menu extends Model
         $sql = "SELECT 
                   A.idmenu,
                   A.nombre
-                FROM sistema.menues A";
+                FROM sistema_menues A";
 
         $sql .= " ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
@@ -76,7 +76,7 @@ class Menu extends Model
         $sql = "SELECT DISTINCT
                   A.idmenu,
                   A.nombre
-                FROM sistema.menues A
+                FROM sistema_menues A
                 WHERE A.id_padre = 0";
 
         $sql .= " ORDER BY A.nombre";
@@ -89,7 +89,7 @@ class Menu extends Model
             $sql = "SELECT DISTINCT
                       A.idmenu,
                       A.nombre
-                    FROM sistema.menues A
+                    FROM sistema_menues A
                     WHERE A.idmenu <> '$idmenu'";
 
             $sql .= " ORDER BY A.nombre";
@@ -109,7 +109,7 @@ class Menu extends Model
                 activo,
                 url,
                 css
-                FROM sistema.menues WHERE idmenu = '$idmenu'";
+                FROM sistema_menues WHERE idmenu = '$idmenu'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -126,7 +126,7 @@ class Menu extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE sistema.menues SET
+        $sql = "UPDATE sistema_menues SET
             nombre='$this->nombre',
             id_padre='$this->id_padre',
             orden=$this->orden,
@@ -138,13 +138,13 @@ class Menu extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM sistema.menues WHERE 
+        $sql = "DELETE FROM sistema_menues WHERE 
             idmenu=?";
         $affected = DB::delete($sql, [$this->idmenu]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO sistema.menues (
+        $sql = "INSERT INTO sistema_menues (
                 nombre,
                 id_padre,
                 orden,
@@ -171,7 +171,7 @@ class Menu extends Model
         A.orden,
         A.url,
         A.css
-        FROM sistema.menues A
+        FROM sistema_menues A
         INNER JOIN sistema.menu_area B ON A.idmenu = B.fk_idmenu
         WHERE A.activo = '1' AND B.fk_idarea = $idGrupo ORDER BY A.orden";
         $resultado = DB::select($sql);

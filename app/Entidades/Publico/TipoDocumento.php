@@ -8,7 +8,7 @@ use Session;
 
 class TipoDocumento extends Model
 {
-    protected $table = 'public.t_documentos';
+    protected $table = 'public_documentos';
     public $timestamps = false;
 
     protected $fillable = [
@@ -35,7 +35,7 @@ class TipoDocumento extends Model
                   A.idtidoc,
                   A.desctidoc,
                   A.nctidoc
-                From public.t_documentos A WHERE 1=1";
+                From public_documentos A WHERE 1=1";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
@@ -54,7 +54,7 @@ class TipoDocumento extends Model
                   A.idtidoc,
                   A.desctidoc, 
                   A.nctidoc
-                From public.t_documentos A";
+                From public_documentos A";
 
         $sql .= " ORDER BY A.desctidoc";
         $lstRetorno = DB::select($sql);
@@ -66,7 +66,7 @@ class TipoDocumento extends Model
                 idtidoc,
                 desctidoc,
                 nctidoc
-                FROM public.t_documentos WHERE idtidoc = $id";
+                FROM public_documentos WHERE idtidoc = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -79,7 +79,7 @@ class TipoDocumento extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE public.t_documentos SET
+        $sql = "UPDATE public_documentos SET
             desctidoc='$this->desctidoc',
             nctidoc='$this->nctidoc'
             WHERE idtidoc=?";
@@ -87,13 +87,13 @@ class TipoDocumento extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM public.t_documentos WHERE 
+        $sql = "DELETE FROM public_documentos WHERE 
             idtidoc=?";
         $affected = DB::delete($sql, [$this->idtidoc]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO public.t_documentos (
+        $sql = "INSERT INTO public_documentos (
         desctidoc,
         nctidoc
         ) VALUES (?, ?);";

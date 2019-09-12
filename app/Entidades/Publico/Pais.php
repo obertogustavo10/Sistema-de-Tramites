@@ -8,7 +8,7 @@ use Session;
 
 class Pais extends Model
 {
-    protected $table = 'public.paises';
+    protected $table = 'public_paises';
     public $timestamps = false;
 
     protected $fillable = [
@@ -36,7 +36,7 @@ class Pais extends Model
                   A.idpais,
                   A.descpais,
                   A.ncpais
-                From public.paises A WHERE 1=1";
+                From public_paises A WHERE 1=1";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
@@ -56,7 +56,7 @@ class Pais extends Model
                   A.descpais, 
                   A.ncpais,
                   A.nacionalidad
-                From public.paises A";
+                From public_paises A";
 
         $sql .= " ORDER BY A.descpais";
         $lstRetorno = DB::select($sql);
@@ -69,7 +69,7 @@ class Pais extends Model
                 descpais,
                 ncpais,
                 nacionalidad
-                FROM public.paises WHERE idpais = $id";
+                FROM public_paises WHERE idpais = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -83,7 +83,7 @@ class Pais extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE public.paises SET
+        $sql = "UPDATE public_paises SET
             descpais='$this->descpais',
             ncpais='$this->ncpais',
             nacionalidad='$this->nacionalidad'
@@ -92,13 +92,13 @@ class Pais extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM public.paises WHERE 
+        $sql = "DELETE FROM public_paises WHERE 
             idpais=?";
         $affected = DB::delete($sql, [$this->idpais]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO public.paises (
+        $sql = "INSERT INTO public_paises (
         descpais,
         ncpais,
         nacionalidad

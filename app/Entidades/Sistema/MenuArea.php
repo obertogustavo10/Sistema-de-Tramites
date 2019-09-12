@@ -8,7 +8,7 @@ use Session;
 
 class MenuArea extends Model
 {
-    protected $table = 'sistema.menu_area';
+    protected $table = 'sistema_menu_area';
     public $timestamps = false;
 
     protected $fillable = [
@@ -16,13 +16,13 @@ class MenuArea extends Model
     ];
 
     public function eliminarPorMenu() {
-        $sql = "DELETE FROM sistema.menu_area WHERE 
+        $sql = "DELETE FROM sistema_menu_area WHERE 
             fk_idmenu=?";
         $affected = DB::delete($sql, [$this->fk_idmenu]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO sistema.menu_area (
+        $sql = "INSERT INTO sistema_menu_area (
         fk_idmenu,
         fk_idarea
         ) VALUES (?, ?);";
@@ -30,7 +30,7 @@ class MenuArea extends Model
     }
 
     public function obtenerPorMenu($menuID){
-        $sql = "SELECT fk_idarea FROM sistema.menu_area WHERE fk_idmenu = $menuID";
+        $sql = "SELECT fk_idarea FROM sistema_menu_area WHERE fk_idmenu = $menuID";
         $resultado = DB::select($sql);
         return $resultado;
     }

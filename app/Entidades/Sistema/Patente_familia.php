@@ -9,7 +9,7 @@ require app_path().'/start/constants.php';
 
 class Patente_familia extends Model
 {
-    protected $table = 'sistema.patente_familia';
+    protected $table = 'sistema_patente_familia';
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,7 +18,7 @@ class Patente_familia extends Model
     ];
 
     public function insertar() {
-        $sql = "INSERT INTO sistema.patente_familia (
+        $sql = "INSERT INTO sistema_patente_familia (
                 fk_idpatente,
                 fk_idfamilia
                 ) VALUES (?, ?);";
@@ -26,7 +26,7 @@ class Patente_familia extends Model
     }
 
     public function eliminarPorFamilia($familiaID) {
-        $sql = "DELETE FROM sistema.patente_familia
+        $sql = "DELETE FROM sistema_patente_familia
                 WHERE fk_idfamilia='$familiaID';";
         $deleted = DB::delete($sql);
     }

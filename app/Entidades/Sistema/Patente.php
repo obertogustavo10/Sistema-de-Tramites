@@ -9,7 +9,7 @@ require app_path().'/start/constants.php';
 
 class Patente extends Model
 {
-    protected $table = 'sistema.patentes';
+    protected $table = 'sistema_patentes';
     public $timestamps = false;
 
     protected $fillable = [
@@ -30,7 +30,7 @@ class Patente extends Model
                 modulo,
                 submodulo,
                 tipo
-                FROM sistema.patentes A
+                FROM sistema_patentes A
                 INNER JOIN sistema.patente_familia B ON B.fk_idpatente = A.idpatente AND B.fk_idfamilia = ? ";
         $sql .= " ORDER BY nombre";
         $lstRetorno = DB::select($sql, [$familiaID]);
@@ -39,7 +39,7 @@ class Patente extends Model
 
     public function obtenerCantidadGrillaDisponibles() {
         $sql = "SELECT count(idpatente) as cantidad
-                FROM sistema.patentes A
+                FROM sistema_patentes A
                 WHERE A.idpatente NOT IN (SELECT fk_idpatente FROM sistema.patente_familia)";
         $lstRetorno = DB::select($sql);
         return $lstRetorno[0]->cantidad;
@@ -67,7 +67,7 @@ class Patente extends Model
                     modulo,
                     submodulo,
                     tipo
-                    FROM sistema.patentes A WHERE 1=1 ";
+                    FROM sistema_patentes A WHERE 1=1 ";
 
         if (!empty($request['search']['value'])) {          
             $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
@@ -95,14 +95,14 @@ class Patente extends Model
                     aud_usuario_ultmod,
                     aud_stm_ultmod,
                     aud_ip_ultmod
-                    FROM sistema.patentes WHERE idpatente = ?";
+                    FROM sistema_patentes WHERE idpatente = ?";
         $lstRetorno = DB::select($sql, [$idpatente]);
         return $lstRetorno[0];
     }
 
     public function obtenerPatentesDelUsuario() {
         $sql = "SELECT nombre, modulo, tipo, log_operacion
-            FROM sistema.patentes A
+            FROM sistema_patentes A
             INNER JOIN sistema.patente_familia B ON B.fk_idpatente = A.idpatente
             INNER JOIN sistema.usuario_familia C ON C.fk_idfamilia = B.fk_idfamilia
             WHERE C.fk_idusuario = ? ";

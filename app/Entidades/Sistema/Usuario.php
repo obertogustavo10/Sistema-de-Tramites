@@ -9,7 +9,7 @@ require app_path().'/start/constants.php';
 
 class Usuario extends Model
 {
-    protected $table = 'sistema.usuarios';
+    protected $table = 'sistema_usuarios';
     public $timestamps = false;
 
     protected $fillable = [
@@ -47,7 +47,7 @@ class Usuario extends Model
                 A.ultimo_ingreso,
                 A.root,
                 A.activo
-                FROM sistema.usuarios A
+                FROM sistema_usuarios A
                 WHERE 1=1";
 
         //Realiza el filtrado
@@ -72,8 +72,8 @@ class Usuario extends Model
                 A.nombre,
                 A.apellido,
                 A.areapredeterminada
-                FROM sistema.usuarios A WHERE usuario = '$usuario' AND activo= 1"; 
-
+                FROM sistema_usuarios A WHERE usuario = '$usuario' AND activo= 1"; 
+print_r($sql);exit;
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -81,7 +81,7 @@ class Usuario extends Model
     public function verificarExistenciaMail($mail){
         $sql = "SELECT 
             count (A.idusuario) as cantidad
-            FROM sistema.usuarios A 
+            FROM sistema_usuarios A 
             WHERE A.mail = '$mail'"; 
 
         $lstRetorno = DB::select($sql);
@@ -91,7 +91,7 @@ class Usuario extends Model
      public function insertar() {
         $now = new \DateTime();
 
-            $sql = "INSERT INTO sistema.usuarios (
+            $sql = "INSERT INTO sistema_usuarios (
                     usuario,
                     cantidad_bloqueo,
                     activo,
@@ -120,7 +120,7 @@ class Usuario extends Model
     }
 
     public function guardar() {
-       $sql = "UPDATE sistema.usuarios SET
+       $sql = "UPDATE sistema_usuarios SET
             usuario='$this->usuario',
             cantidad_bloqueo='$this->cantidad_bloqueo',
             apellido='$this->apellido',
@@ -145,7 +145,7 @@ class Usuario extends Model
                 A.ultimo_ingreso,
                 A.root,
                 A.areapredeterminada
-                FROM sistema.usuarios A
+                FROM sistema_usuarios A
                 WHERE A.activo = '1' ";
 
         $sql .= " ORDER BY C.nombre";
@@ -166,7 +166,7 @@ class Usuario extends Model
                 A.ultimo_ingreso,
                 A.root,
                 A.areapredeterminada
-                FROM sistema.usuarios A
+                FROM sistema_usuarios A
                 WHERE A.activo = '1' ";
 
         $sql .= " ORDER BY A.nombre";
@@ -188,7 +188,7 @@ class Usuario extends Model
                     root,
                     clave,
                     A.areapredeterminada
-                    FROM sistema.usuarios A 
+                    FROM sistema_usuarios A 
                     WHERE usuario = '$usuario'";
         $lstRetorno = DB::select($sql);
 
@@ -221,7 +221,7 @@ class Usuario extends Model
                     root,
                     clave,
                     A.areapredeterminada
-                    FROM sistema.usuarios A 
+                    FROM sistema_usuarios A 
                     WHERE mail = '$mail'";
         $lstRetorno = DB::select($sql);
 
@@ -242,7 +242,7 @@ class Usuario extends Model
 
     public function actualizarFechaIngreso() {
         $fec = new \DateTime();
-        $sql = "UPDATE sistema.usuarios SET
+        $sql = "UPDATE sistema_usuarios SET
             ultimo_ingreso=?
             WHERE idusuario= ?";
         $affected = DB::update($sql, [$fec->format('Y-m-d H:i:s'), $this->idusuario]);
@@ -257,7 +257,7 @@ class Usuario extends Model
     }
 
     public function guardarToken($email, $token){
-        $sql = "UPDATE sistema.usuarios SET
+        $sql = "UPDATE sistema_usuarios SET
         token=?
         WHERE mail=?";
         $affected = DB::update($sql, [$token, $email]);
@@ -266,14 +266,14 @@ class Usuario extends Model
     public function validarToken($mail, $token){
         $sql = "SELECT 
             count (A.idusuario) as cantidad
-            FROM sistema.usuarios A 
+            FROM sistema_usuarios A 
             WHERE A.mail = '$mail' AND token = '$token'"; 
         $lstRetorno = DB::select($sql);
         return $lstRetorno[0]->cantidad > 0;
     }
 
     public function guardarClave($idUsuario, $clave){
-        $sql = "UPDATE sistema.usuarios SET
+        $sql = "UPDATE sistema_usuarios SET
         clave=?
         WHERE idusuario=?";
         $affected = DB::update($sql, [$clave, $idUsuario]);

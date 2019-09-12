@@ -8,7 +8,7 @@ use Session;
 
 class Dia extends Model
 {
-    protected $table = 'public.dias';
+    protected $table = 'public_dias';
     public $timestamps = false;
 
     protected $fillable = [
@@ -24,7 +24,7 @@ class Dia extends Model
                 A.iddia, 
                 A.ncdia,
                 A.descdia
-                FROM public.dias A ORDER BY A.iddia";
+                FROM public_dias A ORDER BY A.iddia";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }

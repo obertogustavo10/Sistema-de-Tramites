@@ -8,7 +8,7 @@ use Session;
 
 class SituacionImpositiva extends Model
 {
-    protected $table = 'public.situimpositiva';
+    protected $table = 'public_situimpositiva';
     public $timestamps = false;
 
     protected $fillable = [
@@ -35,7 +35,7 @@ class SituacionImpositiva extends Model
                   A.idiva,
                   A.desciva,
                   A.nciva
-                From public.situimpositiva A WHERE 1=1";
+                From public_situimpositiva A WHERE 1=1";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
@@ -54,7 +54,7 @@ class SituacionImpositiva extends Model
                   A.idiva,
                   A.desciva,
                   A.nciva
-                From public.situimpositiva A";
+                From public_situimpositiva A";
 
         $sql .= " ORDER BY A.idiva";
         $lstRetorno = DB::select($sql);
@@ -66,7 +66,7 @@ class SituacionImpositiva extends Model
                 idiva,
                 desciva,
                 nciva
-                FROM public.situimpositiva WHERE idiva = $id";
+                FROM public_situimpositiva WHERE idiva = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -79,7 +79,7 @@ class SituacionImpositiva extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE public.situimpositiva SET
+        $sql = "UPDATE public_situimpositiva SET
             desciva='$this->desciva',
             nciva='$this->nciva'
             WHERE idiva=?";
@@ -87,13 +87,13 @@ class SituacionImpositiva extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM public.situimpositiva WHERE 
+        $sql = "DELETE FROM public_situimpositiva WHERE 
             idiva=?";
         $affected = DB::delete($sql, [$this->idiva]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO public.situimpositiva (
+        $sql = "INSERT INTO public_situimpositiva (
         desciva,
         nciva
         ) VALUES (?, ?);";

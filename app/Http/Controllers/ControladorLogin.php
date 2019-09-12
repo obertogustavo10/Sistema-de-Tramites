@@ -36,15 +36,15 @@ class ControladorLogin extends Controller
 
     public function entrar(Request $request){
         $usuario= $request->input('txtUsuario');
-        $clave= $request->input('txtClave');
-     	
+        $clave= "";//$request->input('txtClave');
+     
 		//$user_format = env('ADLDAP_USER_FORMAT', 'uid=%s,'.env('ADLDAP_BASEDN', ''));
 		//$userdn = sprintf($user_format, $usuario);
 		//$conexion = ldap_connect(env('ADLDAP_CONTROLLERS'), "389");
 		//ldap_set_option($conexion, LDAP_OPT_PROTOCOL_VERSION, 3);
 
      	//if(@ldap_bind($conexion, $userdn, $clave)){
-        if($usuario == "ntarche" && $clave == "homero815"){
+        if($usuario == "admin" && $clave == ""){
 	 		//$resultado_ldap = Adldap::search()->where('uid', '=', $usuario)->get();
 	     	//$search = Adldap::search()->users()->find('ntarche');
 	     	//$usuarioLdap = $resultado_ldap[0]["uid"][0];
@@ -53,6 +53,8 @@ class ControladorLogin extends Controller
             // llamo al modelo
             $lstUsuario= $entidad->validarUsuario($usuario);
             // si el usuario y la contraseña ingresado es igual a lo obtenido del modelo redirect al form usuarios, sino from login
+
+print_r($lstUsuario);exit;
 
             if (count($lstUsuario) > 0){
                 $titulo='Inicio';

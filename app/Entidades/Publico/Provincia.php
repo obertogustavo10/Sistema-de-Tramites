@@ -8,7 +8,7 @@ use Session;
 
 class Provincia extends Model
 {
-    protected $table = 'public.provincias';
+    protected $table = 'public_provincias';
     public $timestamps = false;
 
     protected $fillable = [
@@ -30,7 +30,7 @@ class Provincia extends Model
         $sql = "SELECT 
                 A.idprov,
                 A.descprov
-                FROM public.provincias A
+                FROM public_provincias A
                 WHERE A.fk_idpais = '$idPais'";
         $sql .= " ORDER BY A.descprov";
         $resultado = DB::select($sql);

@@ -8,7 +8,7 @@ use Session;
 
 class TipoDomicilio extends Model
 {
-    protected $table = 'public.t_domicilios';
+    protected $table = 'public_domicilios';
     public $timestamps = false;
 
     protected $fillable = [
@@ -34,7 +34,7 @@ class TipoDomicilio extends Model
                   A.idtidomicilio,
                   A.desctidomicilio,
                   A.nctidomicilio
-                From public.t_domicilios A WHERE 1=1";
+                From public_domicilios A WHERE 1=1";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
@@ -53,7 +53,7 @@ class TipoDomicilio extends Model
                   A.idtidomicilio,
                   A.desctidomicilio,
                   A.nctidomicilio
-                From public.t_domicilios A";
+                From public_domicilios A";
 
         $sql .= " ORDER BY A.desctidomicilio";
         $lstRetorno = DB::select($sql);
@@ -65,7 +65,7 @@ class TipoDomicilio extends Model
                 idtidomicilio,
                 desctidomicilio,
                 nctidomicilio
-                FROM public.t_domicilios WHERE idtidomicilio = $id";
+                FROM public_domicilios WHERE idtidomicilio = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -78,7 +78,7 @@ class TipoDomicilio extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE public.t_domicilios SET
+        $sql = "UPDATE public_domicilios SET
             desctidomicilio='$this->desctidomicilio',
             nctidomicilio='$this->nctidomicilio'
             WHERE idtidomicilio=?";
@@ -86,13 +86,13 @@ class TipoDomicilio extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM public.t_domicilios WHERE 
+        $sql = "DELETE FROM public_domicilios WHERE 
             idtidomicilio=?";
         $affected = DB::delete($sql, [$this->idtidomicilio]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO public.t_domicilios (
+        $sql = "INSERT INTO public_domicilios (
         desctidomicilio,
         nctidomicilio
         ) VALUES (?, ?);";

@@ -8,7 +8,7 @@ use Session;
 
 class Area extends Model
 {
-    protected $table = 'sistema.areas';
+    protected $table = 'sistema_areas';
     public $timestamps = false;
 
     protected $fillable = [
@@ -28,7 +28,7 @@ class Area extends Model
             ncarea,
             descarea,
             activo
-            FROM sistema.areas WHERE idarea = '$idarea'";
+            FROM sistema_areas WHERE idarea = '$idarea'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -46,7 +46,7 @@ class Area extends Model
                 A.idarea, 
                 A.ncarea,
                 A.descarea
-                FROM sistema.areas A
+                FROM sistema_areas A
                 WHERE A.activo = 1 ORDER BY A.descarea DESC";
         
         $lstRetorno = DB::select($sql);
@@ -58,7 +58,7 @@ class Area extends Model
                 A.idarea, 
                 A.ncarea, 
                 A.descarea
-                FROM sistema.areas A
+                FROM sistema_areas A
                 INNER JOIN sistema.usuario_familia B ON A.idarea = B.fk_idarea AND B.fk_idusuario = $usuarioID
                 WHERE A.activo = 1 ORDER BY A.descarea DESC";
         
@@ -67,7 +67,7 @@ class Area extends Model
     }
 
     public function insertar() {
-        $sql = "INSERT INTO sistema.areas (
+        $sql = "INSERT INTO sistema_areas (
         ncarea,
         descarea,
         activo
@@ -77,7 +77,7 @@ class Area extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE sistema.areas SET
+        $sql = "UPDATE sistema_areas SET
             ncarea='$this->ncarea',
             descarea='$this->descarea',
             activo='$this->activo'
@@ -96,7 +96,7 @@ class Area extends Model
                     ncarea,
                     descarea,
                     activo
-                FROM sistema.areas A WHERE 1=1";
+                FROM sistema_areas A WHERE 1=1";
 
         if (!empty($request['search']['value'])) {      
             $sql.=" AND ( A.descarea LIKE '%" . $request['search']['value'] . "%' )";
