@@ -31,7 +31,7 @@ class Patente extends Model
                 submodulo,
                 tipo
                 FROM sistema_patentes A
-                INNER JOIN sistema.patente_familia B ON B.fk_idpatente = A.idpatente AND B.fk_idfamilia = ? ";
+                INNER JOIN sistema_patente_familia B ON B.fk_idpatente = A.idpatente AND B.fk_idfamilia = ? ";
         $sql .= " ORDER BY nombre";
         $lstRetorno = DB::select($sql, [$familiaID]);
         return $lstRetorno;
@@ -40,7 +40,7 @@ class Patente extends Model
     public function obtenerCantidadGrillaDisponibles() {
         $sql = "SELECT count(idpatente) as cantidad
                 FROM sistema_patentes A
-                WHERE A.idpatente NOT IN (SELECT fk_idpatente FROM sistema.patente_familia)";
+                WHERE A.idpatente NOT IN (SELECT fk_idpatente FROM sistema_patente_familia)";
         $lstRetorno = DB::select($sql);
         return $lstRetorno[0]->cantidad;
     }
@@ -103,7 +103,7 @@ class Patente extends Model
     public function obtenerPatentesDelUsuario() {
         $sql = "SELECT nombre, modulo, tipo, log_operacion
             FROM sistema_patentes A
-            INNER JOIN sistema.patente_familia B ON B.fk_idpatente = A.idpatente
+            INNER JOIN sistema_patente_familia B ON B.fk_idpatente = A.idpatente
             INNER JOIN sistema_usuario_familia C ON C.fk_idfamilia = B.fk_idfamilia
             WHERE C.fk_idusuario = ? ";
 

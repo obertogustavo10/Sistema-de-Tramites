@@ -106,8 +106,8 @@ class Familia extends Model
                 D.modulo
                 FROM sistema_familias A 
                 INNER JOIN sistema_usuario_familia B ON B.fk_idfamilia = A.idfamilia
-                INNER JOIN sistema.patente_familia C ON C.fk_idfamilia = A.idfamilia
-                INNER JOIN sistema.patentes D ON D.idpatente = C.fk_idpatente
+                INNER JOIN sistema_patente_familia C ON C.fk_idfamilia = A.idfamilia
+                INNER JOIN sistema_patentes D ON D.idpatente = C.fk_idpatente
                 WHERE B.fk_idusuario = $usuarioID AND D.modulo = '$modulo'";
         $sql .= " ORDER BY nombre";
         $lstRetorno = $dacy->exeQueryEntity($sql, "sistema_familias");

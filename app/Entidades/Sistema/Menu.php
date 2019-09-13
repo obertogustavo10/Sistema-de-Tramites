@@ -172,7 +172,7 @@ class Menu extends Model
         A.url,
         A.css
         FROM sistema_menues A
-        INNER JOIN sistema.menu_area B ON A.idmenu = B.fk_idmenu
+        INNER JOIN sistema_menu_area B ON A.idmenu = B.fk_idmenu
         WHERE A.activo = '1' AND B.fk_idarea = $idGrupo ORDER BY A.orden";
         $resultado = DB::select($sql);
         return $resultado;
