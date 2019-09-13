@@ -80,7 +80,7 @@ class Familia extends Model
                 A.nombre,
                 A.descripcion
                 FROM sistema_familias A 
-                INNER JOIN sistema.usuario_familia B ON B.fk_idfamilia = A.idfamilia
+                INNER JOIN sistema_usuario_familia B ON B.fk_idfamilia = A.idfamilia
                 WHERE B.fk_idusuario = $usuarioID ";
         $sql .= " ORDER BY nombre";
 
@@ -91,7 +91,7 @@ class Familia extends Model
     public function validarFamiliaPorUsuarioArea($familiaID, $usuarioID, $areaID){
         $sql = "SELECT DISTINCT
                 A.fk_idfamilia
-                FROM sistema.usuario_familia A
+                FROM sistema_usuario_familia A
                 WHERE A.fk_idfamilia = $familiaID AND A.fk_idusuario = $usuarioID AND A.fk_idarea = $areaID";
         $lstRetorno = DB::select($sql);
         return count($lstRetorno)>0;
@@ -105,7 +105,7 @@ class Familia extends Model
                 A.descripcion,
                 D.modulo
                 FROM sistema_familias A 
-                INNER JOIN sistema.usuario_familia B ON B.fk_idfamilia = A.idfamilia
+                INNER JOIN sistema_usuario_familia B ON B.fk_idfamilia = A.idfamilia
                 INNER JOIN sistema.patente_familia C ON C.fk_idfamilia = A.idfamilia
                 INNER JOIN sistema.patentes D ON D.idpatente = C.fk_idpatente
                 WHERE B.fk_idusuario = $usuarioID AND D.modulo = '$modulo'";

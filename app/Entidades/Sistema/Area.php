@@ -59,7 +59,7 @@ class Area extends Model
                 A.ncarea, 
                 A.descarea
                 FROM sistema_areas A
-                INNER JOIN sistema.usuario_familia B ON A.idarea = B.fk_idarea AND B.fk_idusuario = $usuarioID
+                INNER JOIN sistema_usuario_familia B ON A.idarea = B.fk_idarea AND B.fk_idusuario = $usuarioID
                 WHERE A.activo = 1 ORDER BY A.descarea DESC";
         
         $lstRetorno = DB::select($sql);

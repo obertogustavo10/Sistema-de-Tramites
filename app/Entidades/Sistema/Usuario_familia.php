@@ -35,7 +35,7 @@ class Usuario_familia extends Model
 
     public function obtenerFamiliaDelUsuario($usuarioID) {
         $sql = "SELECT fk_idfamilia FROM sistema_usuario_familia A
-        INNER JOIN sistema.usuario_area B ON A.fk_idusuario = B.fk_idusuario
+        INNER JOIN sistema_usuario_area B ON A.fk_idusuario = B.fk_idusuario
         WHERE A.fk_idusuario='$usuarioID' AND B.fk_idarea=" .Session::get('grupo_id');
         $lstRetorno = DB::select($sql);
         return $lstRetorno;

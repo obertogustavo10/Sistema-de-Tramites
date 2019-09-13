@@ -104,7 +104,7 @@ class Patente extends Model
         $sql = "SELECT nombre, modulo, tipo, log_operacion
             FROM sistema_patentes A
             INNER JOIN sistema.patente_familia B ON B.fk_idpatente = A.idpatente
-            INNER JOIN sistema.usuario_familia C ON C.fk_idfamilia = B.fk_idfamilia
+            INNER JOIN sistema_usuario_familia C ON C.fk_idfamilia = B.fk_idfamilia
             WHERE C.fk_idusuario = ? ";
 
         $lstRetorno = DB::select($sql, [Session::get('usuario_id')]);
