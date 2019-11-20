@@ -11,7 +11,7 @@
 |
 */
 
-  Route::group(array('domain' => 'admin.localhost'), function()
+  Route::group(array('domain' => 'sistema'), function()
 {
 
 Route::get('/', 'ControladorHome@index');
