@@ -82,5 +82,13 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 
+/* --------------------------------------------- */
+/* CONTROLADOR NUEVO TRAMITE (PODER ESPECIAL)                           */
+/* --------------------------------------------- */
+
+Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
+Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+
 });
 
