@@ -87,5 +87,27 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
 Route::get('/sistema/menu/cargarGrilla', 'ControladorMenu@cargarGrilla')->name('calculoutilidades.cargarGrilla');
+/* CONTROLADOR CLIENTE                            */
+/* --------------------------------------------- */
+
+Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
+Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
+Route::get('/cliente/listar', 'ClienteListar@cargarGrilla')->name('cliente.cargarGrilla');
+
+/* CONFIGURACION                             */
+/* --------------------------------------------- */
+Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@nuevo');
+Route::get('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@nuevo');
+Route::post('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@guardar');
+Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFormularios@cargarGrilla')->name('formulario.cargarGrilla');
+
+/* --------------------------------------------- */
+/* CONTROLADOR NUEVO TRAMITE (PODER ESPECIAL)                           */
+/* --------------------------------------------- */
+
+Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
+Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+
 });
 
