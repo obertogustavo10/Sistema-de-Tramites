@@ -90,20 +90,19 @@ Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guard
 /* --------------------------------------------- */
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
 
 /* calculo de utilidadez                             */
 /* --------------------------------------------- */
 Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
-Route::get('/sistema/menu/cargarGrilla', 'ControladorMenu@cargarGrilla')->name('calculoutilidades.cargarGrilla');
 
 /* CONTROLADOR CLIENTE                            */
 /* --------------------------------------------- */
 
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
-Route::get('/cliente/listar', 'ControladorClienteListar@cargarGrilla')->name('cliente.cargarGrilla');
+Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 
 /* CONFIGURACION                             */
 /* --------------------------------------------- */
