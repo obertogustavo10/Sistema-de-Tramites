@@ -87,7 +87,7 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
-Route::get('/cliente/listar', 'ClienteListar@cargarGrilla')->name('cliente.cargarGrilla');
+Route::get('/cliente/listar', 'ControladorClienteListar@cargarGrilla')->name('cliente.cargarGrilla');
 
 /* CONFIGURACION                             */
 /* --------------------------------------------- */
