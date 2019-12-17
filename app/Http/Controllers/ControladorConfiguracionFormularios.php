@@ -12,6 +12,22 @@ use Session;
 
 class ControladorConfiguracionFormularios extends Controller
     {
+        public function index()
+        {
+        $titulo = "Listado de Formularios";
+        if(Usuario::autenticado() == true)
+        {
+            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
+                $codigo = "MENUCONSULTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('configuracion.formulario-listar', compact('titulo'));
+            }
+        } else {
+            return redirect('login');
+        }
+    }
         public function nuevo()
         {
             $titulo = "Nuevo Formulario";
