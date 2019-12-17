@@ -82,13 +82,18 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
-<<<<<<< HEAD
 /* Autorizacion de viajes                        */
 /* --------------------------------------------- */
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
 Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
-=======
+
+/* calculo de utilidadez                             */
+/* --------------------------------------------- */
+Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
+Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
+Route::get('/sistema/menu/cargarGrilla', 'ControladorMenu@cargarGrilla')->name('calculoutilidades.cargarGrilla');
+
 /* CONTROLADOR CLIENTE                            */
 /* --------------------------------------------- */
 
@@ -111,6 +116,5 @@ Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramite/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
 
->>>>>>> a05ca2b741e68376d1b1c1a3c40e3e5214d5d80e
 });
 

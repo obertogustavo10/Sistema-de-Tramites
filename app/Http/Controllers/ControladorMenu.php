@@ -11,8 +11,8 @@ use App\Entidades\Sistema\MenuArea;
 require app_path().'/start/constants.php';
 use Session;
 
-class ControladorMenu extends Controller{
-    public function index(){
+class ControladorCalculoUtlidades extends Controller{
+    public function nuevo(){
         $titulo = "Menú";
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
