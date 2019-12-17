@@ -82,6 +82,13 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
+/* CONTROLADOR CLIENTE                            */
+/* --------------------------------------------- */
+
+Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
+Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
+Route::get('/cliente/listar', 'ClienteListar@cargarGrilla')->name('cliente.cargarGrilla');
+
 /* CONFIGURACION                             */
 /* --------------------------------------------- */
 Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@index');
