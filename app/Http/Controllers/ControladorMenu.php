@@ -11,8 +11,8 @@ use App\Entidades\Sistema\MenuArea;
 require app_path().'/start/constants.php';
 use Session;
 
-class ControladorCalculoUtlidades extends Controller{
-    public function nuevo(){
+class ControladorMenu extends Controller{
+    public function index(){
         $titulo = "Menú";
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
@@ -138,7 +138,7 @@ class ControladorCalculoUtlidades extends Controller{
             //validaciones
             if ($entidad->nombre == "") {
                 $msg["ESTADO"] = MSG_ERROR;
-                $msg["MSG"] = FALTANOMBRE; //ARREGLAR
+                $msg["MSG"] = "Complete todos los datos";
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
@@ -181,8 +181,6 @@ class ControladorCalculoUtlidades extends Controller{
         $array_menu_grupo = $menu_grupo->obtenerPorMenu($id);
 
         return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $menu->idmenu;
-    }
 
-    
-    
+    }
 }
