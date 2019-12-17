@@ -81,6 +81,11 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
-
+/* --------------------------------------------- */
+/* Autorizacion de viajes                        */
+/* --------------------------------------------- */
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
 });
 
