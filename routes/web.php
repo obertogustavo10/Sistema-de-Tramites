@@ -84,8 +84,8 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 /* --------------------------------------------- */
 /* Autorizacion de viajes                        */
 /* --------------------------------------------- */
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@nuevo');
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar');
 Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
 
 /* calculo de utilidadez                             */
