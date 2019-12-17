@@ -54,4 +54,30 @@ Class Formulario extends Model
             idformulario=?";
         $affected = DB::delete($sql, [$this->idformulario]);
     }
+    public function obtenerFiltrado() 
+    {
+        $request = $_REQUEST;
+        $columns = array(
+           0 => 'idformulario',
+           1 => 'nombre'
+            );
+        $sql = "SELECT 
+                idformulario,
+                nombre
+                FROM formularios
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) 
+        { 
+            $sql.=" AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR idformulario LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }

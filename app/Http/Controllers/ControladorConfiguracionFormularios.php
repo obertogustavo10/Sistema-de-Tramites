@@ -28,6 +28,37 @@ class ControladorConfiguracionFormularios extends Controller
             return redirect('login');
         }
     }
+    public function cargarGrilla()
+    {
+        $request = $_REQUEST;
+
+        $entidadFormulario = new Formulario();
+        $aFormulario = $entidadFormulario->obtenerFiltrado();
+
+        $data = array();
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+        if (count($aFormulario) > 0)
+            $cont=0;
+            for ($i=$inicio; $i < count($aFormulario) && $cont < $registros_por_pagina; $i++) 
+            {
+                $row = array();
+                $row[] = '<a href="/cofiguracion/formularios/' . $aFormulario[$i]->idformulario . '">' . $aFormulario[$i]->nombre . '</a>';
+                $row[] = $aFormulario[$i]->nombre;
+                $cont++;
+                $data[] = $row;
+            }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aFormulario), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aFormulario),//cantidad total de registros en la paginacion
+            "data" => $data
+        );
+        return json_encode($json_data);
+    }
         public function nuevo()
         {
             $titulo = "Nuevo Formulario";
