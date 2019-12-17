@@ -91,7 +91,7 @@ Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guard
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
 
-/* calculo de utilidadez                             */
+/* calculo de utilidades                             */
 /* --------------------------------------------- */
 Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
@@ -118,5 +118,7 @@ Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramite/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
 
+Route::get('/tramites/finalizados', 'ControladorTramite@index');
+Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
 });
 
