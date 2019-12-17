@@ -111,7 +111,7 @@ Route::get('/cliente/listar', 'ClienteListar@cargarGrilla')->name('cliente.carga
 
 /* CONFIGURACION                             */
 /* --------------------------------------------- */
-Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@nuevo');
+Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@index');
 Route::get('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@nuevo');
 Route::post('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@guardar');
 Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFormularios@cargarGrilla')->name('formulario.cargarGrilla');
