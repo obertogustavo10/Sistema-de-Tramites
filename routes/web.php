@@ -82,6 +82,10 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
+/* calculo de utilidades                             */
+/* --------------------------------------------- */
+Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
+Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
 /* Autorizacion de viajes                        */
 /* --------------------------------------------- */
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
