@@ -86,6 +86,18 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 /* --------------------------------------------- */
 Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
+/* Autorizacion de viajes                        */
+/* --------------------------------------------- */
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
+
+/* calculo de utilidadez                             */
+/* --------------------------------------------- */
+Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
+Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
+Route::get('/sistema/menu/cargarGrilla', 'ControladorMenu@cargarGrilla')->name('calculoutilidades.cargarGrilla');
+
 /* CONTROLADOR CLIENTE                            */
 /* --------------------------------------------- */
 
