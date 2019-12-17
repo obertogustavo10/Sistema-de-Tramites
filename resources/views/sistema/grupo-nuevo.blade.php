@@ -47,7 +47,7 @@ if (isset($msg)) {
     <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
     <div class="row">
         <div class="form-group col-lg-6">
-            <label>Nombre: *</label>
+            <label>Nombre y Apellido: *</label>
             <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$grupo->descarea or ''}}" required>
         </div>
         <div class="form-group col-lg-6">
