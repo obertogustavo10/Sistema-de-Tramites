@@ -86,11 +86,13 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 /* --------------------------------------------- */
 Route::get('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/formulario/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
-/* Autorizacion de viajes                        */
+
+/* --------------------------------------------- */
+/* CONTROLADOR AUTORIZACION DE VIAJE                           */
 /* --------------------------------------------- */
 
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/autorizacionviajes', 'ControladorAutorizacionViajes@nuevo');
+Route::post('/tramite/autorizacionviajes', 'ControladorAutorizacionViajes@guardar');
 Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('autorizacionviaje.cargarGrilla');
 
 
@@ -120,8 +122,16 @@ Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFo
 Route::get('/tramites/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramites/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramites/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+
+/* --------------------------------------------- */
+/* CONTROLADOR TRAMITE INICIADO                           */
+/* --------------------------------------------- */
 Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramites@cargarGrilla')->name('tramitesiniciados.cargarGrilla');
 Route::get('/tramites/iniciados', 'ControladorTramites@index');
+
+/* --------------------------------------------- */
+/* CONTROLADOR TRAMITE FINALIZADO                           */
+/* --------------------------------------------- */
 
 
 Route::get('/tramites/finalizados', 'ControladorTramite@index');
@@ -129,8 +139,8 @@ Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrill
 });
 
 /* --------------------------------------------- */
-/* controlador tramite en proceso                           */
+/* CONTROLADOR TRAMITE EN PROCESO                           */
 /* --------------------------------------------- */
 
 Route::get('/tramites/enproceso','ControladorTramite@index');
-Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramiteenproceso.cargarGrilla');
+Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitesenproceso.cargarGrilla');

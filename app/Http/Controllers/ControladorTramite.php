@@ -12,14 +12,14 @@ use Session;
 
 class ControladorTramite extends Controller{
     public function index(){
-        $titulo = "tramites en proceso";
+        $titulo = "Tramites en proceso";
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                return view('tramite.enproceso', compact('titulo'));
+                return view('tramites.enproceso', compact('titulo'));
             }
         } else {
             return redirect('login');

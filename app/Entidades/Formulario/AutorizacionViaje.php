@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Entidades\Formulario;
+namespace App\Entidades\Formulario\AutorizacionViajes;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -12,15 +12,15 @@ class AutorizacionViaje extends Model{
 	public $timestamps = false;
 
 	protected $fillable = [
-		'idvalor','nombremadre','nombrepadre','nombremenor','pais','tiempo'
+		'idvalor','campo','valor','fk_idtramite','nombremadre','nombrepadre','nombremenor','pais','tiempo'
 	];
 
     protected $hidden = [
 
     ];
 	
-	function cargarDesdeRequest($request) {
-        $this->idvalor = $request->input('id') !="0" ? $request->input('id') : $this->idvalor;
+	public function cargarDesdeRequest($request) {
+        $this->idvalor = $request->input('idvalor') !="0" ? $request->input('idvalor') : $this->idvalor;
         $this->nombremadre = $request->input('txtNombreMadre');
         $this->nombrepadre = $request->input('txtNombrePadre');
         $this->nombremenor = $request->input('txtNombreMenor');
