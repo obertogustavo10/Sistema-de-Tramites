@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
-use App\Entidades\Sistema\Patente;
+use App\Entidades\Sistema\Patente;;
 use App\Entidades\Tramite\Tramite;
-
 
 require app_path().'/start/constants.php';
 use Session;
 
 class ControladorTramite extends Controller{
     public function index(){
-        $titulo = "Tramites en proceso";
+        $titulo = "tramites en proceso";
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";

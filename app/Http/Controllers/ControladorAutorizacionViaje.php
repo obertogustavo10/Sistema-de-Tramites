@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
@@ -19,7 +18,7 @@ class ControladorAutorizacionViaje extends Controller{
     try {
         //Define la entidad servicio
         $titulo = "Modificar Autorizacion de Viaje";
-        $entidad = new AutorizacionViaje();
+        $entidad = new Menu();
         $entidad->cargarDesdeRequest($request);
 
         //validaciones
@@ -35,16 +34,7 @@ class ControladorAutorizacionViaje extends Controller{
                 $msg["MSG"] = OKINSERT;
             } else {
                 //Es nuevo
-                $fechaActual = new Date();
-                    $tramite = new Tramite();
-                    $tramite->rectificativa = 0;
-                    $tramite->fecha_inicio = $fechaActual;
-                    $tramite->fk_idcliente = Session::get('usuario_id');
-                    $tramite->fk_idformulario = 4;
-                    $tramite->fk_idtramite_estado = 2; //Iniciado
-                    $tramite->insertar();
-
-                $entidad->insertar($tramite->idtramite);
+                $entidad->insertar();
 
                 $msg["ESTADO"] = MSG_SUCCESS;
                 $msg["MSG"] = OKINSERT;
@@ -61,7 +51,7 @@ class ControladorAutorizacionViaje extends Controller{
     $autorizacionViaje->obtenerPorId($id);
 
 
-    return view('formulario.autorizacionviaje-nuevo', compact('msg', 'menu', 'titulo')) . '?id=' . $autorizacionViaje->idvalor;
+    return view('formulario.autorizacionviaje-nuevo', compact('msg', 'autorizacionviaje', 'titulo')) . '?id=' . $autorizacionViaje->idvalor;
     }
 }
 
