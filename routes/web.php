@@ -120,9 +120,12 @@ Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFo
 /* CONTROLADOR NUEVO TRAMITE (PODER ESPECIAL)                           */
 /* --------------------------------------------- */
 
-Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
-Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+Route::get('/tramites/poderes_especiales','ControladorPoderesEspeciales@nuevo');
+Route::post('/tramites/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramites/cargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramites@cargarGrilla')->name('tramitesiniciados.cargarGrilla');
+Route::get('/tramites/iniciados', 'ControladorTramites@index');
+
 
 Route::get('/tramites/finalizados', 'ControladorTramite@index');
 Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
