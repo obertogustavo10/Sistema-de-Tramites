@@ -10,7 +10,8 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">formulario</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
