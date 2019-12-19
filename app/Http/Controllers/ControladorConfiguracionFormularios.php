@@ -45,10 +45,9 @@ class ControladorConfiguracionFormularios extends Controller
             for ($i=$inicio; $i < count($aFormulario) && $cont < $registros_por_pagina; $i++) 
             {
                 $row = array();
-                $row[] = '<a href="/cofiguracion/formularios/' . $aFormulario[$i]->idformulario . '">' . $aFormulario[$i]->nombre . '</a>';
+                $row[] = "<a href=/configuracion/formulario/nuevo/" .$aFormulario[$i]->idformulario. ">" . $aFormulario[$i]->nombre . '</a>';
                 $row[] = $aFormulario[$i]->descripcion;
-                $row[] = $aFormulario[$i]->url;
-                $cont++;
+                $row[] = "<a href=" .$aFormulario[$i]->url. ">" . $aFormulario[$i]->url . '</a>';
                 $data[] = $row;
             }
 
@@ -103,6 +102,6 @@ class ControladorConfiguracionFormularios extends Controller
         $formulario = new Formulario();
         $formulario->obtenerPorId($id);
 
-        return view('configuracion.formulario-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $formulario->idformulario;
+        return view('configuracion.formulario-nuevo', compact('nombre')) . '?id=' . $formulario->idformulario;
     }
 }

@@ -123,9 +123,9 @@ Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFo
 /* CONTROLADOR PODERES ESPECIALES                */
 /* --------------------------------------------- */
 
-Route::get('/tramites/poderes_especiales','ControladorPoderesEspeciales@nuevo');
-Route::post('/tramites/poderes_especiales','ControladorPoderesEspeciales@guardar');
-Route::get('/tramites/poderes_especialescargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
+Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramite/poderes_especialescargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
 
 /* --------------------------------------------- */
 /* CONTROLADOR NUEVO TRAMITE                     */
