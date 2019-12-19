@@ -11,7 +11,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
     <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
-    <li class="breadcrumb-item"><a href="/configuracion/formularios">formulario</a></li>
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">

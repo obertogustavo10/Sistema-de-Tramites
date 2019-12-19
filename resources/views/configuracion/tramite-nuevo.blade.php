@@ -1,20 +1,10 @@
 @extends('plantilla')
 
-@section('titulo', "Listado del Formularios")
+@section('titulo', "Nuevo Trámite")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/datatables.min.js') }}"></script>
-@endsection
-@section('breadcrumb')
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item active">Men&uacute;</a></li>
-</ol>
-<ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/formulario");'><span>Recargar</span></a></li>
-</ol>
 @endsection
 @section('contenido')
 <?php
@@ -23,13 +13,17 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-<table id="grilla" class="display">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-        </tr>
-    </thead>
-</table> 
+
+<div class="container">
+@foreach ($tramites as $tramite)
+    <div class="card w-75">
+        <div class="card-body">
+            <h5 class="card-title">{{ $tramite['nombre'] }}</h5>
+            <p class="card-text">{{ $tramite['descripcion'] }}</p>
+            <a href="{{ $tramite['url'] }}" class="btn btn-primary">Iniciar Trámite</a>
+        </div>
+    </div>
+</div>
 <script>
 	var dataTable = $('#grilla').DataTable({
 	    "processing": true,

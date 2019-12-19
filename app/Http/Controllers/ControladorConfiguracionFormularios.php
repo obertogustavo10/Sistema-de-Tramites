@@ -46,7 +46,8 @@ class ControladorConfiguracionFormularios extends Controller
             {
                 $row = array();
                 $row[] = '<a href="/cofiguracion/formularios/' . $aFormulario[$i]->idformulario . '">' . $aFormulario[$i]->nombre . '</a>';
-                $row[] = $aFormulario[$i]->nombre;
+                $row[] = $aFormulario[$i]->descripcion;
+                $row[] = $aFormulario[$i]->url;
                 $cont++;
                 $data[] = $row;
             }

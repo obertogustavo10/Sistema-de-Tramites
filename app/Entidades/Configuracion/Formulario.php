@@ -13,13 +13,14 @@ Class Formulario extends Model
 
     protected $fillable = 
     [
-        'idformulario', 'nombre'
+        'idformulario', 'nombre', 'descripcion', 'url'
     ];
 
     protected $hidden = 
     [
 
     ];
+    
 
     public function cargarDesdeRequest($request)
     {
@@ -59,11 +60,15 @@ Class Formulario extends Model
         $request = $_REQUEST;
         $columns = array(
            0 => 'idformulario',
-           1 => 'nombre'
+           1 => 'nombre',
+           2 => 'descripcion',
+           3 => 'url'
             );
         $sql = "SELECT 
                 idformulario,
-                nombre
+                nombre,
+                descripcion,
+                url
                 FROM formularios
                 WHERE 1=1
                 ";
