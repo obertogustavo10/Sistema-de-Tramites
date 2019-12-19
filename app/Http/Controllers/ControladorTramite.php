@@ -12,14 +12,14 @@ use Session;
 
 class ControladorTramite extends Controller{
     public function index(){
-        $titulo = "tramites finalizados";
+        $titulo = "Tramites en proceso";
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                return view('tramite.finalizado', compact('titulo'));
+                return view('tramites.enproceso', compact('titulo'));
             }
         } else {
             return redirect('login');
@@ -29,33 +29,41 @@ class ControladorTramite extends Controller{
     public function cargarGrilla(){
         $request = $_REQUEST;
 
-        $entidadTramite = new Tramite();
-        $aTramite = $entidadTramite->obtenerFiltrado();
+        $entidadMenu = new Tramite();
+        $aMenu = $entidadMenu->obtenerFiltrado();
 
         $data = array();
 
         $inicio = $request['start'];
         $registros_por_pagina = $request['length'];
 
-        if (count($aTramite) > 0)
+        if (count($aMenu) > 0)
             $cont=0;
-            for ($i=$inicio; $i < count($aTramite) && $cont < $registros_por_pagina; $i++) {
+            for ($i=$inicio; $i < count($aMenu) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="' . $aTramite[$i]->idtramite. '">' . $aTramite[$i]->nombre_tramite . '</a>';
-                $row[] = $aTramite[$i]->estado;
-                $row[] = $aTramite[$i]->fecha_inicio;
-                $row[] = $aTramite[$i]->rectificativa;
+                $row[] = '<a href="/sistema/menu/' . $aMenu[$i]->idmenu . '">' . $aMenu[$i]->nombre . '</a>';
+                $row[] = $aMenu[$i]->padre;
+                $row[] = $aMenu[$i]->url;
+                $row[] = $aMenu[$i]->activo;
                 $cont++;
                 $data[] = $row;
             }
 
         $json_data = array(
             "draw" => intval($request['draw']),
-            "recordsTotal" => count($aTramite), //cantidad total de registros sin paginar
-            "recordsFiltered" => count($aTramite),//cantidad total de registros en la paginacion
+            "recordsTotal" => count($aMenu), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aMenu),//cantidad total de registros en la paginacion
             "data" => $data
         );
         return json_encode($json_data);
     }
 
+ 
+
+
+  
+
+   
     }
+
+?>

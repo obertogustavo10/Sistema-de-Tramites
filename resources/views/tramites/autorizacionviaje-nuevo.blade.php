@@ -42,67 +42,47 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-<form class="form" method="post">
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                <input type="text" name="txtNombreMadre" required="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                <input type="text" name="txtNombrePadre" required="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                <input type="text" name="txtNombreMenor" required="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="lstAcomp">Viaja:</label>
-                <select name="lstAcomp">    
-                    <option disabled select>Seleccionar</option>
-                    <option value="">Solo/a</option>
-                    <option value="">Acompañada/o del Padre, Madre y/o Tutor/a </option>
-                </select>           
-            </div>
-        </div>
-        <div class="row">
-            <div col-sm-12>
-                <label for="lstPais">Viaja a:</label>
-                <select name="lstPais">
-                    <optgroup label="País">
-                        <option>Todos los paises del mundo</option>
-                        <optgroup>
-                            <option  disabled selected>Seleccionar pais</option>
-                            <option>Argentina</option>
-                            <option>Brasil</option>
+        <form id="form-aut" method="POST">
+            <div class="row">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
+                <div class="form-group col-lg-6">
+                    <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
+                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="{{$menu->txtNombreMadre or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
+                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="{{$menu->txtNombrePadre or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label for="txtNombreMenor">Nombre del/la Menor:</label>
+                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="{{$menu->txtNombreMenor or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                </select>
+                    <label for="lstAcomp">Viaja:</label>
+                    <select id="lstAcomp" name="lstAcomp" class="form-control" required>
+                        <option value="" disabled selected>Seleccionar</option>
+                        <option value="1">Solo/a</option>
+                        <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label for="lstPais">Viaja a:</label>
+                    <select id="lstPais" name="lstPais">
+                        <optgroup label="País">
+                            <option value="1">Todos los paises del mundo</option>
+                            <optgroup>
+                                <option value="" disabled selected>Seleccionar pais</option>
+                                <option value="2">Argentina</option>
+                                <option value="3">Brasil</option>
+                            </optgroup>
                         </optgroup>
-                    </optgroup>
-                </select>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="txtTiempo">Hasta:</label>
-                <select name="txtTiempo">
-                    <optgroup>
-                        <option>Hasta la mayoría de edad</option>
-                    </optgroup>
-                </select>
-                <select>
-                    <optgroup>
-                            <option  disabled selected>Fecha</option>
-                            <option label="Definir fecha" for="fecha"><input type="text" name="fecha"></option>
-                    </optgroup>
-                </select>
             </div>
-        </div>
-    </form>
+        </form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

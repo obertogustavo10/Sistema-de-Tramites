@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Entidades\Formulario\AutorizacionViaje;
+namespace App\Entidades\Formulario\AutorizacionViajes;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -12,14 +12,15 @@ class AutorizacionViaje extends Model{
 	public $timestamps = false;
 
 	protected $fillable = [
-		'nombremadre','nombrepadre','nombremenor','pais','tiempo'
+		'idvalor','campo','valor','fk_idtramite','nombremadre','nombrepadre','nombremenor','pais','tiempo'
 	];
 
     protected $hidden = [
 
     ];
 	
-	function cargarDesdeRequest($request) {
+	public function cargarDesdeRequest($request) {
+        $this->idvalor = $request->input('idvalor') !="0" ? $request->input('idvalor') : $this->idvalor;
         $this->nombremadre = $request->input('txtNombreMadre');
         $this->nombrepadre = $request->input('txtNombrePadre');
         $this->nombremenor = $request->input('txtNombreMenor');
@@ -29,8 +30,8 @@ class AutorizacionViaje extends Model{
     public function insertar() {
         $sql = "INSERT INTO valores(
                 fk_idcampo,
-                valor,
                 fk_idtramite,
+                idvalor,
                 nombremadre,
                 nombrepadre,
                 nombremenor,
@@ -40,8 +41,8 @@ class AutorizacionViaje extends Model{
        $result = DB::insert($sql, [
             
             $this->fk_idcampo,
-            $this->valor, 
             $this->fk_idtramite,
+            $this->idvalor,
             $this->nombremadre,  
             $this->nombrepadre, 
             $this->nombremenor,
@@ -53,8 +54,8 @@ class AutorizacionViaje extends Model{
     public function guardar() {
         $sql = "UPDATE valores SET
             fk_idcampo ='$this->fk_idcampo',
-            valor ='$this->valor',
             fk_idtramite =$this->fk_idtramite,
+            idvalor ='$this->idvalor',
             nombremadre ='$this->nombremadre',
             nombrepadre ='$this->nombrepadre',
             nombremenor ='$this->nombremenor',
@@ -71,4 +72,4 @@ class AutorizacionViaje extends Model{
 
 }
 
- ?>
+?>

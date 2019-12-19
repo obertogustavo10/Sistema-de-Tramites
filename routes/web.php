@@ -140,8 +140,11 @@ Route::get('/tramite/nuevo', 'ControladorTramiteNuevo@nuevo');
 
 Route::get('/tramites/iniciados', 'ControladorTramites@index');
 Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramites@cargarGrilla')->name('tramitesiniciados.cargarGrilla');
+
 Route::get('/tramites/finalizados', 'ControladorTramite@index');
 Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
 
-});
+Route::get('/tramites/enproceso','ControladorTramite@index');
+Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitesenproceso.cargarGrilla');
 
+});
