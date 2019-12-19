@@ -26,6 +26,8 @@ Class Formulario extends Model
     {
         $this->idformulario = $request->input('id') !="0" ? $request->input('id') : $this->idformulario;
         $this->nombre = $request->input('txtNombre');
+        $this->descripcion = $request->input('txtDescripcion');
+        $this->url = $request->input('txtURL');
     }
 
     public function insertar() 
@@ -33,10 +35,14 @@ Class Formulario extends Model
         $sql = "INSERT INTO formularios (
             idformulario,
             nombre
-            ) VALUES (?, ?);";
+            descripcion
+            url
+        ) VALUES (?, ?, ?, ?);";
             $result = DB::insert($sql, [
                 $this->idformulario,
-                $this->nombre
+                $this->nombre,
+                $this->descripcion,
+                $this->url
             ]);
             return $this->idformulario = DB::getPdo()->lastInsertId();
     }
@@ -45,6 +51,8 @@ Class Formulario extends Model
         $sql = "UPDATE formularios SET
             idformulario='$this->idformularios',
             nombre='$this->nombre',
+            descripcion='$this->descripcion',
+            url='$this->url'
             WHERE idformulario=?";
         $affected = DB::update($sql, [$this->idformulario]);
     }

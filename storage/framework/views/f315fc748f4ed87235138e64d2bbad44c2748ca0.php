@@ -47,7 +47,15 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->nombre) ? $formulario->nombre : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>URL: *</label>
+                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
                 </div>
             </div>
         </form>

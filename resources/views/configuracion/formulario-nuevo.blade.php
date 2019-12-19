@@ -50,6 +50,14 @@ if (isset($msg)) {
                     <label>Nombre: *</label>
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$formulario->nombre or ''}}" required>
                 </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="{{$formulario->descripcion or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>URL: *</label>
+                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="{{$formulario->url or ''}}" required>
+                </div>
             </div>
         </form>
 </div>

@@ -1,13 +1,12 @@
-@extends('plantilla')
-@section('titulo', "Calculo de Utilidades")
-@section('scripts')
+<?php $__env->startSection('titulo', "Calculo de Utilidades"); ?>
+<?php $__env->startSection('scripts'); ?>
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
     <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
 
 </script>
-@endsection
-@section('breadcrumb')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
     <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
@@ -26,8 +25,8 @@ function fsalir(){
     location.href ="/sistema/menu";
 }
 </script>
-@endsection
-@section('contenido')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('contenido'); ?>
 <?php
 if (isset($msg)) {
     echo '<div id = "msg"></div>';
@@ -43,11 +42,11 @@ if (isset($msg)) {
         ?>
         <form id="form1" method="POST">
             <div class="row">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
+                <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre y Apellido: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$menu->nombre or ''}}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>No. Cedula de Identidad: *</label>
@@ -73,16 +72,16 @@ if (isset($msg)) {
                     <label>Desea calculo a ultimo salario:</label>
                     <select id="lstEstado" name="lstUltimo_Salario" class="form-control" required>
                 <option value="" disabled selected>Seleccionar</option>
-                <option value="1" {{isset($grupo) && $grupo->activo == 1? 'selected' : ''}}>Si</option>
-                <option value="0" {{isset($grupo) &&$grupo->activo == 0? 'selected' : ''}}>No</option>
+                <option value="1" <?php echo e(isset($grupo) && $grupo->activo == 1? 'selected' : ''); ?>>Si</option>
+                <option value="0" <?php echo e(isset($grupo) &&$grupo->activo == 0? 'selected' : ''); ?>>No</option>
             </select>
                 </div>
                  <div class="form-group col-lg-6">
                     <label>Desea calculo a salario promedio:</label>
                    <select id="lstEstado" name="lstSalario_Promedio" class="form-control" required>
                 <option value="" disabled selected>Seleccionar</option>
-                <option value="1" {{isset($grupo) && $grupo->activo == 1? 'selected' : ''}}>Si</option>
-                <option value="0" {{isset($grupo) &&$grupo->activo == 0? 'selected' : ''}}>No</option>
+                <option value="1" <?php echo e(isset($grupo) && $grupo->activo == 1? 'selected' : ''); ?>>Si</option>
+                <option value="0" <?php echo e(isset($grupo) &&$grupo->activo == 0? 'selected' : ''); ?>>No</option>
             </select>
             </div>
 			
@@ -124,7 +123,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('sistema/menu/eliminar') }}",
+            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",
@@ -142,4 +141,5 @@ if (isset($msg)) {
     }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -15,13 +15,25 @@ if (isset($msg)) {
 ?>
 
 <div class="container">
-@foreach ($tramites as $tramite)
-    <div class="card w-75">
-        <div class="card-body">
-            <h5 class="card-title">{{ $tramite['nombre'] }}</h5>
-            <p class="card-text">{{ $tramite['descripcion'] }}</p>
-            <a href="{{ $tramite['url'] }}" class="btn btn-primary">Iniciar Trámite</a>
+    <div class="row m-auto p-3">
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+    </div>
+    @foreach ($tramites as $tramite)   
+    <div class="row m-auto p-3">
+        <div class="card w-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ $tramite['nombre'] }}</h5>
+                <p class="card-text">{{ $tramite['descripcion'] }}</p>
+                <a href="{{ $tramite['url'] }}" class="btn btn-primary float-right">Iniciar Trámite</a>
+            </div>
         </div>
     </div>
-</div>
+    @endforeach
+</div>    
+
 @endsection
