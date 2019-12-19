@@ -17,7 +17,7 @@ Class ControladorPoderesEspeciales extends Controller{
         
         $titulo= "Poder Especial";
 
-        return view("Formulario.poderesespeciales_nuevo", compact('titulo'));
+        return view("tramites.poderesespeciales-nuevo", compact('titulo'));
     }
 
     public function guardar(Request $request){

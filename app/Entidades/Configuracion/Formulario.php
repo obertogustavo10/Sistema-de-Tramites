@@ -13,18 +13,21 @@ Class Formulario extends Model
 
     protected $fillable = 
     [
-        'idformulario', 'nombre'
+        'idformulario', 'nombre', 'descripcion', 'url'
     ];
 
     protected $hidden = 
     [
 
     ];
+    
 
     public function cargarDesdeRequest($request)
     {
         $this->idformulario = $request->input('id') !="0" ? $request->input('id') : $this->idformulario;
         $this->nombre = $request->input('txtNombre');
+        $this->descripcion = $request->input('txtDescripcion');
+        $this->url = $request->input('txtURL');
     }
 
     public function insertar() 
@@ -32,10 +35,14 @@ Class Formulario extends Model
         $sql = "INSERT INTO formularios (
             idformulario,
             nombre
-            ) VALUES (?, ?);";
+            descripcion
+            url
+        ) VALUES (?, ?, ?, ?);";
             $result = DB::insert($sql, [
                 $this->idformulario,
-                $this->nombre
+                $this->nombre,
+                $this->descripcion,
+                $this->url
             ]);
             return $this->idformulario = DB::getPdo()->lastInsertId();
     }
@@ -44,6 +51,8 @@ Class Formulario extends Model
         $sql = "UPDATE formularios SET
             idformulario='$this->idformularios',
             nombre='$this->nombre',
+            descripcion='$this->descripcion',
+            url='$this->url'
             WHERE idformulario=?";
         $affected = DB::update($sql, [$this->idformulario]);
     }
@@ -59,11 +68,15 @@ Class Formulario extends Model
         $request = $_REQUEST;
         $columns = array(
            0 => 'idformulario',
-           1 => 'nombre'
+           1 => 'nombre',
+           2 => 'descripcion',
+           3 => 'url'
             );
         $sql = "SELECT 
                 idformulario,
-                nombre
+                nombre,
+                descripcion,
+                url
                 FROM formularios
                 WHERE 1=1
                 ";
