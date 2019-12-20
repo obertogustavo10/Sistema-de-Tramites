@@ -40,51 +40,72 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form-aut" method="POST">
+        <form id="form1" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="<?php echo e(isset($menu->txtNombreMadre) ? $menu->txtNombreMadre : ''); ?>" required>
+                    <label>Nombre: *</label>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="<?php echo e(isset($menu->txtNombrePadre) ? $menu->txtNombrePadre : ''); ?>" required>
+                    <label>Men&uacute; padre:</label>
+                    <select id="lstMenuPadre" name="lstMenuPadre" class="form-control">
+                        <option selected value="0">-</option>
+                        <?php for($i = 0; $i < count($array_menu); $i++): ?>
+                            <?php if(isset($menu) and $array_menu[$i]->idmenu == $menu->id_padre): ?>
+                                <option selected value="<?php echo e($array_menu[$i]->idmenu); ?>"><?php echo e($array_menu[$i]->nombre); ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo e($array_menu[$i]->idmenu); ?>"><?php echo e($array_menu[$i]->nombre); ?></option>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="<?php echo e(isset($menu->txtNombreMenor) ? $menu->txtNombreMenor : ''); ?>" required>
+                    <label>Orden:</label>
+                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="<?php echo e(isset($menu->orden) ? $menu->orden : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
-                </select>
-                    <label for="lstAcomp">Viaja:</label>
-                    <select id="lstAcomp" name="lstAcomp" class="form-control" required>
+                    <label>Activo: *</label>
+                    <select id="lstActivo" name="lstActivo" class="form-control" required>
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Solo/a</option>
-                        <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
+                        <option value="1" <?php echo e(isset($menu) && $menu->activo == 1? 'selected' : ''); ?>>Si</option>
+                        <option value="0" <?php echo e(isset($menu) &&$menu->activo == 0? 'selected' : ''); ?>>No</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais">
-                        <optgroup label="País">
-                            <option value="1">Todos los paises del mundo</option>
-                            <optgroup label="Seleccionar País">
-                                <option value="2">Argentina</option>
-                                <option value="3">Brasil</option>
-                            </optgroup>
-                        </optgroup>
-                    </select>
+                    <label>URL:</label>
+                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="<?php echo e(isset($menu->url) ? $menu->url : ''); ?>">
                 </div>
-                <div class="form-group col-lg-6">
-                    <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha">
-                        <option value="1">Hasta la mayoría de edad</option>
-                        <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
-                    </select>
+                 <div class="form-group col-lg-6">
+                    <label>CSS:</label>
+                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="<?php echo e(isset($menu->css) ? $menu->css : ''); ?>">
+                    <a href="https://fontawesome.com/v4.7.0/icons/" target="blank">Catálogo de íconos</a>
                 </div>
             </div>
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-users fa-fw"></i> Áreas de trabajo:
+				</div>
+				<div class="card-body">
+		            <div class="row">         
+		    	        <?php $__currentLoopData = Session::get("array_grupos"); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $grupo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+		                <div class="form-group col-lg-12">
+		                    <label><input type="checkbox" id="chk_<?php echo e($grupo->idarea); ?>" name="chk_grupo[]" value="<?php echo e($grupo->idarea); ?>" class="chk-control" /> <?php echo e($grupo->descarea); ?>
+
+		                    </label>
+		            	</div>
+		                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	                	<?php if(isset($array_menu_grupo) && count($array_menu_grupo)>0): ?>
+	                	<script>
+	                		<?php $__currentLoopData = $array_menu_grupo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+	                			$("#chk_<?php echo e($item->fk_idarea); ?>").prop("checked", true);
+                			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            			</script>
+	                    <?php endif; ?>
+		            </div>
+				</div>
+			</div>
             </div>
         </form>
 </div>
@@ -142,5 +163,4 @@ if (isset($msg)) {
 
 </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

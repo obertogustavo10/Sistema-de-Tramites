@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado del Formularios")
+@section('titulo', 'Tipos de Clientes')
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -10,11 +10,11 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
     <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
-    <li class="breadcrumb-item active">Formularios</a></li>
+    <li class="breadcrumb-item active">Tipo de clientes</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/formularios");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/tipocliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/tipodeclientes");'><span>Recargar</span></a></li>
 </ol>
 @endsection
 @section('contenido')
@@ -28,8 +28,6 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Descripción</th>
-            <th>URL</th>
         </tr>
     </thead>
 </table> 
@@ -41,8 +39,8 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 2, "asc" ]],
-	    "ajax": "{{ route('formulario.cargarGrilla') }}"
+        "order": [[ 0, "asc" ]],
+	    "ajax": "{{ route('tipodeclientes.cargarGrilla') }}"
 	});
 </script>
 @endsection

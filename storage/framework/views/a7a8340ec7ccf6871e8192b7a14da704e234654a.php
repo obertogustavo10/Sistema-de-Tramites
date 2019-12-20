@@ -1,19 +1,20 @@
 <?php $__env->startSection('titulo', "$titulo"); ?>
 <?php $__env->startSection('scripts'); ?>
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($formulario->idformulario) && $formulario->idformulario > 0 ? $formulario->idformulario : 0; ?>';
+    <?php $globalId = isset($formulario->idformulario) ? $formulario->idformulario : "0"; ?>
 
 </script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -22,7 +23,7 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/menu";
+    location.href ="/configuracion/formularios";
 }
 </script>
 <?php $__env->stopSection(); ?>
@@ -40,51 +41,22 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form-aut" method="POST">
+        <form id="form1" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="<?php echo e(isset($menu->txtNombreMadre) ? $menu->txtNombreMadre : ''); ?>" required>
+                    <label>Nombre: *</label>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->nombre) ? $formulario->nombre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="<?php echo e(isset($menu->txtNombrePadre) ? $menu->txtNombrePadre : ''); ?>" required>
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="<?php echo e(isset($menu->txtNombreMenor) ? $menu->txtNombreMenor : ''); ?>" required>
+                    <label>URL: *</label>
+                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
                 </div>
-                <div class="form-group col-lg-6">
-                </select>
-                    <label for="lstAcomp">Viaja:</label>
-                    <select id="lstAcomp" name="lstAcomp" class="form-control" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Solo/a</option>
-                        <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais">
-                        <optgroup label="País">
-                            <option value="1">Todos los paises del mundo</option>
-                            <optgroup label="Seleccionar País">
-                                <option value="2">Argentina</option>
-                                <option value="3">Brasil</option>
-                            </optgroup>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha">
-                        <option value="1">Hasta la mayoría de edad</option>
-                        <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
-                    </select>
-                </div>
-            </div>
             </div>
         </form>
 </div>
@@ -142,5 +114,4 @@ if (isset($msg)) {
 
 </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -88,6 +88,18 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
+/* TIPO DE CLIENTES                             */
+/* --------------------------------------------- */
+Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
+Route::post('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodeclientes', 'ControladorTipocliente@index');
+Route::get('/configuracion/tipodeclientes/cargargrilla', 'ControladorTipoCliente@cargarGrilla')->name('tipodeclientes.cargarGrilla');
+Route::get('/configuracion/tipodecliente/nuevo/eliminar', 'ControladorTipoCliente@eliminar');
+Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
+Route::post('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
+
+/* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE UTILIDADES             */
 /* --------------------------------------------- */
 
@@ -97,15 +109,10 @@ Route::post('/tramite/calculo_utilidades', 'ControladorCalculoUtlidades@guardar'
 /* --------------------------------------------- */
 /* CONTROLADOR AUTORIZACION DE VIAJE             */
 /* --------------------------------------------- */
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
 
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('autorizacionviaje.cargarGrilla');
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@nuevo');
+Route::post('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviaje.cargarGrilla');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CLIENTE                           */
@@ -113,6 +120,8 @@ Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar'
 
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
+Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 Route::get('/clientes', 'ControladorCliente@cargarGrilla')->name('clientes.cargarGrilla');
 
 /* --------------------------------------------- */
@@ -123,6 +132,11 @@ Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@in
 Route::get('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@nuevo');
 Route::post('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@guardar');
 Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFormularios@cargarGrilla')->name('formulario.cargarGrilla');
+Route::get('/configuracion/formulario/nuevo/eliminar', 'ControladorConfiguracionFormularios@eliminar');
+Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
+Route::post('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@guardar');
+Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR PODERES ESPECIALES                */

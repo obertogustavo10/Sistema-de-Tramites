@@ -1,4 +1,4 @@
-<?php $__env->startSection('titulo', $titulo); ?>
+<?php $__env->startSection('titulo', 'Tipos de Clientes'); ?>
 
 <?php $__env->startSection('scripts'); ?>
 <link href="<?php echo e(asset('css/datatables.min.css')); ?>" rel="stylesheet">
@@ -7,11 +7,12 @@
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item active">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+    <li class="breadcrumb-item active">Tipo de clientes</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/cliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/cliente/listar");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/tipocliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/tipodeclientes");'><span>Recargar</span></a></li>
 </ol>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
@@ -25,14 +26,6 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Razon Social</th>
-            <th>Documento</th>
-            <th>Tipo de Documento</th>
-            <th>Tipo de persona</th>
-            <th>Teléfono</th>
-            <th>Mail</th>
-            <th>Domicilio</th>
-            <th>Tipo de Domicilio</th>
         </tr>
     </thead>
 </table> 
@@ -45,7 +38,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "<?php echo e(route('cliente.cargarGrilla')); ?>"
+	    "ajax": "<?php echo e(route('tipodeclientes.cargarGrilla')); ?>"
 	});
 </script>
 <?php $__env->stopSection(); ?>
