@@ -138,7 +138,7 @@ class ControladorMenu extends Controller{
             //validaciones
             if ($entidad->nombre == "") {
                 $msg["ESTADO"] = MSG_ERROR;
-                $msg["MSG"] = FALTANOMBRE; //ARREGLAR
+                $msg["MSG"] = "Complete todos los datos";
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
@@ -181,8 +181,6 @@ class ControladorMenu extends Controller{
         $array_menu_grupo = $menu_grupo->obtenerPorMenu($id);
 
         return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $menu->idmenu;
-    }
 
-    
-    
+    }
 }

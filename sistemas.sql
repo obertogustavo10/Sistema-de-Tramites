@@ -304,3 +304,4 @@ CREATE TABLE `sistema_usuarios`  (
 INSERT INTO `sistema_usuarios` VALUES (1, 'admin', 'Laura', 'Hernandez', 'lalalejandrahc@gmail.com', '1234', '2019-09-17 17:27:10', 'current_timestamp()', 1, '2019-09-17 16:05:57', 0, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
+clientestipo_clientescampostipo_clientesclientesclientes
