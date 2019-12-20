@@ -10,8 +10,8 @@ use App\Entidades\Configuracion\Formulario;
 require app_path().'/start/constants.php';
 use Session;
 
-class ControladorConfiguracionFormularios extends Controller
-    {
+class ControladorConfiguracionFormularios extends Controller {
+
         public function index()
         {
         $titulo = "Listado de Formularios";
@@ -27,9 +27,9 @@ class ControladorConfiguracionFormularios extends Controller
         } else {
             return redirect('login');
         }
-    }
-    public function cargarGrilla()
-    {
+        }
+        public function cargarGrilla()
+        {
         $request = $_REQUEST;
 
         $entidadFormulario = new Formulario();
@@ -58,7 +58,7 @@ class ControladorConfiguracionFormularios extends Controller
             "data" => $data
         );
         return json_encode($json_data);
-    }
+        }
         public function nuevo()
         {
             $titulo = "Nuevo Formulario";

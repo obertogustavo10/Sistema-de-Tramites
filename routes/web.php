@@ -88,12 +88,18 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
-/* TIPOS DE CLIENTES- NUEVO TIPO DE CLIENTES                             */
+/* TIPO DE CLIENTES                             */
 /* --------------------------------------------- */
-Route::get('configuracion/cliente/nuevo', 'ControladorTipoCliente@nuevo');
-Route::post('configuracion/cliente/nuevo', 'ControladorTipoCliente@guardar');
-Route::get('/configuracion/clientes', 'ControladorTipoCliente@cargarGrilla')->name('TipoCliente.cargarGrilla');
+Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
+Route::post('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodeclientes', 'ControladorTipocliente@index');
+Route::get('/configuracion/tipodeclientes/cargargrilla', 'ControladorTipoCliente@cargarGrilla')->name('tipodeclientes.cargarGrilla');
+Route::get('/configuracion/tipodecliente/nuevo/eliminar', 'ControladorTipoCliente@eliminar');
+Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
+Route::post('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
 
+/* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE UTILIDADES             */
 /* --------------------------------------------- */
 
