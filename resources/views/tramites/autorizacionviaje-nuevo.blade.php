@@ -69,7 +69,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais">
+                    <select id="lstPais" name="lstPais" required>
                         <optgroup label="País">
                             <option value="1">Todos los paises del mundo</option>
                             <optgroup label="Seleccionar País">
@@ -81,7 +81,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha">
+                    <select name="txtTiempo" label="fecha" required>
                         <option value="1">Hasta la mayoría de edad</option>
                         <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
                     </select>
