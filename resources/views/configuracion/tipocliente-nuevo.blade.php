@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', "$titulo")
+@section('titulo', "Tipo de Cliente")
 @section('scripts')
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
@@ -10,11 +10,12 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
-    <li class="breadcrumb-item active">Modificar</li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+    <li class="breadcrumb-item"><a href="/configuracion/tipodeclientes">Tipos de Clientes</a></li>
+    <li class="breadcrumb-item active">Nuevo</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/tipodecliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -23,7 +24,7 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/menu";
+    location.href ="/configuracion/tipodeclientes";
 }
 </script>
 @endsection
@@ -47,13 +48,10 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$menu->nombre or ''}}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$tipocliente->nombre or ''}}" required>
                 </div>
-                
-                  
-                    
-                
-               
+            </div>    
+        </form>        
 <script>
 
     $("#form1").validate();
