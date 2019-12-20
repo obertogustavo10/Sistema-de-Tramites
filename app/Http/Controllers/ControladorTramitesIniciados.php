@@ -42,7 +42,7 @@ class ControladorTramitesIniciados extends Controller{
             $cont=0;
             for ($i=$inicio; $i < count($aTramites) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href=' . $aTramites[$i]->idtramite . '">' . $aTramites[$i]->nombre_tramite . '</a>';
+                $row[] = '<a href=/tramite/poderes_especiales/' . $aTramites[$i]->idtramite . '>' . $aTramites[$i]->nombre_tramite . '</a>';
                 $row[] = $aTramites[$i]->estado;
                 $row[] = $aTramites[$i]->fecha_inicio;
                 $row[] = $aTramites[$i]->rectificativa;

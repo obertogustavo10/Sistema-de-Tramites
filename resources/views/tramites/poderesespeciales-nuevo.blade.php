@@ -10,7 +10,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Nuevo trámite</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -41,15 +41,17 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="datosPoder" method="POST">
+        <form id="form1" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+        <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="row">
                 <div class="col-sm-4">
-                    <h3><label for="tipoDePoder">Tipo de Poder</label></h3>
+                    <label for="tipoDePoder">Tipo de Poder</label>
                     <select class="form-control" name="tipoDePoder" id="tipoDePoder">
-                        <option selected value="1">Venta</option>
-                        <option selected value="2">Adminitracion y Disposicion</option>
-                        <option selected value="3">Judicial</option>
-                        <option selected=""></option>
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Venta</option>
+                        <option value="2">Adminitracion y Disposicion</option>
+                        <option value="3">Judicial</option>
                     </select>
                 </div>
             </div>
@@ -60,49 +62,49 @@ if (isset($msg)) {
             </div>
             <div class="row">
                 <div class="col">
-                    <h5><label for="nombrePoderdante">Nombre Completo</label></h5>
-                    <input type="text" class="form-control" name="nombrePoderdante" id="nombrePoderdante">
+                    <label for="nombrePoderdante">Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombrePoderdante" id="nombrePoderdante" value="{{ $poderEspecial->nombrepoderdante or ''}}">
                 </div>
                 <div class="col">
-                    <h5><label for="fechaPoderdante">Fecha de Nacimiento</label></h5>
-                    <input type="date" class="form-control" name="fechaPoderdante" id="fechaPoderdante">
+                    <label for="fechaPoderdante">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fechaPoderdante" id="fechaPoderdante" value="{{ $poderEspecial->fechapoderdante or ''}}">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <h5><label for="cuilPoderdante">CUIL</label></h5>
-                    <input type="cuilPoderdante" class="form-control" name="cuilPoderdante" id="cuilPoderdante">
+                    <label for="cuilPoderdante">CUIL</label>
+                    <input type="cuilPoderdante" class="form-control" name="cuilPoderdante" id="cuilPoderdante" value="{{ $poderEspecial->cuilpoderdante or ''}}">
                 </div>
                 <div class="col">
-                    <h5><label for="domicilioPoderdante">Domicilio</label></h5>
-                    <input type="text" class="form-control" name="domicilioPoderdante" id="domicilioPoderdante" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires">
+                    <label for="domicilioPoderdante">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilioPoderdante" id="domicilioPoderdante" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires" value="{{ $poderEspecial->domiciliopoderdante or ''}}">
                 </div>
             </div>
             <div class="row mt-3 ">
                 <div class="col">
-                    <h5><label for="estadoCivilPoderdante">Estado Civil</label></h5>
-                    <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante">
-                        <option selected value="1">Casado</option>
-                        <option selected value="2">Soltero</option>
-                        <option selected value="3">Viudo</option>
-                        <option selected=""></option>
+                    <label for="estadoCivilPoderdante">Estado Civil</label>
+                    <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante" value="{{ $poderEspecial->estadocivilpoderdante or ''}}">
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
-                    <h5><label for="nombreConyugePoderdante">Nombre de su Conyuge*</label>(En el caso de ser Casado)</h5>
-                    <input type="text" class="form-control" name="nombreConyugePoderdante" id="nombreConyugePoderdante" >
+                    <label for="nombreConyugePoderdante">Nombre de su Conyuge*</label>(En el caso de ser Casado)
+                    <input type="text" class="form-control" name="nombreConyugePoderdante" id="nombreConyugePoderdante" value="{{ $poderEspecial->conyugepoderdante or ''}}" >
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombreMadrePoderdante">Nombre de su Madre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombreMadrePoderdante" id="nombreMadrePoderdante" >
+                    <label for="nombreMadrePoderdante">Nombre de su Madre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombreMadrePoderdante" id="nombreMadrePoderdante" value="{{ $poderEspecial->madrepoderdante or ''}}">
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombrePadrePoderdante">Nombre de su Padre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombrePadrePoderdante" id="nombrePadrePoderdante" >
+                    <label for="nombrePadrePoderdante">Nombre de su Padre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombrePadrePoderdante" id="nombrePadrePoderdante" value="{{ $poderEspecial->padrepoderdante or ''}}">
                 </div>
             </div>
             <div class="row mt-4">
@@ -112,50 +114,49 @@ if (isset($msg)) {
             </div>
             <div class="row">
                 <div class="col">
-                    <h5><label for="nombreApoderado">Nombre Completo</label></h5>
-                    <input type="text" class="form-control" name="nombreApoderado" id="nombreApoderado">
+                    <label for="nombreApoderado">Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombreApoderado" id="nombreApoderado" value="{{ $poderEspecial->nombreapoderado or ''}}">
                 </div>
                 <div class="col">
-                    <h5><label for="fechaApoderado">Fecha de Nacimiento</label></h5>
-                    <input type="date" class="form-control" name="fechaApoderado" id="fechaApoderado">
+                    <label for="fechaApoderado">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fechaApoderado" id="fechaApoderado" value="{{ $poderEspecial->fechaapoderado or ''}}">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <h5><label for="cuilApoderado">CUIL</label></h5>
-                    <input type="cuilApoderado" class="form-control" name="cuilApoderado" id="cuilApoderado">
+                    <label for="cuilApoderado">CUIL</label>
+                    <input type="cuilApoderado" class="form-control" name="cuilApoderado" id="cuilApoderado" value="{{ $poderEspecial->cuilapoderado or ''}}">
                 </div>
                 <div class="col">
-                    <h5><label for="domicilioApoderado">Domicilio</label></h5>
-                    <input type="text" class="form-control" name="domicilioApoderado" id="domicilioApoderado" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires">
+                    <label for="domicilioApoderado">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilioApoderado" id="domicilioApoderado" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires" value="{{ $poderEspecial->domicilioapoderado or ''}}">
                 </div>
             </div>
             <div class="row mt-3 mb-3">
                 <div class="col">
-                    <h5><label for="estadoCivilApoderado">Estado Civil</label></h5>
-                    <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado">
-                        <option disabled="" selected=""></option>
-                        <option selected value="1">Casado</option>
-                        <option selected value="2">Soltero</option>
-                        <option selected value="3">Viudo</option>
-                        <option  selected=""></option>
+                    <label for="estadoCivilApoderado">Estado Civil</label>
+                    <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado" value="{{ $poderEspecial->estadocivilapoderado or ''}}">
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
-                    <h5><label for="nombreConyugeApoderado">Nombre de su Conyuge*</label>(En el caso de ser Casado)</h5>
-                    <input type="text" class="form-control" name="nombreConyugeApoderado" id="nombreConyugeApoderado" >
+                    <label for="nombreConyugeApoderado">Nombre de su Conyuge*</label>(En el caso de ser Casado)
+                    <input type="text" class="form-control" name="nombreConyugeApoderado" id="nombreConyugeApoderado" value="{{ $poderEspecial->conyugeapoderado or ''}}">
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombreMadreApoderado">Nombre de su Madre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombreMadreApoderado" id="nombreMadreApoderado" >
+                    <label for="nombreMadreApoderado">Nombre de su Madre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombreMadreApoderado" id="nombreMadreApoderado" value="{{ $poderEspecial->madreapoderado or ''}}">
                 </div>
             </div>
             <div class="row justify-content-end mb-3">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombrePadreApoderado">Nombre de su Padre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombrePadreApoderado" id="nombrePadreApoderado" >
+                    <label for="nombrePadreApoderado">Nombre de su Padre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombrePadreApoderado" id="nombrePadreApoderado" value="{{ $poderEspecial->padreapoderado or ''}}">
                 </div>
             </div>
         </form>
