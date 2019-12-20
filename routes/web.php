@@ -109,9 +109,9 @@ Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
 Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
 
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('autorizacionviaje.cargarGrilla');
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@nuevo');
-Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@nuevo');
+Route::post('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviaje.cargarGrilla');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CLIENTE                           */
