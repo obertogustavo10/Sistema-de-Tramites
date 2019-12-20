@@ -13,7 +13,7 @@ use Session;
 class ControladorCalculoUtlidades extends Controller{
     public function nuevo(){
         $titulo = "datos del cliente";
-            return view('formulario.calculoutilidades-nuevo', compact('titulo'));
+            return view('tramites.calculoutilidades-nuevo', compact('titulo'));
         }
 public function guardar(Request $request){
             try {

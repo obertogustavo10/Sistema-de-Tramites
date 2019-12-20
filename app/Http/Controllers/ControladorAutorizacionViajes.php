@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 
+
 require app_path().'/start/constants.php';
 use Session;
 
 class ControladorAutorizacionViajes extends Controller{
 	public function nuevo(){
 		$titulo = "Datos Autorización de Viajes";
-		return view ("formulario.autorizacionviaje-nuevo", compact('titulo'));
+		return view ("tramites.autorizacionviaje-nuevo", compact('titulo'));
 	}
     public function guardar(Request $request){
     try {

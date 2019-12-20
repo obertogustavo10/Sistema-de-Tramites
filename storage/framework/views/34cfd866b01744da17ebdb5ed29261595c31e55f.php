@@ -26,6 +26,8 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Descripción</th>
+            <th>URL</th>
         </tr>
     </thead>
 </table> 
@@ -37,7 +39,7 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 0, "asc" ]],
+        "order": [[ 2, "asc" ]],
 	    "ajax": "<?php echo e(route('formulario.cargarGrilla')); ?>"
 	});
 </script>

@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', "$titulo")
+@section('titulo', "Calculo de Utilidades")
 @section('scripts')
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
