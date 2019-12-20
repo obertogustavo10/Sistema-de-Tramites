@@ -126,6 +126,11 @@ Route::get('/configuracion/formularios', 'ControladorConfiguracionFormularios@in
 Route::get('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@nuevo');
 Route::post('/configuracion/formulario/nuevo', 'ControladorConfiguracionFormularios@guardar');
 Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFormularios@cargarGrilla')->name('formulario.cargarGrilla');
+Route::get('/configuracion/formulario/nuevo/eliminar', 'ControladorConfiguracionFormularios@eliminar');
+Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
+Route::post('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@guardar');
+Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR PODERES ESPECIALES                */

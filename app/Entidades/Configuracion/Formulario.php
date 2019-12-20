@@ -93,4 +93,16 @@ Class Formulario extends Model
 
         return $lstRetorno;
     }
+    public function obtenerFormulario() {
+        $sql = "SELECT DISTINCT
+                  A.idformulario,
+                  A.nombre,
+                  A.descripcion,
+                  A.url
+                FROM formularios A";
+
+        $sql .= " ORDER BY A.nombre";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
 }
