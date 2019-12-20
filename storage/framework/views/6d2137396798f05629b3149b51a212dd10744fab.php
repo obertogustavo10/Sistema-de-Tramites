@@ -40,43 +40,52 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form1" method="POST">
+        <form id="form-aut" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
+                    <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
+                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="<?php echo e(isset($menu->txtNombreMadre) ? $menu->txtNombreMadre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Men&uacute; padre:</label>
-                    <select id="lstMenuPadre" name="lstMenuPadre" class="form-control">
-                        <option selected value="0">-</option>
-                    </select>
+                    <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
+                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="<?php echo e(isset($menu->txtNombrePadre) ? $menu->txtNombrePadre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Orden:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="<?php echo e(isset($menu->orden) ? $menu->orden : ''); ?>">
+                    <label for="txtNombreMenor">Nombre del/la Menor:</label>
+                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="<?php echo e(isset($menu->txtNombreMenor) ? $menu->txtNombreMenor : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Activo: *</label>
-                    <select id="lstActivo" name="lstActivo" class="form-control" required>
+                </select>
+                    <label for="lstAcomp">Viaja:</label>
+                    <select id="lstAcomp" name="lstAcomp" class="form-control" required>
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="1" <?php echo e(isset($menu) && $menu->activo == 1? 'selected' : ''); ?>>Si</option>
-                        <option value="0" <?php echo e(isset($menu) &&$menu->activo == 0? 'selected' : ''); ?>>No</option>
+                        <option value="1">Solo/a</option>
+                        <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>URL:</label>
-                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="<?php echo e(isset($menu->url) ? $menu->url : ''); ?>">
+                    <label for="lstPais">Viaja a:</label>
+                    <select id="lstPais" name="lstPais">
+                        <optgroup label="País">
+                            <option value="1">Todos los paises del mundo</option>
+                            <optgroup label="Seleccionar País">
+                                <option value="2">Argentina</option>
+                                <option value="3">Brasil</option>
+                            </optgroup>
+                        </optgroup>
+                    </select>
                 </div>
-                 <div class="form-group col-lg-6">
-                    <label>CSS:</label>
-                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="<?php echo e(isset($menu->css) ? $menu->css : ''); ?>">
-                    <a href="https://fontawesome.com/v4.7.0/icons/" target="blank">Catálogo de íconos</a>
+                <div class="form-group col-lg-6">
+                    <label for="txtTiempo">Hasta:</label>
+                    <select name="txtTiempo" label="fecha">
+                        <option value="1">Hasta la mayoría de edad</option>
+                        <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
+                    </select>
                 </div>
             </div>
-            
+            </div>
         </form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -133,4 +142,5 @@ if (isset($msg)) {
 
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

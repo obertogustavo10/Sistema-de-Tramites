@@ -1,4 +1,4 @@
-<?php $__env->startSection('titulo', "Listado de Clientes"); ?>
+<?php $__env->startSection('titulo', $titulo); ?>
 
 <?php $__env->startSection('scripts'); ?>
 <link href="<?php echo e(asset('css/datatables.min.css')); ?>" rel="stylesheet">
@@ -44,8 +44,8 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 2, "asc" ]],
-	    "ajax": "<?php echo e(route('menu.cargarGrilla')); ?>"
+        "order": [[ 0, "asc" ]],
+	    "ajax": "<?php echo e(route('cliente.cargarGrilla')); ?>"
 	});
 </script>
 <?php $__env->stopSection(); ?>

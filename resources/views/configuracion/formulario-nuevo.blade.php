@@ -2,19 +2,20 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($formulario->idformulario) && $formulario->idformulario > 0 ? $formulario->idformulario : 0; ?>';
+    <?php $globalId = isset($formulario->idformulario) ? $formulario->idformulario : "0"; ?>
 
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -47,7 +48,15 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$menu->nombre or ''}}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$formulario->nombre or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="{{$formulario->descripcion or ''}}" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>URL: *</label>
+                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="{{$formulario->url or ''}}" required>
                 </div>
             </div>
         </form>

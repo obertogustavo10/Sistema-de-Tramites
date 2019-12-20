@@ -15,7 +15,7 @@ class ControladorCalculoVacaciones extends Controller
         public function nuevo()
         {
             $titulo = "Calculo de Vacaciones";
-            return view("formularios.calculo_vacaciones", compact('titulo'));
+            return view("tramites.calculovacaciones-nuevo", compact('titulo'));
         }
     
         public function guardar(Request $request){

@@ -12,6 +12,53 @@ use Session;
 
 class ControladorConfiguracionFormularios extends Controller
     {
+        public function index()
+        {
+        $titulo = "Listado de Formularios";
+        if(Usuario::autenticado() == true)
+        {
+            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
+                $codigo = "MENUCONSULTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('configuracion.formulario-listar', compact('titulo'));
+            }
+        } else {
+            return redirect('login');
+        }
+    }
+    public function cargarGrilla()
+    {
+        $request = $_REQUEST;
+
+        $entidadFormulario = new Formulario();
+        $aFormulario = $entidadFormulario->obtenerFiltrado();
+
+        $data = array();
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+        if (count($aFormulario) > 0)
+            $cont=0;
+            for ($i=$inicio; $i < count($aFormulario) && $cont < $registros_por_pagina; $i++) 
+            {
+                $row = array();
+                $row[] = "<a href=/configuracion/formulario/nuevo/" .$aFormulario[$i]->idformulario. ">" . $aFormulario[$i]->nombre . '</a>';
+                $row[] = $aFormulario[$i]->descripcion;
+                $row[] = "<a href=" .$aFormulario[$i]->url. ">" . $aFormulario[$i]->url . '</a>';
+                $data[] = $row;
+            }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aFormulario), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aFormulario),//cantidad total de registros en la paginacion
+            "data" => $data
+        );
+        return json_encode($json_data);
+    }
         public function nuevo()
         {
             $titulo = "Nuevo Formulario";
@@ -55,6 +102,6 @@ class ControladorConfiguracionFormularios extends Controller
         $formulario = new Formulario();
         $formulario->obtenerPorId($id);
 
-        return view('configuracion.formulario-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $formulario->idformulario;
+        return view('configuracion.formulario-nuevo', compact('nombre')) . '?id=' . $formulario->idformulario;
     }
 }

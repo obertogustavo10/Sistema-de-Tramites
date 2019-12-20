@@ -1,19 +1,24 @@
 <?php $__env->startSection('titulo', "$titulo"); ?>
 <?php $__env->startSection('scripts'); ?>
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($formulario->idformulario) && $formulario->idformulario > 0 ? $formulario->idformulario : 0; ?>';
+    <?php $globalId = isset($formulario->idformulario) ? $formulario->idformulario : "0"; ?>
 
 </script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">formulario</a></li>
+=======
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
+>>>>>>> e95d962520e6246f0a9e85fa9fe125ad1780122d
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -46,7 +51,15 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->nombre) ? $formulario->nombre : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>URL: *</label>
+                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
                 </div>
             </div>
         </form>
