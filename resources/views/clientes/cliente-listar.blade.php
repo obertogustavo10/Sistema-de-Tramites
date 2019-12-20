@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de Clientes")
+@section('titulo', "$titulo")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -46,7 +46,7 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 2, "asc" ]],
+        "order": [[ 0, "asc" ]],
 	    "ajax": "{{ route('cliente.cargarGrilla') }}"
 	});
 </script>

@@ -45,7 +45,7 @@ class ControladorCliente extends Controller{
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                return view('cliente.cliente-listar', compact('titulo', 'msg'));
+                return view('Cliente.cliente-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -58,4 +58,57 @@ class ControladorCliente extends Controller{
 
         return view('Cliente.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
+    public function index(){
+        $titulo = "Listado de Clientes";
+        if(Usuario::autenticado() == true){
+            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
+                $codigo = "MENUCONSULTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view ('cliente.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('cliente.cliente-listar', compact('titulo'));
+            }
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function cargarGrilla(){
+        $request = $_REQUEST;
+
+        $entidadCliente = new Cliente();
+        $aCliente = $entidadCliente->obtenerFiltrado();
+
+        $data = array();
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+        if (count($aCliente) > 0)
+            $cont=0;
+            for ($i=$inicio; $i < count($aCliente) && $cont < $registros_por_pagina; $i++) {
+                $row = array();
+                $row[] = '<a href="/cliente/listar/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
+                $row[] = $aCliente[$i]->nombre;
+                $row[] = $aCliente[$i]->razon_social;
+                $row[] = $aCliente[$i]->documento;
+                $row[] = $aCliente[$i]->tipodedocumento;
+                $row[] = $aCliente[$i]->tipodepersona;
+                $row[] = $aCliente[$i]->telefono;
+                $row[] = $aCliente[$i]->mail;
+                $row[] = $aCliente[$i]->domicilio;
+                $row[] = $aCliente[$i]->tipodedomicilio;
+                $cont++;
+                $data[] = $row;
+            }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aCliente), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aCliente),//cantidad total de registros en la paginacion
+            "data" => $data
+        );
+        return json_encode($json_data);
+    }
+
 }

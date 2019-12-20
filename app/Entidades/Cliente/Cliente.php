@@ -65,4 +65,39 @@ class Cliente extends Model{
             idcliente=?";
         $affected = DB::delete($sql, [$this->idcliente]);
     }
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
+        $columns = array(
+           0 => 'A.nombre',
+           1 => 'A.razon_social',
+           2 => 'A.documento',
+           3 => 'A.mail'
+            );
+        $sql = "SELECT
+                    A.idcliente,
+                    A.nombre,
+                    A.razon_social,
+                    A.documento,
+                    A.telefono,
+                    A.mail,
+                    A.fk_idtipocliente
+                    FROM clientes A
+                    INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) { 
+            $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR A.razon_social LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR A.documento LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR A.mail LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
 }

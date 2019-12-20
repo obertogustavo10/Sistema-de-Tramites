@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Entidades\Formulario\AutorizacionViajes;
+namespace App\Entidades\Formularios;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
