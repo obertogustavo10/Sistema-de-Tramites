@@ -13,7 +13,7 @@ class ControladorTipoCliente extends Controller{
     public function nuevo () {
 
         $titulo ="Tipos de Clientes";
-        return view('clientes.tipocliente-nuevo', compact('titulo'));
+        return view('configuracion.tipocliente-nuevo', compact('titulo'));
     }
 
         public function guardar(Request $request){
