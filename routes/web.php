@@ -81,6 +81,13 @@ Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
+/* --------------------------------------------- */
+/* TIPOS DE CLIENTES- NUEVO TIPO DE CLIENTES                             */
+/* --------------------------------------------- */
+Route::get('cliente/nuevo', 'ControladorTipoCliente@nuevo');
+Route::post('cliente/nuevo', 'ControladorTipoCliente@guardar');
+Route::get('/cliente/nuevo/cargarGrilla', 'ControladorTipoCliente@cargarGrilla')->name('TipoCliente.cargarGrilla');
+
 
 });
 
