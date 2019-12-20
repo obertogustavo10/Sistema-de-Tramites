@@ -20,7 +20,50 @@ class Tramite extends Model
 
     ];
 
+<<<<<<< HEAD
     public function obtenerFiltradoEnProceso() {
+=======
+    
+    public function guardar() {
+        $sql = "UPDATE tramites SET
+                rectificativa='$this->rectificativa',
+                fecha_inicio='$this->fecha_inicio',
+                fk_idcliente='$this->fk_idcliente',
+                fk_idformulario='$this->fk_idformulario',
+                fk_idtramite_estado='$this->fk_idtramite_estado',
+                usuario_sistema='$this->usuario_sistema'
+            WHERE idtramite=?";
+        $affected = DB::update($sql, [$this->idtramite]);
+    }
+
+    public  function eliminar() {
+        $sql = "DELETE FROM tramites WHERE 
+            idtramite=?";
+        $affected = DB::delete($sql, [$this->idtramite]);
+    }
+
+    public function insertar() {
+        $sql = "INSERT INTO tramites (
+               rectificativa,
+               fecha_inicio,
+               fk_idcliente,
+               fk_idformulario,
+               fk_idtramite_estado,
+               usuario_sistema
+            ) VALUES (?, ?, ?, ?, ?, ?);";
+       $result = DB::insert($sql, [
+            $this->rectificativa, 
+            $this->fecha_inicio, 
+            $this->fk_idcliente, 
+            $this->fk_idformulario, 
+            $this->fk_idtramite_estado,
+            $this->usuario_sistema
+        ]);
+       return $this->idtramite = DB::getPdo()->lastInsertId();
+    }
+
+    public function obtenerFiltrado() {
+>>>>>>> ad0b3840fddca593379127bb3c59dbd0f775a083
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.nombre',

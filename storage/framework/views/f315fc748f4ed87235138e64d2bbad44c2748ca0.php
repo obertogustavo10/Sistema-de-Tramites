@@ -10,7 +10,11 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
     <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="/configuracion/formularios">formulario</a></li>
+=======
     <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
+>>>>>>> e95d962520e6246f0a9e85fa9fe125ad1780122d
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
