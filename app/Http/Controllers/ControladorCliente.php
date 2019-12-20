@@ -45,7 +45,7 @@ class ControladorCliente extends Controller{
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                return view('cliente.cliente-listar', compact('titulo', 'msg'));
+                return view('Cliente.cliente-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;

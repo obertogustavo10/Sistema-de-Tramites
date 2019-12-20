@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', $titulo)
+@section('titulo', "$titulo")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
