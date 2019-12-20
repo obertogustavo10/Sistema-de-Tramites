@@ -88,10 +88,16 @@ class ControladorCliente extends Controller{
             $cont=0;
             for ($i=$inicio; $i < count($aCliente) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="/sistema/menu/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
-                $row[] = $aCliente[$i]->padre;
-                $row[] = $aCliente[$i]->url;
-                $row[] = $aCliente[$i]->activo;
+                $row[] = '<a href="/cliente/listar/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
+                $row[] = $aCliente[$i]->nombre;
+                $row[] = $aCliente[$i]->razon_social;
+                $row[] = $aCliente[$i]->documento;
+                $row[] = $aCliente[$i]->tipodedocumento;
+                $row[] = $aCliente[$i]->tipodepersona;
+                $row[] = $aCliente[$i]->telefono;
+                $row[] = $aCliente[$i]->mail;
+                $row[] = $aCliente[$i]->domicilio;
+                $row[] = $aCliente[$i]->tipodedomicilio;
                 $cont++;
                 $data[] = $row;
             }

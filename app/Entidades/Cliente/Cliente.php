@@ -69,9 +69,9 @@ class Cliente extends Model{
         $request = $_REQUEST;
         $columns = array(
            0 => 'A.nombre',
-           1 => 'B.nombre',
-           2 => 'A.url',
-           3 => 'A.activo'
+           1 => 'A.razon_social',
+           2 => 'A.documento',
+           3 => 'A.mail'
             );
         $sql = "SELECT
                     A.idcliente,
@@ -89,8 +89,9 @@ class Cliente extends Model{
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
             $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR B.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR A.url LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR A.razon_social LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR A.documento LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR A.mail LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
