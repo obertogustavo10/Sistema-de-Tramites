@@ -131,6 +131,7 @@ Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFo
 Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramite/poderes_especialescargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
+Route::get('/tramite/poderes_especiales/{id}','ControladorPoderesEspeciales@editar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR NUEVO TRAMITE                     */
