@@ -31,7 +31,7 @@ class ControladorTramitesEnProceso extends Controller{
         $request = $_REQUEST;
 
         $entidadTramite = new Tramite();
-        $aTramites = $entidadTramite->obtenerFiltrado();
+        $aTramites = $entidadTramite->obtenerFiltradoEnProceso();
 
         $data = array();
 

@@ -31,7 +31,7 @@ class ControladorTramitesIniciados extends Controller{
         $request = $_REQUEST;
 
         $entidadTramite = new Tramite();
-        $aTramites = $entidadTramite->obtenerFiltrado();
+        $aTramites = $entidadTramite->obtenerFiltradoIniciados();
 
         $data = array();
 
