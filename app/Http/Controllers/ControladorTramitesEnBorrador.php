@@ -31,7 +31,8 @@ class ControladorTramitesEnBorrador extends Controller{
         $request = $_REQUEST;
 
         $entidadTramite = new Tramite();
-        $aTramites = $entidadTramite->obtenerFiltradoBorrador();
+         $idtramite_estado = 5; //fila de tramites en proceso de la base de datos
+        $aTramites = $entidadTramite->obtenerFiltrado($idtramite_estado);
 
         $data = array();
 
@@ -42,7 +43,7 @@ class ControladorTramitesEnBorrador extends Controller{
             $cont=0;
             for ($i=$inicio; $i < count($aTramites) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href=' . $aTramites[$i]->idtramite . '">' . $aTramites[$i]->nombre_tramite . '</a>';
+                $row[] = '<a href='.$aTramites[$i]->fk_formulario_url. '/' . $aTramites[$i]->idtramite . '>' . $aTramites[$i]->nombre_tramite . '</a>';
                 $row[] = $aTramites[$i]->estado;
                 $row[] = $aTramites[$i]->fecha_inicio;
                 $row[] = $aTramites[$i]->rectificativa;
