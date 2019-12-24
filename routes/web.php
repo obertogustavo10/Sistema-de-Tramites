@@ -88,7 +88,16 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
-/* TIPO DE CLIENTES                             */
+/* CONTROLADOR CALENDARIO                        */
+/* --------------------------------------------- */
+
+Route::get('/calendario', 'ControladorCalendario@index');
+Route::post('fullcalendar/create','FullCalendarController@create');
+Route::post('fullcalendar/update','FullCalendarController@update');
+Route::post('fullcalendar/delete','FullCalendarController@destroy');
+
+/* --------------------------------------------- */
+/* TIPO DE CLIENTES                              */
 /* --------------------------------------------- */
 
 Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
