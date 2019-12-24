@@ -16,6 +16,7 @@ class ControladorCliente extends Controller{
     public function nuevo(){
         $titulo = "Cliente nuevo";
         return view("Clientes.cliente-nuevo", compact('titulo'));
+        return view("clientes.cliente-nuevo", compact('titulo'));
 
         
     
@@ -46,6 +47,7 @@ class ControladorCliente extends Controller{
                     $msg["MSG"] = OKINSERT;
                 }
                 return view('Clientes.cliente-listar', compact('titulo', 'msg'));
+                return view('clientes.cliente-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -57,6 +59,7 @@ class ControladorCliente extends Controller{
         $cliente->obtenerPorId($id);
 
         return view('Clientes.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
+        return view('clientes.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
     public function index(){
         $titulo = "Listado de Clientes";
@@ -65,6 +68,7 @@ class ControladorCliente extends Controller{
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('clientes.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
+                return view ('cllientes.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
             } else {
                 return view('clientes.cliente-listar', compact('titulo'));
             }
@@ -92,7 +96,7 @@ class ControladorCliente extends Controller{
                 $row[] = $aCliente[$i]->nombre;
                 $row[] = $aCliente[$i]->razon_social;
                 $row[] = $aCliente[$i]->documento;
-                $row[] = $aCliente[$i]->tipodedocumento;
+                $row[] = $aCliente[$i]->tipodocumento;
                 $row[] = $aCliente[$i]->tipodepersona;
                 $row[] = $aCliente[$i]->telefono;
                 $row[] = $aCliente[$i]->mail;

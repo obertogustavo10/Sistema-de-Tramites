@@ -24,6 +24,7 @@ class Cliente extends Model{
         $this->documento = $request->input('txtDocumento');
         $this->telefono = $request->input('txtTel');
         $this->fk_idtipocliente = $request->input('lstPersona');
+        $this->fk_iddomicilio = $request->input('lstTipoDomicilio');
 
     }
 
@@ -80,9 +81,14 @@ class Cliente extends Model{
                     A.documento,
                     A.telefono,
                     A.mail,
-                    A.fk_idtipocliente
+                    A.fk_idtipocliente,
+                    C.nombre AS tipodocumento,
+                    A.domicilio,
+                    D.nombre AS tipodomicilio
                     FROM clientes A
                     INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
+                    INNER JOIN tipo_documentos C ON A.fk_idtipodocumento = C.nombre
+                    INNER JOIN tipo_domicilios D ON A.fk_idtipodomicilio = D.nombre
                 WHERE 1=1
                 ";
 
