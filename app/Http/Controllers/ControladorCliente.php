@@ -15,7 +15,7 @@ class ControladorCliente extends Controller{
 
     public function nuevo(){
         $titulo = "Cliente nuevo";
-        return view("Cliente.cliente-nuevo", compact('titulo'));
+        return view("clientes.cliente-nuevo", compact('titulo'));
 
         
     
@@ -45,7 +45,7 @@ class ControladorCliente extends Controller{
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                return view('cliente.cliente-listar', compact('titulo', 'msg'));
+                return view('clientes.cliente-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -56,7 +56,7 @@ class ControladorCliente extends Controller{
         $cliente = new Cliente();
         $cliente->obtenerPorId($id);
 
-        return view('Cliente.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
+        return view('clientes.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
     public function index(){
         $titulo = "Listado de Clientes";
@@ -64,9 +64,9 @@ class ControladorCliente extends Controller{
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
-                return view ('cliente.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
+                return view ('cllientes.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                return view('cliente.cliente-listar', compact('titulo'));
+                return view('clientes.cliente-listar', compact('titulo'));
             }
         } else {
             return redirect('login');
