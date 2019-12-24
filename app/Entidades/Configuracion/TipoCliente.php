@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Entidades\Cliente;
+namespace app\Entidades\Configuracion;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -26,10 +26,12 @@ class TipoCliente extends Model
 
     public function insertar() {
         $sql = "INSERT INTO tipo_clientes (
+                idtipocliente,
                 nombre
                 
-            ) VALUES (?);";
+            ) VALUES (?, ?);";
        $result = DB::insert($sql, [
+           $this->idtipocliente,
             $this->nombre    
         ]);
         return $this->idtipocliente = DB::getPdo()->lastInsertId();
@@ -37,6 +39,7 @@ class TipoCliente extends Model
 
     public function guardar() {
         $sql = "UPDATE tipo_clientes SET
+            idtipocliente='$this->idtipocliente',
             nombre='$this->nombre'
          WHERE idtipocliente=?";
         $affected = DB::update($sql, [$this->idtipocliente]);
@@ -48,7 +51,43 @@ class TipoCliente extends Model
         $affected = DB::delete($sql, [$this->idtipocliente]);
     }
 
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
 
+        $columns = array(
+           0 => 'nombre'
+            );
+        $sql = "SELECT 
+                idtipocliente,
+                nombre
+                FROM tipo_clientes
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) { 
+            $sql.=" AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR idtipocliente LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
+    public function obtenerMenuPadre() {
+        $sql = "SELECT DISTINCT
+                idtipocliente,
+                nombre
+                FROM tipo_clientes
+                ";
+
+
+        $sql .= " ORDER BY A.nombre";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
     
 }
 
