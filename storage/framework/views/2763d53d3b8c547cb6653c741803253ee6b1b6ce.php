@@ -40,7 +40,7 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form-aut" method="POST">
+        <form id="form1" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>

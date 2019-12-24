@@ -10,8 +10,8 @@ use App\Entidades\Configuracion\Formulario;
 require app_path().'/start/constants.php';
 use Session;
 
-class ControladorConfiguracionFormularios extends Controller
-    {
+class ControladorConfiguracionFormularios extends Controller {
+
         public function index()
         {
         $titulo = "Listado de Formularios";
@@ -27,9 +27,9 @@ class ControladorConfiguracionFormularios extends Controller
         } else {
             return redirect('login');
         }
-    }
-    public function cargarGrilla()
-    {
+        }
+        public function cargarGrilla()
+        {
         $request = $_REQUEST;
 
         $entidadFormulario = new Formulario();
@@ -58,13 +58,33 @@ class ControladorConfiguracionFormularios extends Controller
             "data" => $data
         );
         return json_encode($json_data);
-    }
+        }
         public function nuevo()
         {
             $titulo = "Nuevo Formulario";
             return view("configuracion.formulario-nuevo", compact('titulo'));
         }
-    
+        public function editar($id){
+        $titulo = "Modificar Formulario";
+        if(Usuario::autenticado() == true){
+            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                $codigo = "MENUMODIFICACION";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $formulario = new Formulario();
+                $formulario->obtenerPorId($id);
+
+                $entidad = new Formulario();
+                $array_formulario = $entidad->obtenerFormulario($id);
+
+                return view('configuracion.formulario-nuevo', compact('formulario', 'titulo', 'array_formulario'));
+            }
+        } else {
+           return redirect('login');
+        }
+    }
+
         public function guardar(Request $request){
         try {
             //Define la entidad servicio

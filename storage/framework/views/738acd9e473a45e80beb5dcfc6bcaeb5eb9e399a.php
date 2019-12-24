@@ -9,7 +9,7 @@
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Nuevo trámite</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -40,15 +40,17 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="datosPoder" method="POST">
+        <form id="form1" method="POST">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
+        <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
             <div class="row">
                 <div class="col-sm-4">
-                    <h3><label for="tipoDePoder">Tipo de Poder</label></h3>
+                    <label for="tipoDePoder">Tipo de Poder</label>
                     <select class="form-control" name="tipoDePoder" id="tipoDePoder">
-                        <option selected value="1">Venta</option>
-                        <option selected value="2">Adminitracion y Disposicion</option>
-                        <option selected value="3">Judicial</option>
-                        <option selected=""></option>
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Venta</option>
+                        <option value="2">Adminitracion y Disposicion</option>
+                        <option value="3">Judicial</option>
                     </select>
                 </div>
             </div>
@@ -59,49 +61,49 @@ if (isset($msg)) {
             </div>
             <div class="row">
                 <div class="col">
-                    <h5><label for="nombrePoderdante">Nombre Completo</label></h5>
-                    <input type="text" class="form-control" name="nombrePoderdante" id="nombrePoderdante">
+                    <label for="nombrePoderdante">Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombrePoderdante" id="nombrePoderdante" value="<?php echo e(isset($poderEspecial->nombrepoderdante) ? $poderEspecial->nombrepoderdante : ''); ?>">
                 </div>
                 <div class="col">
-                    <h5><label for="fechaPoderdante">Fecha de Nacimiento</label></h5>
-                    <input type="date" class="form-control" name="fechaPoderdante" id="fechaPoderdante">
+                    <label for="fechaPoderdante">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fechaPoderdante" id="fechaPoderdante" value="<?php echo e(isset($poderEspecial->fechapoderdante) ? $poderEspecial->fechapoderdante : ''); ?>">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <h5><label for="cuilPoderdante">CUIL</label></h5>
-                    <input type="cuilPoderdante" class="form-control" name="cuilPoderdante" id="cuilPoderdante">
+                    <label for="cuilPoderdante">CUIL</label>
+                    <input type="cuilPoderdante" class="form-control" name="cuilPoderdante" id="cuilPoderdante" value="<?php echo e(isset($poderEspecial->cuilpoderdante) ? $poderEspecial->cuilpoderdante : ''); ?>">
                 </div>
                 <div class="col">
-                    <h5><label for="domicilioPoderdante">Domicilio</label></h5>
-                    <input type="text" class="form-control" name="domicilioPoderdante" id="domicilioPoderdante" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires">
+                    <label for="domicilioPoderdante">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilioPoderdante" id="domicilioPoderdante" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires" value="<?php echo e(isset($poderEspecial->domiciliopoderdante) ? $poderEspecial->domiciliopoderdante : ''); ?>">
                 </div>
             </div>
             <div class="row mt-3 ">
                 <div class="col">
-                    <h5><label for="estadoCivilPoderdante">Estado Civil</label></h5>
-                    <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante">
-                        <option selected value="1">Casado</option>
-                        <option selected value="2">Soltero</option>
-                        <option selected value="3">Viudo</option>
-                        <option selected=""></option>
+                    <label for="estadoCivilPoderdante">Estado Civil</label>
+                    <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante" value="<?php echo e(isset($poderEspecial->estadocivilpoderdante) ? $poderEspecial->estadocivilpoderdante : ''); ?>">
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
-                    <h5><label for="nombreConyugePoderdante">Nombre de su Conyuge*</label>(En el caso de ser Casado)</h5>
-                    <input type="text" class="form-control" name="nombreConyugePoderdante" id="nombreConyugePoderdante" >
+                    <label for="nombreConyugePoderdante">Nombre de su Conyuge*</label>(En el caso de ser Casado)
+                    <input type="text" class="form-control" name="nombreConyugePoderdante" id="nombreConyugePoderdante" value="<?php echo e(isset($poderEspecial->conyugepoderdante) ? $poderEspecial->conyugepoderdante : ''); ?>" >
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombreMadrePoderdante">Nombre de su Madre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombreMadrePoderdante" id="nombreMadrePoderdante" >
+                    <label for="nombreMadrePoderdante">Nombre de su Madre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombreMadrePoderdante" id="nombreMadrePoderdante" value="<?php echo e(isset($poderEspecial->madrepoderdante) ? $poderEspecial->madrepoderdante : ''); ?>">
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombrePadrePoderdante">Nombre de su Padre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombrePadrePoderdante" id="nombrePadrePoderdante" >
+                    <label for="nombrePadrePoderdante">Nombre de su Padre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombrePadrePoderdante" id="nombrePadrePoderdante" value="<?php echo e(isset($poderEspecial->padrepoderdante) ? $poderEspecial->padrepoderdante : ''); ?>">
                 </div>
             </div>
             <div class="row mt-4">
@@ -111,50 +113,49 @@ if (isset($msg)) {
             </div>
             <div class="row">
                 <div class="col">
-                    <h5><label for="nombreApoderado">Nombre Completo</label></h5>
-                    <input type="text" class="form-control" name="nombreApoderado" id="nombreApoderado">
+                    <label for="nombreApoderado">Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombreApoderado" id="nombreApoderado" value="<?php echo e(isset($poderEspecial->nombreapoderado) ? $poderEspecial->nombreapoderado : ''); ?>">
                 </div>
                 <div class="col">
-                    <h5><label for="fechaApoderado">Fecha de Nacimiento</label></h5>
-                    <input type="date" class="form-control" name="fechaApoderado" id="fechaApoderado">
+                    <label for="fechaApoderado">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fechaApoderado" id="fechaApoderado" value="<?php echo e(isset($poderEspecial->fechaapoderado) ? $poderEspecial->fechaapoderado : ''); ?>">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <h5><label for="cuilApoderado">CUIL</label></h5>
-                    <input type="cuilApoderado" class="form-control" name="cuilApoderado" id="cuilApoderado">
+                    <label for="cuilApoderado">CUIL</label>
+                    <input type="cuilApoderado" class="form-control" name="cuilApoderado" id="cuilApoderado" value="<?php echo e(isset($poderEspecial->cuilapoderado) ? $poderEspecial->cuilapoderado : ''); ?>">
                 </div>
                 <div class="col">
-                    <h5><label for="domicilioApoderado">Domicilio</label></h5>
-                    <input type="text" class="form-control" name="domicilioApoderado" id="domicilioApoderado" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires">
+                    <label for="domicilioApoderado">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilioApoderado" id="domicilioApoderado" placeholder="25 de Mayo 437, Ramos Mejia, La Matanza, Provincia de Buenos Aires" value="<?php echo e(isset($poderEspecial->domicilioapoderado) ? $poderEspecial->domicilioapoderado : ''); ?>">
                 </div>
             </div>
             <div class="row mt-3 mb-3">
                 <div class="col">
-                    <h5><label for="estadoCivilApoderado">Estado Civil</label></h5>
-                    <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado">
-                        <option disabled="" selected=""></option>
-                        <option selected value="1">Casado</option>
-                        <option selected value="2">Soltero</option>
-                        <option selected value="3">Viudo</option>
-                        <option  selected=""></option>
+                    <label for="estadoCivilApoderado">Estado Civil</label>
+                    <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado" value="<?php echo e(isset($poderEspecial->estadocivilapoderado) ? $poderEspecial->estadocivilapoderado : ''); ?>">
+                        <option selected disabled>Seleccionar</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
-                    <h5><label for="nombreConyugeApoderado">Nombre de su Conyuge*</label>(En el caso de ser Casado)</h5>
-                    <input type="text" class="form-control" name="nombreConyugeApoderado" id="nombreConyugeApoderado" >
+                    <label for="nombreConyugeApoderado">Nombre de su Conyuge*</label>(En el caso de ser Casado)
+                    <input type="text" class="form-control" name="nombreConyugeApoderado" id="nombreConyugeApoderado" value="<?php echo e(isset($poderEspecial->conyugeapoderado) ? $poderEspecial->conyugeapoderado : ''); ?>">
                 </div>
             </div>
             <div class="row justify-content-end">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombreMadreApoderado">Nombre de su Madre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombreMadreApoderado" id="nombreMadreApoderado" >
+                    <label for="nombreMadreApoderado">Nombre de su Madre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombreMadreApoderado" id="nombreMadreApoderado" value="<?php echo e(isset($poderEspecial->madreapoderado) ? $poderEspecial->madreapoderado : ''); ?>">
                 </div>
             </div>
             <div class="row justify-content-end mb-3">   
                 <div class="col-sm-6 ">
-                    <h5><label for="nombrePadreApoderado">Nombre de su Padre*</label>(En el caso de ser Soltero)</h5>
-                    <input type="text" class="form-control" name="nombrePadreApoderado" id="nombrePadreApoderado" >
+                    <label for="nombrePadreApoderado">Nombre de su Padre*</label>(En el caso de ser Soltero)
+                    <input type="text" class="form-control" name="nombrePadreApoderado" id="nombrePadreApoderado" value="<?php echo e(isset($poderEspecial->padreapoderado) ? $poderEspecial->padreapoderado : ''); ?>">
                 </div>
             </div>
         </form>
