@@ -88,8 +88,18 @@ Route::post('/sistema/menu/{id}', 'ControladorMenu@guardar');
 Route::get('/sistema/menu/{id}', 'ControladorMenu@editar');
 
 /* --------------------------------------------- */
-/* TIPO DE CLIENTES                             */
+/* CONTROLADOR CALENDARIO                        */
 /* --------------------------------------------- */
+
+Route::get('/calendario', 'ControladorCalendario@index');
+Route::post('fullcalendar/create','FullCalendarController@create');
+Route::post('fullcalendar/update','FullCalendarController@update');
+Route::post('fullcalendar/delete','FullCalendarController@destroy');
+
+/* --------------------------------------------- */
+/* TIPO DE CLIENTES                              */
+/* --------------------------------------------- */
+
 Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
 Route::post('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@guardar');
 Route::get('/configuracion/tipodeclientes', 'ControladorTipocliente@index');
@@ -98,6 +108,15 @@ Route::get('/configuracion/tipodecliente/nuevo/eliminar', 'ControladorTipoClient
 Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
 Route::post('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@guardar');
 Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
+
+/* --------------------------------------------- */
+/* CONTROLADOR CALCULO DE VACACIONES             */
+/* --------------------------------------------- */
+
+Route::get('/tramite/calculo_vacaciones','ControladorCalculoVacaciones@nuevo');
+Route::post('/tramite/calculo_vacaciones','ControladorCalculoVacaciones@guardar');
+Route::get('/tramite/calculo_vacacionescargarGrilla', 'ControladorCalculoVacaciones@cargarGrilla')->name('calculovacaciones.cargarGrilla');
+Route::get('/tramite/calculo_vacaciones/{id}','ControladorCalculoVacaciones@editar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE UTILIDADES             */
@@ -136,7 +155,6 @@ Route::get('/configuracion/formulario/nuevo/eliminar', 'ControladorConfiguracion
 Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
 Route::post('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@guardar');
 Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
-
 
 /* --------------------------------------------- */
 /* CONTROLADOR PODERES ESPECIALES                */

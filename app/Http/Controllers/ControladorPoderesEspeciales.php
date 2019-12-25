@@ -66,6 +66,8 @@ Class ControladorPoderesEspeciales extends Controller{
                     $tramite->fecha_inicio = $fechaActual;
                     $tramite->fk_idcliente = Session::get('usuario_id');//Persona q inica el tramite
                     $tramite->fk_idformulario = 4;
+                    $tramite->fk_formulario_url = "/tramite/poderes_especiales";
+                    //ATENCION! debe ser insertado desde la tabla formularios
                     $tramite->fk_idtramite_estado = 1;
                     $tramite->idtramite = $tramite->insertar();
 
