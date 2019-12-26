@@ -131,7 +131,9 @@ Route::post('/tramite/calculo_utilidades', 'ControladorCalculoUtlidades@guardar'
 
 Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@nuevo');
 Route::post('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viajecargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viaje/{id}','ControladorAutorizacionViajes@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR CLIENTE                           */
