@@ -140,6 +140,9 @@ Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla'
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
 Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
+Route::post('/cliente/nuevo/{id}', 'ControladorCliente@guardar');
+Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
 Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 Route::get('/clientes', 'ControladorCliente@cargarGrilla')->name('clientes.cargarGrilla');
 
