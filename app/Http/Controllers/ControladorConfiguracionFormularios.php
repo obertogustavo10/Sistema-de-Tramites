@@ -74,7 +74,7 @@ class ControladorConfiguracionFormularios extends Controller {
             } else {
                 $formulario = new Formulario();
                 $formulario->obtenerPorId($id);
-
+            
                 $entidad = new Formulario();
                 $array_formulario = $entidad->obtenerFormulario($id);
 
@@ -111,7 +111,7 @@ class ControladorConfiguracionFormularios extends Controller {
                     $msg["MSG"] = OKINSERT;
                 }
                 
-                return view('configuracion.formularios-listar', compact('titulo', 'msg'));
+                return view('configuracion.formulario-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -124,4 +124,29 @@ class ControladorConfiguracionFormularios extends Controller {
 
         return view('configuracion.formulario-nuevo', compact('nombre')) . '?id=' . $formulario->idformulario;
     }
+
+    public function eliminar(Request $request){
+        $id = $request->input('id');
+
+        if(Usuario::autenticado() == true){
+            if(Patente::autorizarOperacion("MENUELIMINAR")){
+
+                $entidad = new Formulario();
+                $entidad->cargarDesdeRequest($request);
+                $entidad->eliminar();
+
+                $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                
+            } else {
+                $codigo = "MENUELIMINAR";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                $aResultado["err"] = EXIT_FAILURE; //error al elimiar
+            }
+            echo json_encode($aResultado);
+        } else {
+            return redirect('login');
+        }
+    }
+
 }

@@ -11,7 +11,7 @@ class Cliente extends Model{
     public $timestamps = false;
 
     protected $fillable = [
-        'idcliente', 'razon_social', 'nombre', 'mail', 'documento', 'telefono', 'fk_iddomicilio', 'fk_idtipocliente'
+        'idcliente', 'razon_social', 'nombre', 'mail', 'documento', 'telefono', 'fk_idtipodomicilio', 'fk_idtipocliente', 'fk_idtipodocumento'
     ];
     protected $hidden =[
 
@@ -24,10 +24,12 @@ class Cliente extends Model{
         $this->documento = $request->input('txtDocumento');
         $this->telefono = $request->input('txtTel');
         $this->fk_idtipocliente = $request->input('lstPersona');
+        $this->fk_idtipodomicilio = $request->input('lstTipoDomicilio');
+      
 
     }
 
-    public function insertar() {
+    public function insertarCliente() {
         $sql = "INSERT INTO clientes (
             
                 razon_social,
@@ -35,9 +37,14 @@ class Cliente extends Model{
                 mail,
                 documento,
                 telefono,
-                fk_idtipocliente
+                fk_idtipocliente,
+                fk_idtipodomicilio,
+                fk_idtipodocumento
 
-            ) VALUES ( ?, ?, ?, ?, ?,?);";
+
+            ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+
+    
        $result = DB::insert($sql, [
              
             $this->razon_social, 
@@ -45,11 +52,13 @@ class Cliente extends Model{
             $this->mail, 
             $this->documento,
             $this->telefono,
-            $this->fk_idtipocliente
+            $this->fk_idtipocliente,
+            $this->fk_idtidomicilio,
+            $this->fk_idtidocumento,
         ]);
        return $this->idcliente = DB::getPdo()->lastInsertId();
     }
-    public function guardar() {
+    public function guardarCliente() {
         $sql = "UPDATE clientes SET
             razon_social='$this->razon_social',
             nombre='$this->nombre',
@@ -57,15 +66,17 @@ class Cliente extends Model{
             documento=$this->documento,
             telefono='$this->telefono',
             fk_idtipocliente='$this->fk_idtipocliente',
+            fk_idtipodomicilio='$this->fk_idtipodomicilio',
+            fk_idtipodocumento='$this->fk_idtipodocumento'
             WHERE idcliente=?";
         $affected = DB::update($sql, [$this->idcliente]);
     }
-    public  function eliminar() {
+    public  function eliminarCliente() {
         $sql = "DELETE FROM clientes WHERE 
             idcliente=?";
         $affected = DB::delete($sql, [$this->idcliente]);
     }
-    public function obtenerFiltrado() {
+    public function obtenerFiltradoCliente() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'A.nombre',
@@ -80,9 +91,13 @@ class Cliente extends Model{
                     A.documento,
                     A.telefono,
                     A.mail,
-                    A.fk_idtipocliente
+                    A.fk_idtipocliente,
+                    C.nombre AS tipodocumento,
+                    D.nombre AS tipodomicilio
                     FROM clientes A
                     INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
+                    INNER JOIN tipo_documentos C ON A.fk_idtipodocumento = C.nombre
+                    INNER JOIN tipo_domicilios D ON A.fk_idtipodomicilio = D.nombre
                 WHERE 1=1
                 ";
 
@@ -99,5 +114,20 @@ class Cliente extends Model{
 
         return $lstRetorno;
     }
+    public function obtenerPorIdCliente($id){
+        $sql = "SELECT
+              idcliente,
+              razon_social,
+                nombre,
+                mail,
+                documento,
+                telefono,
+                fk_idtipocliente,
+                fk_idtipodomicilio,
+                fk_idtipodocumento
+              FROM clientes WHERE idcliente = $id";
+      $lstRetorno = DB::select($sql);
 
+      return $lstRetorno;
+  }
 }

@@ -11,7 +11,7 @@
     <li class="breadcrumb-item active">Tipo de clientes</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/configuracion/tipocliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/configuracion/tipodecliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/tipodeclientes");'><span>Recargar</span></a></li>
 </ol>
 <?php $__env->stopSection(); ?>
