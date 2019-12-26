@@ -46,31 +46,31 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre y Apellido: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($menu->nombre) ? $menu->nombre : ''); ?>" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value="<?php echo e(isset($calculoUtilidades->nombre) ? $calculoUtilidades->nombre : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>No. Cedula de Identidad: *</label>
-                    <input class="form-control" type="number" placeholder="" name="txtCedula"required id="txtCantidad">
+                    <input class="form-control" type="number" placeholder="" name="txtCedula"required id="txtCantidad" value="<?php echo e(isset($calculoUtilidades->no_cedula) ? $calculoUtilidades->no_cedula : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Cargo que ocupa en la empresa: *</label>
-                    <input class="form-control" type="text" placeholder="" name="txtCargo"required id="txtNombre">
+                    <input class="form-control" type="text" placeholder="" name="txtCargo"required id="txtNombre" value="<?php echo e(isset($calculoUtilidades->cargo_empresa) ? $calculoUtilidades->cargo_empresa : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Fecha de Ingreso: *</label>
-                    <input class="form-control" type="date" placeholder="" name="txtFecha"required id="txtFecha">
+                    <input class="form-control" type="date" placeholder="" name="txtFecha"required id="txtFecha" value="<?php echo e(isset($calculoUtilidades->fecha_ingreso) ? $calculoUtilidades->fecha_ingreso : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Dias a Bonificar:</label>
-                    <input class="form-control" type="number" placeholder="" name="txtBonificar"required id="txtCantidad">
+                    <input class="form-control" type="number" placeholder="" name="txtBonificar"required id="txtCantidad" value="<?php echo e(isset($calculoUtilidades->dias_bonificar) ? $calculoUtilidades->dias_bonificar : ''); ?>">
                 </div>
                  <div class="form-group col-lg-6">
                     <label>Nombre del Solicitante:</label>
-                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante"required id="txtNombre">
+                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante"required id="txtNombre" value="<?php echo e(isset($calculoUtilidades->nombre_solicitante) ? $calculoUtilidades->nombre_solicitante : ''); ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Desea calculo a ultimo salario:</label>
-                    <select id="lstEstado" name="lstUltimo_Salario" class="form-control" required>
+                    <select id="lstEstado" name="lstUltimo_Salario" class="form-control" required value="<?php echo e(isset($calculoUtilidades->calculo_ultimosalario) ? $calculoUtilidades->calculo_ultimosalario : ''); ?>">
                 <option value="" disabled selected>Seleccionar</option>
                 <option value="1" <?php echo e(isset($grupo) && $grupo->activo == 1? 'selected' : ''); ?>>Si</option>
                 <option value="0" <?php echo e(isset($grupo) &&$grupo->activo == 0? 'selected' : ''); ?>>No</option>
@@ -78,7 +78,7 @@ if (isset($msg)) {
                 </div>
                  <div class="form-group col-lg-6">
                     <label>Desea calculo a salario promedio:</label>
-                   <select id="lstEstado" name="lstSalario_Promedio" class="form-control" required>
+                   <select id="lstEstado" name="lstSalario_Promedio" class="form-control" required value="<?php echo e(isset($calculoUtilidades->calculo_salariopromedio) ? $calculoUtilidades->calculo_salariopromedio : ''); ?>">
                 <option value="" disabled selected>Seleccionar</option>
                 <option value="1" <?php echo e(isset($grupo) && $grupo->activo == 1? 'selected' : ''); ?>>Si</option>
                 <option value="0" <?php echo e(isset($grupo) &&$grupo->activo == 0? 'selected' : ''); ?>>No</option>

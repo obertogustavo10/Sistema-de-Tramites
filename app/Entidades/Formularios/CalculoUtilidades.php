@@ -25,9 +25,10 @@ class CalculoUtilidades extends Model{
          'calculo_ultimosalario', 'calculo_salariopromedio'
     ];
     protected $hidden = [
-
-    ];
+        'idtramite'
+     ];
     function cargarDesdeRequest($request) {
+        $this->idtramite = $request->input('id')!= "0" ? $request->input('id') : $this->idtramite;
         $this->nombre = $request->input('txtNombre');
         $this->no_cedula = $request->input('txtCedula');
         $this->cargo_empresa = $request->input('txtCargo');

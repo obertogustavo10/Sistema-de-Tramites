@@ -40,8 +40,7 @@ class ControladorCalculoUtlidades extends Controller{
                 $titulo = "Modificar Poder";
                 $calculoUtilidades = new CalculoUtilidades();
                 $calculoUtilidades->cargarDesdeRequest($request);
-    
-                //validaciones
+               //validaciones
                 if ($calculoUtilidades->nombre == "")
             {
                 $msg["ESTADO"] = MSG_ERROR;
@@ -81,7 +80,7 @@ class ControladorCalculoUtlidades extends Controller{
             {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Seleccione una opcion";
-                
+            } else {
                     if ($_POST["id"] > 0) {
                         //Es actualizacion
                         $calculoUtilidades->guardar();
