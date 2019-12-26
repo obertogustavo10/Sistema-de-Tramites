@@ -69,16 +69,13 @@ class ControladorTipoCliente extends Controller{
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                $menu = new TipoCliente();
-                $menu->obtenerPorId($id);
+                $tipoCliente = new TipoCliente();
+                $tipoCliente->obtenerPorId($id);
 
                 $entidad = new TipoCliente();
-                $array_menu = $entidad->obtenerMenuPadre($id);
+                $array_tipocliente = $entidad->obtenerTipoCliente($id);
 
-                $menu_grupo = new MenuArea();
-                $array_menu_grupo = $menu_grupo->obtenerPorMenu($id);
-
-                return view('sistema.menu-nuevo', compact('menu', 'titulo', 'array_menu', 'array_menu_grupo'));
+                return view('configuracion.tipocliente-listar', compact('titulo', 'tipoCliente', 'array_tipocliente', 'entidad'));
             }
         } else {
            return redirect('login');
@@ -124,7 +121,7 @@ class ControladorTipoCliente extends Controller{
     
             
     
-            return view('configuracion.tipocliente-nuevo', compact('msg', 'TipoCliente', 'titulo')) . '?id=' . $entidad->idtipocliente;
+            return view('configuracion.tipocliente-nuevo', compact('msg', 'tipoCliente', 'titulo')) . '?id=' . $entidad->idtipocliente;
         }    
     }
 

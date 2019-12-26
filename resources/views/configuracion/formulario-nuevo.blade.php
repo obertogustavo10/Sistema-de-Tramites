@@ -52,11 +52,11 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="{{$formulario->descripcion or ''}}" required>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$formulario->descripcion or ''}}" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>URL: *</label>
-                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="{{$formulario->url or ''}}" required>
+                    <input type="text" id="txtURL" name="txtURL" class="form-control" value="{{$formulario->url or ''}}" required>
                 </div>
             </div>
         </form>
@@ -96,7 +96,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('sistema/menu/eliminar') }}",
+            url: "{{ asset('configuracion/formulario/eliminar/') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",

@@ -55,7 +55,8 @@ class TipoCliente extends Model
         $request = $_REQUEST;
 
         $columns = array(
-           0 => 'nombre'
+           0 => 'idtipocliente',
+           1 => 'nombre'
             );
         $sql = "SELECT 
                 idtipocliente,
@@ -76,7 +77,7 @@ class TipoCliente extends Model
         return $lstRetorno;
     }
 
-    public function obtenerMenuPadre() {
+    public function obtenerTipoCliente() {
         $sql = "SELECT DISTINCT
                 idtipocliente,
                 nombre
@@ -89,6 +90,20 @@ class TipoCliente extends Model
         return $lstRetorno;
     }
     
+    public function obtenerPorId($id) {
+        $sql = "SELECT
+                idtipocliente,
+                nombre,
+                FROM tipo_clientes WHERE idtipocliente = '$id'";
+        $lstRetorno = DB::select($sql);
+
+        if(count($lstRetorno)>0){
+            $this->idtipocliente = $lstRetorno[0]->idtipocliente;
+            $this->nombre = $lstRetorno[0]->nombre;
+            return $this;
+        }
+        return null;
+    }
 }
 
 
