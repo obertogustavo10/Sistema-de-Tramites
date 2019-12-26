@@ -6,7 +6,7 @@ use App\Evento;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+//use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -31,26 +31,27 @@ class ControladorCalendario extends Controller
                  {
                     foreach ($data as $key => $value) 
                     {
-                        $eventos[] = Calendar::event(
-                            $value->title,
-                            true,
-                            new \DateTime($value->start_date),
-                            new \DateTime($value->end_date.'+1 day'),
-                            null,
+                          // $eventos[] = Calendar::event(
+                           // $value->title,
+                           // true,
+                            //new \DateTime($value->start_date),
+                           // new \DateTime($value->end_date.'+1 day'),
+                           // null,
                             // Add color
-                         [
-                             'color' => '#000000',
-                             'textColor' => '#008000',
-                         ]
-                        );
-                    }
-                }
-                $calendar = Calendar::addEvents($eventos);
+                         //[
+                         //    'color' => '#000000',
+                          //   'textColor' => '#008000',
+                      //   ]
+                     //   );
+                  //  }
+              //  }
+               // $calendar = Calendar::addEvents($eventos);
                
-                return view('calendario.calendario', compact('calendar'));
-            }
-        } else {
-            return redirect('login');
-        }
-    }
-}
+              //  return view('calendario.calendario', compact('calendar'));
+           // }
+       // } else {
+         //   return redirect('login');
+      //  }
+   // }
+//}
+    
