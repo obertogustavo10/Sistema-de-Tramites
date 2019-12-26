@@ -6,63 +6,100 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Session;
 
-Class Calculo_vacaciones extends Model
-{
+class CalculoVacaciones extends Model{
+      
+
     protected $table = 'valores';
     public $timestamps = false;
+    
+    private $aIdCampos = array(
+        "nombreyapellidodeltrabajor" => 34,
+        "numerodeceduladeidentidad" => 35,
+        "cargoqueocupaenlaempresa" => 36,
+        "fechadeingreso" => 37,
+        "fechadesalidadevacaciones" => 38,
+        "ultimosalariodevengado" => 39,
+        "nombredelsolicitante" => 40,
+        );
 
-    protected $fillable = 
-    [
-        'idvalor', 'nombre', 'cedula', 'cargo', 'fecha_ingreso', 'fecha_salida', 'ultimo_salario', 'nombre_solicitante'
+    protected $fillable = [
+        'nombreyapellidodeltrabajor',
+        'numerodeceduladeidentidad',
+        'cargoqueocupaenlaempresa',
+        'fechadeingreso',
+        'fechadesalidadevacaciones',
+        'ultimosalariodevengado',
+        'nombredelsolicitante'];
+
+    protected $hidden = [
+        'idtramite'
     ];
 
-    protected $hidden = 
-    [
-
-    ];
-
-    public function cargarDesdeRequest($request)
-    {
-        $this->idvalor = $request->input('id') !="0" ? $request->input('id') : $this->idvalor;
-        $this->nombre = $request->input('txtNombre');
-        $this->cedula = $request->input('txtCedula');
-        $this->cargo = $request->input('txtCargo');
-        $this->fecha_ingreso = $request->input('txtFechaIngreso');
-        $this->fecha_salida = $request->input('txtFechaSalida');
-        $this->ultimo_salario = $request->input('txtUltSalario');
-        $this->nombre_solicitante = $request->input('txtNombre');
+     function cargarDesdeRequest($request) {
+        $this->idtramite = $request->input('id')!= "0" ? $request->input('id') : $this->idtramite;
+        $this->nombreyapellidodeltrabajor =$request->input('txtNombreTrabajador');
+        $this->numerodeceduladeidentidad = $request->input('txtCedula');
+        $this->cargoqueocupaenlaempresa = $request->input('txtCargo');
+        $this->fechadeingreso =  $request->input('txtFechaIngreso');
+        $this->fechadesalidadevacaciones = $request->input('txtFechaSalida');
+        $this->ultimosalariodevengado = $request->input('txtUltimoSalario');
+        $this->nombredelsolicitante = $request->input('txtNombreSolicitante');
+        
     }
-    public function insertar() 
-    {
-        $sql = "INSERT INTO valores (
-            idvalor,
-            fk_idcampo,
-            valor,
-            fk_idtramite
-            ) VALUES (?, ?, ?, ?);";
+
+    public function obtenerPorId($id){
+          $sql = "SELECT
+                idvalor,
+                fk_idtramite,
+                fk_idcampo,
+                valor
+                FROM valores WHERE fk_idtramite = $id";
+        $lstRetorno = DB::select($sql);
+
+        if(count($lstRetorno)>0){
+            $this->idtramite = $id;
+            foreach($lstRetorno as $fila){
+                foreach($this->aIdCampos as $campo => $fk_idcampo){
+                    if($fila->fk_idcampo == $fk_idcampo){
+                        $this->$campo = $fila->valor; 
+                    }
+                }
+            }
+            return $this;
+        }
+        return null;
+    }
+
+    public function insertar() {
+        foreach($this->fillable as $campo){
+            $sql = "INSERT INTO valores (
+                fk_idtramite,
+                fk_idcampo,
+                valor
+            ) VALUES (?, ?, ?);";
             $result = DB::insert($sql, [
-                $this->idvalor,
-                $this->fk_idcampo,
-                $this->valor,
-                $this->fk_idtramite
+                $this->idtramite,
+                $this->aIdCampos[$campo],
+                $this->$campo
             ]);
-            return $this->idvalor = DB::getPdo()->lastInsertId();
-    }
-    public function guardar() 
-    {
-        $sql = "UPDATE valores SET
-            idvalor='$this->idvalor',
-            fk_idcampo='$this->fk_idcampo',
-            valor='$this->valor',
-            fk_idtramite='$this->fk_idtramite'
-            WHERE idvalor=?";
-        $affected = DB::update($sql, [$this->idvalor]);
+            $idvalor = DB::getPdo()->lastInsertId();
+        }
     }
 
-    public  function eliminar() 
-    {
+    public function guardar($idTramite) {
+         foreach ($this as $campo => $valor) {
+            $sql = "UPDATE valores SET
+                valor='$valor'
+            WHERE idvalores= ? AND campo = ?"; 
+            $affected = DB::update($sql, [$idTramite, $campo]);
+        }
+    }
+
+    public function eliminar() {
         $sql = "DELETE FROM valores WHERE 
             fk_idtramite=?";
         $affected = DB::delete($sql, [$this->fk_idtramite]);
     }
 }
+
+?>

@@ -64,7 +64,27 @@ class ControladorConfiguracionFormularios extends Controller {
             $titulo = "Nuevo Formulario";
             return view("configuracion.formulario-nuevo", compact('titulo'));
         }
-    
+        public function editar($id){
+        $titulo = "Modificar Formulario";
+        if(Usuario::autenticado() == true){
+            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                $codigo = "MENUMODIFICACION";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $formulario = new Formulario();
+                $formulario->obtenerPorId($id);
+
+                $entidad = new Formulario();
+                $array_formulario = $entidad->obtenerFormulario($id);
+
+                return view('configuracion.formulario-nuevo', compact('formulario', 'titulo', 'array_formulario'));
+            }
+        } else {
+           return redirect('login');
+        }
+    }
+
         public function guardar(Request $request){
         try {
             //Define la entidad servicio
