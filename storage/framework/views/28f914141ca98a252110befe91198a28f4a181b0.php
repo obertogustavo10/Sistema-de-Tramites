@@ -52,8 +52,10 @@ if (isset($msg)) {
                     <label>Persona:</label>
                     <select id="lstPersona" name="lstPersona" class="form-control">
                     <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Persona Física</option>
+                        <option value="1">Persona Natural</option>
                         <option value="2">Persona Jurídica</option>
+                        <option value="3">Sociedad Anónima</option>
+                        <option value="4">Compañía Anónima</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -71,6 +73,7 @@ if (isset($msg)) {
                         <option value="1">CUIT/CUIL</option>
                         <option value="2">RIF</option>
                         <option value="3">DNI</option>
+                        <option value="4">Cédula de Identidad</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -83,7 +86,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Tipo de Domicilio:</label>
-                    <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control" required>
+                    <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
                         <option value="1">Real</option>
                         <option value="2">Legal</option>

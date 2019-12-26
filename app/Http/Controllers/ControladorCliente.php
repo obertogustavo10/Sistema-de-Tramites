@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Cliente\Cliente;
+use App\Entidades\Cliente\Domicilio;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -15,7 +16,6 @@ class ControladorCliente extends Controller{
 
     public function nuevo(){
         $titulo = "Cliente nuevo";
-        return view("Clientes.cliente-nuevo", compact('titulo'));
         return view("clientes.cliente-nuevo", compact('titulo'));
 
         
@@ -26,6 +26,7 @@ class ControladorCliente extends Controller{
             //Define la entidad servicio
             $titulo = "Modificar Cliente";
             $entidad = new Cliente();
+            $entidad = new Domicilio();
             $entidad->cargarDesdeRequest($request);
 
             //validaciones
@@ -35,18 +36,19 @@ class ControladorCliente extends Controller{
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
-                    $entidad->guardar();
+                    $entidad->guardarCliente();
+                    $entidad->guardarDomicilio();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 } else {
                     //Es nuevo
-                    $entidad->insertar();
+                    $entidad->insertarCliente();
+                    $entidad->insertarDomicilio();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                return view('Clientes.cliente-listar', compact('titulo', 'msg'));
                 return view('clientes.cliente-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
@@ -56,9 +58,9 @@ class ControladorCliente extends Controller{
 
         $id = $entidad->idcliente;
         $cliente = new Cliente();
-        $cliente->obtenerPorId($id);
+        $cliente->obtenerPorIdCliente($id);
 
-        return view('Clientes.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
+       
         return view('clientes.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
     public function index(){
@@ -67,7 +69,7 @@ class ControladorCliente extends Controller{
             if(!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
-                return view ('clientes.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
+                
                 return view ('cllientes.cliente-listar', compact('titulo', 'codigo', 'mensaje'));
             } else {
                 return view('clientes.cliente-listar', compact('titulo'));
