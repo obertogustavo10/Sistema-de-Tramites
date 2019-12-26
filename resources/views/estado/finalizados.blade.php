@@ -43,6 +43,8 @@ if (isset($msg)) {
         "pageLength": 25,
         "order": [[ 2, "asc" ]],
 	    "ajax": "{{ route('tramitesfinalizados.cargarGrilla') }}"
-	});
+    });
+    
+    
 </script>
 @endsection

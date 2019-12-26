@@ -6,7 +6,7 @@ use App\Evento;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+//use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -31,7 +31,7 @@ class ControladorCalendario extends Controller
                  {
                     foreach ($data as $key => $value) 
                     {
-                        $eventos[] = Calendar::event(
+                     $eventos[] = Calendar::event(
                             $value->title,
                             true,
                             new \DateTime($value->start_date),

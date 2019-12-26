@@ -29,51 +29,19 @@ if (!defined('CAMPOOBLIGATORIO')) define("CAMPOOBLIGATORIO", "Complete todos los
 
 //Modulo usuarios
 if (!defined('USUARIOFALTACAMPOS')) define("USUARIOFALTACAMPOS", "Complete todos los campos obligatorios");
-if (!defined('USURIONOEXISTEENLDAP')) define("USURIONOEXISTEENLDAP", "Usuario o contrase&ntilde;a incorrecto");
 if (!defined('USUARIOBLOQUEADO')) define("USUARIOBLOQUEADO", "Usuario bloqueado. Comun&iacute;quese con el administrador");
 if (!defined('USUARIOINCORRECTO')) define("USUARIOINCORRECTO", "El usuario no est&aacute; autorizado a usar el sistema. Comun&iacute;quese con el administrador");
-if (!defined('INCIDENTE_ASIGNADO')) define("INCIDENTE_ASIGNADO", 2);
-if (!defined('INCIDENTE_RESUELTO')) define("INCIDENTE_RESUELTO", 5);
-if (!defined('INCIDENTE_CERRADO')) define("INCIDENTE_CERRADO", 6);
 
-if (!defined('INCIDENTE_ESTADO_NUEVO')) define("INCIDENTE_ESTADO_NUEVO", 1);
-if (!defined('INCIDENTE_ESTADO_ENCURSO')) define("INCIDENTE_ESTADO_ENCURSO", 2);
-if (!defined('INCIDENTE_ESTADO_ENESPERA')) define("INCIDENTE_ESTADO_ENESPERA", 4);
-if (!defined('INCIDENTE_ESTADO_RESUELTO')) define("INCIDENTE_ESTADO_RESUELTO", 5);
-if (!defined('INCIDENTE_ESTADO_CERRADO')) define("INCIDENTE_ESTADO_CERRADO", 6);
+//Modulo tramites
+if (!defined('TRAMITE_INICIADO')) define("TRAMITE_INICIADO", 1);
+if (!defined('TRAMITE_EN_PROCESO')) define("TRAMITE_EN_PROCESO", 2);
+if (!defined('TRAMITE_FINALIZADO')) define("TRAMITE_FINALIZADO", 3);
+if (!defined('TRAMITE_RECTIFICAR')) define("TRAMITE_RECTIFICAR", 4);
+if (!defined('TRAMITE_BORRADOR')) define("TRAMITE_BORRADOR", 5);
+if (!defined('TRAMITE_ANULADO')) define("TRAMITE_ANULADO", 6);
 
-//Modulo incidente
-if (!defined('INCIDENTE_USUARIO_SOLICITANTE')) define("INCIDENTE_USUARIO_SOLICITANTE", "S");
-if (!defined('INCIDENTE_USUARIO_OBSERVADOR')) define("INCIDENTE_USUARIO_OBSERVADOR", "O");
-if (!defined('INCIDENTE_USUARIO_ASIGNADO')) define("INCIDENTE_USUARIO_ASIGNADO", "A");
 
-if (!defined('INCIDENTE_SEGUIMIENTO_APROBADO')) define("INCIDENTE_SEGUIMIENTO_APROBADO", "A");
-if (!defined('INCIDENTE_SEGUIMIENTO_SOLUCION')) define("INCIDENTE_SEGUIMIENTO_SOLUCION", "S");
-if (!defined('INCIDENTE_SEGUIMIENTO_INFORMATIVO')) define("INCIDENTE_SEGUIMIENTO_INFORMATIVO", "I");
-if (!defined('INCIDENTE_SEGUIMIENTO_TEXTO')) define("INCIDENTE_SEGUIMIENTO_TEXTO", "T");
-if (!defined('INCIDENTE_SEGUIMIENTO_RECHAZADO')) define("INCIDENTE_SEGUIMIENTO_RECHAZADO", "R");
 
-//Nota materias
-if (!defined('NOTA_UNO')) define("NOTA_UNO", "1");
-if (!defined('NOTA_DOS')) define("NOTA_DOS", "2");
-if (!defined('NOTA_TRES')) define("NOTA_TRES", "3");
-if (!defined('NOTA_CUATRO')) define("NOTA_CUATRO", "4");
-if (!defined('NOTA_CINCO')) define("NOTA_CINCO", "5");
-if (!defined('NOTA_SEIS')) define("NOTA_SEIS", "6");
-if (!defined('NOTA_SIETE')) define("NOTA_SIETE", "7");
-if (!defined('NOTA_OCHO')) define("NOTA_OCHO", "8");
-if (!defined('NOTA_NUEVE')) define("NOTA_NUEVE", "9");
-if (!defined('NOTA_DIEZ')) define("NOTA_DIEZ", "10");
-if (!defined('NOTA_AP')) define("NOTA_AP", "11");
-if (!defined('NOTA_RE')) define("NOTA_RE", "12");
-if (!defined('NOTA_AU')) define("NOTA_AU", "13");
-if (!defined('NOTA_EX')) define("NOTA_EX", "14");
-if (!defined('NOTA_NOINFORMADO')) define("NOTA_NOINFORMADO", "15");
 
-//Estado alumno
-if (!defined('ASPIRANTE')) define("ASPIRANTE", "1");
-if (!defined('PREINSCRIPTO')) define("PREINSCRIPTO", "2");
-if (!defined('INSCRIPTO')) define("INSCRIPTO", "3");
-if (!defined('ALUMNO')) define("ALUMNO", "4");
 
 ?>
