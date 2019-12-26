@@ -1,21 +1,19 @@
-
-@extends('plantilla')
-@section('titulo', "$titulo")
-@section('scripts')
+<?php $__env->startSection('titulo', "$titulo"); ?>
+<?php $__env->startSection('scripts'); ?>
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
     <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
 
 </script>
-@endsection
-@section('breadcrumb')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/tramite/nuevo">Nuevo Trámite</a></li>
-    <li class="breadcrumb-item active">Modificar</li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Trámites</a></li>
+    <li class="breadcrumb-item active">Nuevo Calculo de Vacaciones</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/tramite/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -24,11 +22,11 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/menu";
+    location.href ="/Tramites/iniciados";
 }
 </script>
-@endsection
-@section('contenido')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('contenido'); ?>
 <?php
 if (isset($msg)) {
     echo '<div id = "msg"></div>';
@@ -44,49 +42,43 @@ if (isset($msg)) {
         ?>
         <form id="form1" method="POST">
             <div class="row">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
+                <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="{{$autorizacionViaje->txtNombreMadre or ''}}" required>
+                    <label>Nombre y Apellido del Trabajador: *</label>
+                    <input type="text" id="txtNombre" name="txtNombreTrabajador" class="form-control" 
+                    value="<?php echo e(isset($calculoVacaciones->nombreyapellidodeltrabajor) ? $calculoVacaciones->nombreyapellidodeltrabajor : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="{{$autorizacionViaje->txtNombrePadre or ''}}" required>
+                    <label>No. Cedula de Identidad del Trabajador: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtCedula" id="txtCedula"
+                    value="<?php echo e(isset($calculoVacaciones->numerodeceduladeidentidad) ? $calculoVacaciones->numerodeceduladeidentidad : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="{{$autorizacionViaje->txtNombreMenor or ''}}" required>
+                    <label>Cargo que ocupa en la empresa: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtCargo" id="txtCargo"
+                    value="<?php echo e(isset($calculoVacaciones->cargoqueocupaenlaempresa) ? $calculoVacaciones->cargoqueocupaenlaempresa : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                </select>
-                    <label for="lstAcomp">Viaja:</label>
-                    <select id="lstAcomp" name="lstAcomp" class="form-control" value="{{$autorizacionViaje->lstAcomp or ''}}" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Solo/a</option>
-                        <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
-                    </select>
+                    <label>Fecha de Ingreso: *</label>
+                    <input class="form-control" type="date" placeholder="" name="txtFechaIngreso" id="txtFechaIngreso"
+                    value="<?php echo e(isset($calculoVacaciones->fechadeingreso) ? $calculoVacaciones->fechadeingreso : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais" class="form-control" value="{{$autorizacionViaje->lstPais or ''}}" required>
-                        <optgroup label="País">
-                            <option value="1">Todos los paises del mundo</option>
-                            <optgroup label="Seleccionar País">
-                                <option value="2">Argentina</option>
-                                <option value="3">Brasil</option>
-                            </optgroup>
-                        </optgroup>
-                    </select>
+                    <label>Fecha de Salida de Vacaciones: *</label>
+                    <input class="form-control" type="date" placeholder="" name="txtFechaSalida" id="txtFechaSalida"
+                    value="<?php echo e(isset($calculoVacaciones->fechadesalidadevacaciones) ? $calculoVacaciones->fechadesalidadevacaciones : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha" class="form-control" value="{{$autorizacionViaje->txtTiempo or ''}}" required>
-                        <option value="1">Hasta la mayoría de edad</option>
-                        <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
-                    </select>
+                    <label>Ultimo Salario Devengado: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtUltimoSalario" id="txtUltimoSalario"
+                    value="<?php echo e(isset($calculoVacaciones->ultimosalariodevengado) ? $calculoVacaciones->ultimosalariodevengado : ''); ?>" required>
                 </div>
-            </div>
+                 <div class="form-group col-lg-6">
+                    <label>Nombre del Solicitante: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante" id="txtNombreSolicitante"
+                    value="<?php echo e(isset($calculoVacaciones->nombredelsolicitante) ? $calculoVacaciones->nombredelsolicitante : ''); ?>" required>
+                </div>
             </div>
         </form>
 </div>
@@ -125,7 +117,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('sistema/menu/eliminar') }}",
+            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",
@@ -143,4 +135,5 @@ if (isset($msg)) {
     }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Session;
 
-class Tramite extends Model
-{
+class Tramite extends Model{
     protected $table = 'tramites';
     public $timestamps = false;
 
