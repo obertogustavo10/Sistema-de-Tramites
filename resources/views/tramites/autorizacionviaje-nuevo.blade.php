@@ -11,7 +11,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Nuevo Trámite</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -48,20 +48,20 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="{{$menu->txtNombreMadre or ''}}" required>
+                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="{{$autorizacionViaje->txtNombreMadre or ''}}" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="{{$menu->txtNombrePadre or ''}}" required>
+                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="{{$autorizacionViaje->txtNombrePadre or ''}}" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="{{$menu->txtNombreMenor or ''}}" required>
+                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="{{$autorizacionViaje->txtNombreMenor or ''}}" required>
                 </div>
                 <div class="form-group col-lg-6">
                 </select>
                     <label for="lstAcomp">Viaja:</label>
-                    <select id="lstAcomp" name="lstAcomp" class="form-control" required>
+                    <select id="lstAcomp" name="lstAcomp" class="form-control" value="{{$autorizacionViaje->lstAcomp or ''}}" required>
                         <option value="" disabled selected>Seleccionar</option>
                         <option value="1">Solo/a</option>
                         <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
@@ -69,7 +69,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais" required>
+                    <select id="lstPais" name="lstPais" class="form-control" value="{{$autorizacionViaje->lstPais or ''}}" required>
                         <optgroup label="País">
                             <option value="1">Todos los paises del mundo</option>
                             <optgroup label="Seleccionar País">
@@ -81,7 +81,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha" required>
+                    <select name="txtTiempo" label="fecha" class="form-control" value="{{$autorizacionViaje->txtTiempo or ''}}" required>
                         <option value="1">Hasta la mayoría de edad</option>
                         <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
                     </select>
