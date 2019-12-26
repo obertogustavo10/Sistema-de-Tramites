@@ -114,6 +114,12 @@ class PoderEspecial extends Model{
             fk_idtramite=?";
         $affected = DB::delete($sql, [$this->fk_idtramite]);
     }
+
+
+
 }
+
+
+
 
 ?>

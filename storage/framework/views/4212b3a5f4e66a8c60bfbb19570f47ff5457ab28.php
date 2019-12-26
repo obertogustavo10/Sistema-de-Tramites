@@ -1,20 +1,19 @@
-@extends('plantilla')
-@section('titulo', "Calculo de Utilidades")
-@section('scripts')
+<?php $__env->startSection('titulo', "$titulo"); ?>
+<?php $__env->startSection('scripts'); ?>
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
     <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
 
 </script>
-@endsection
-@section('breadcrumb')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/sistema/menu">Men&uacute;</a></li>
-    <li class="breadcrumb-item active">Modificar</li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Trámites</a></li>
+    <li class="breadcrumb-item active">Nuevo Calculo de Vacaciones</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/tramite/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -23,11 +22,11 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/menu";
+    location.href ="/Tramites/iniciados";
 }
 </script>
-@endsection
-@section('contenido')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('contenido'); ?>
 <?php
 if (isset($msg)) {
     echo '<div id = "msg"></div>';
@@ -43,49 +42,43 @@ if (isset($msg)) {
         ?>
         <form id="form1" method="POST">
             <div class="row">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
+                <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label>Nombre y Apellido: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value="{{ $calculoUtilidades->nombre or ''}}">
+                    <label>Nombre y Apellido del Trabajador: *</label>
+                    <input type="text" id="txtNombre" name="txtNombreTrabajador" class="form-control" 
+                    value="<?php echo e(isset($calculoVacaciones->nombreyapellidodeltrabajor) ? $calculoVacaciones->nombreyapellidodeltrabajor : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>No. Cedula de Identidad: *</label>
-                    <input class="form-control" type="number" placeholder="" name="txtCedula"required id="txtCantidad" value="{{ $calculoUtilidades->no_cedula or ''}}">
+                    <label>No. Cedula de Identidad del Trabajador: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtCedula" id="txtCedula"
+                    value="<?php echo e(isset($calculoVacaciones->numerodeceduladeidentidad) ? $calculoVacaciones->numerodeceduladeidentidad : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Cargo que ocupa en la empresa: *</label>
-                    <input class="form-control" type="text" placeholder="" name="txtCargo"required id="txtNombre" value="{{ $calculoUtilidades->cargo_empresa or ''}}">
+                    <input class="form-control" type="text" placeholder="" name="txtCargo" id="txtCargo"
+                    value="<?php echo e(isset($calculoVacaciones->cargoqueocupaenlaempresa) ? $calculoVacaciones->cargoqueocupaenlaempresa : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Fecha de Ingreso: *</label>
-                    <input class="form-control" type="date" placeholder="" name="txtFecha"required id="txtFecha" value="{{ $calculoUtilidades->fecha_ingreso or ''}}">
+                    <input class="form-control" type="date" placeholder="" name="txtFechaIngreso" id="txtFechaIngreso"
+                    value="<?php echo e(isset($calculoVacaciones->fechadeingreso) ? $calculoVacaciones->fechadeingreso : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Dias a Bonificar:</label>
-                    <input class="form-control" type="number" placeholder="" name="txtBonificar"required id="txtCantidad" value="{{ $calculoUtilidades->dias_bonificar or ''}}">
-                </div>
-                 <div class="form-group col-lg-6">
-                    <label>Nombre del Solicitante:</label>
-                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante"required id="txtNombre" value="{{ $calculoUtilidades->nombre_solicitante or ''}}">
+                    <label>Fecha de Salida de Vacaciones: *</label>
+                    <input class="form-control" type="date" placeholder="" name="txtFechaSalida" id="txtFechaSalida"
+                    value="<?php echo e(isset($calculoVacaciones->fechadesalidadevacaciones) ? $calculoVacaciones->fechadesalidadevacaciones : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Desea calculo a ultimo salario:</label>
-                    <select id="lstEstado" name="lstUltimo_Salario" class="form-control" required value="{{ $calculoUtilidades->calculo_ultimosalario or ''}}">
-                <option value="" disabled selected>Seleccionar</option>
-                <option value="1" {{isset($grupo) && $grupo->activo == 1? 'selected' : ''}}>Si</option>
-                <option value="0" {{isset($grupo) &&$grupo->activo == 0? 'selected' : ''}}>No</option>
-            </select>
+                    <label>Ultimo Salario Devengado: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtUltimoSalario" id="txtUltimoSalario"
+                    value="<?php echo e(isset($calculoVacaciones->ultimosalariodevengado) ? $calculoVacaciones->ultimosalariodevengado : ''); ?>" required>
                 </div>
                  <div class="form-group col-lg-6">
-                    <label>Desea calculo a salario promedio:</label>
-                   <select id="lstEstado" name="lstSalario_Promedio" class="form-control" required value="{{ $calculoUtilidades->calculo_salariopromedio or ''}}">
-                <option value="" disabled selected>Seleccionar</option>
-                <option value="1" {{isset($grupo) && $grupo->activo == 1? 'selected' : ''}}>Si</option>
-                <option value="0" {{isset($grupo) &&$grupo->activo == 0? 'selected' : ''}}>No</option>
-            </select>
-            </div>
-			
+                    <label>Nombre del Solicitante: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante" id="txtNombreSolicitante"
+                    value="<?php echo e(isset($calculoVacaciones->nombredelsolicitante) ? $calculoVacaciones->nombredelsolicitante : ''); ?>" required>
+                </div>
             </div>
         </form>
 </div>
@@ -124,7 +117,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('sistema/menu/eliminar') }}",
+            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",
@@ -142,4 +135,5 @@ if (isset($msg)) {
     }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
