@@ -85,7 +85,7 @@ class TipoCliente extends Model
                 ";
 
 
-        $sql .= " ORDER BY A.nombre";
+        $sql .= " ORDER BY nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -93,7 +93,7 @@ class TipoCliente extends Model
     public function obtenerPorId($id) {
         $sql = "SELECT
                 idtipocliente,
-                nombre,
+                nombre
                 FROM tipo_clientes WHERE idtipocliente = '$id'";
         $lstRetorno = DB::select($sql);
 

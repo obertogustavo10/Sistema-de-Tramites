@@ -71,11 +71,11 @@ class ControladorTipoCliente extends Controller{
             } else {
                 $tipoCliente = new TipoCliente();
                 $tipoCliente->obtenerPorId($id);
-
+                
                 $entidad = new TipoCliente();
                 $array_tipocliente = $entidad->obtenerTipoCliente($id);
 
-                return view('configuracion.tipocliente-listar', compact('titulo', 'tipoCliente', 'array_tipocliente', 'entidad'));
+                return view('configuracion.tipocliente-nuevo', compact('titulo', 'tipoCliente', 'array_tipocliente', 'entidad'));
             }
         } else {
            return redirect('login');
@@ -122,7 +122,32 @@ class ControladorTipoCliente extends Controller{
             
     
             return view('configuracion.tipocliente-nuevo', compact('msg', 'tipoCliente', 'titulo')) . '?id=' . $entidad->idtipocliente;
-        }    
+        }   
+        
+        public function eliminar(Request $request){
+            $id = $request->input('id');
+    
+            if(Usuario::autenticado() == true){
+                if(Patente::autorizarOperacion("MENUELIMINAR")){
+    
+                    $entidad = new TipoCliente();
+                    $entidad->cargarDesdeRequest($request);
+                    $entidad->eliminar();
+    
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                    
+                } else {
+                    $codigo = "MENUELIMINAR";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                    $aResultado["err"] = EXIT_FAILURE; //error al elimiar
+                }
+                echo json_encode($aResultado);
+            } else {
+                return redirect('login');
+            }
+        }
+    
     }
 
 ?>

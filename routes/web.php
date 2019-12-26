@@ -104,10 +104,9 @@ Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
 Route::post('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@guardar');
 Route::get('/configuracion/tipodeclientes', 'ControladorTipocliente@index');
 Route::get('/configuracion/tipodeclientes/cargargrilla', 'ControladorTipoCliente@cargarGrilla')->name('tipodeclientes.cargarGrilla');
-Route::get('/configuracion/tipodecliente/nuevo/eliminar', 'ControladorTipoCliente@eliminar');
-Route::get('/configuracion/tipodecliente/nuevo{id}', 'ControladorTipoCliente@editar');
-Route::post('/configuracion/tipodecliente/nuevo{id}', 'ControladorTipoCliente@guardar');
-Route::get('/configuracion/tipodecliente/nuevo{id}', 'ControladorTipoCliente@eliminar');
+Route::get('/configuracion/tipodecliente/nuevo/{id}', 'ControladorTipoCliente@editar');
+Route::post('/configuracion/tipodecliente/nuevo/{id}', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodecliente/eliminar', 'ControladorTipoCliente@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE VACACIONES             */
