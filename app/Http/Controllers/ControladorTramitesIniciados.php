@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Tramite\Tramite;
+use App\Entidades\Tramite\TramiteMovimiento;
 
 
 require app_path().'/start/constants.php';
@@ -45,9 +46,23 @@ class ControladorTramitesIniciados extends Controller{
                   
                 $row = array();
                 $row[] = '<a href='.$aTramites[$i]->fk_formulario_url. '/' . $aTramites[$i]->idtramite . '>' . $aTramites[$i]->nombre_tramite . '</a>';
+                $row[] = $aTramites[$i]->razon_social;
+                $row[] = $aTramites[$i]->documento;
                 $row[] = $aTramites[$i]->estado;
-                $row[] = $aTramites[$i]->fecha_inicio;
+                $row[] = date_format(date_create($aTramites[$i]->fecha_inicio),"d/m/Y H:i");
                 $row[] = $aTramites[$i]->rectificativa;
+                $row[] = '<div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Seleccionar
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" onclick="fTramiteProcesar('.$aTramites[$i]->idtramite.');">En proceso</a>
+                            <a class="dropdown-item" href="#" onclick="fTramiteFinalizar('.$aTramites[$i]->idtramite.');">Finalizar</a>
+                            <a class="dropdown-item" href="#" onclick="fTramiteRechazar('.$aTramites[$i]->idtramite.');">Rechazar</a>
+                            <a class="dropdown-item" href="#" onclick="fTramiteRectificar('.$aTramites[$i]->idtramite.');">Rectificar</a>
+                            <a class="dropdown-item" href="#" onclick="fTramiteAnular('.$aTramites[$i]->idtramite.');">Anular</a>
+                        </div>
+                        </div>';
                 $cont++;
                 $data[] = $row;
             }
@@ -184,5 +199,23 @@ class ControladorTramitesIniciados extends Controller{
 
         return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $menu->idmenu;
 
+    }
+
+    public function tramiteProcesar(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->procesar();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_EN_PROCESO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite procesado correctamente";
+
+        echo json_encode($msg);
     }
 }

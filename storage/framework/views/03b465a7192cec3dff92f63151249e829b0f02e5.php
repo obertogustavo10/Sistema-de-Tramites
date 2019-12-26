@@ -41,7 +41,9 @@ if (isset($msg)) {
         "pageLength": 25,
         "order": [[ 2, "asc" ]],
 	    "ajax": "<?php echo e(route('tramitesfinalizados.cargarGrilla')); ?>"
-	});
+    });
+    
+    
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
