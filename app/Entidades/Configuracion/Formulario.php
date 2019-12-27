@@ -33,13 +33,12 @@ Class Formulario extends Model
     public function insertar() 
     {
         $sql = "INSERT INTO formularios (
-            idformulario,
-            nombre
-            descripcion
+            nombre,
+            descripcion,
             url
-        ) VALUES (?, ?, ?, ?);";
+        ) VALUES (?, ?, ?);";
             $result = DB::insert($sql, [
-                $this->idformulario,
+                
                 $this->nombre,
                 $this->descripcion,
                 $this->url
@@ -49,7 +48,7 @@ Class Formulario extends Model
     public function guardar() 
     {
         $sql = "UPDATE formularios SET
-            idformulario='$this->idformularios',
+            idformulario='$this->idformulario',
             nombre='$this->nombre',
             descripcion='$this->descripcion',
             url='$this->url'
@@ -104,5 +103,24 @@ Class Formulario extends Model
         $sql .= " ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
+    }
+
+    public function obtenerPorId($id) {
+        $sql = "SELECT
+                idformulario,
+                nombre,
+                descripcion,
+                url
+                FROM formularios WHERE idformulario = '$id'";
+        $lstRetorno = DB::select($sql);
+
+        if(count($lstRetorno)>0){
+            $this->idformulario = $lstRetorno[0]->idformulario;
+            $this->nombre = $lstRetorno[0]->nombre;
+            $this->descripcion = $lstRetorno[0]->descripcion;
+            $this->url = $lstRetorno[0]->url;
+            return $this;
+        }
+        return null;
     }
 }

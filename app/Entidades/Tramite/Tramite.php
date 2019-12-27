@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Session;
 
-class Tramite extends Model
-{
+class Tramite extends Model{
     protected $table = 'tramites';
     public $timestamps = false;
 
@@ -85,10 +84,13 @@ class Tramite extends Model
                 B.nombre AS estado,
                 A.rectificativa,
                 A.fecha_inicio,
-                A.fk_formulario_url
+                A.fk_formulario_url,
+                D.razon_social,
+                D.documento
                 FROM tramites A
                 INNER JOIN tramite_estado B ON A.fk_idtramite_estado = B.idtramite_estado
                 INNER JOIN formularios C ON A.fk_idformulario = C.idformulario
+                LEFT JOIN clientes D ON D.idcliente = A.fk_idcliente
                 /* INNER JOIN formularios D ON A.fk_formulario_url = D.url */
                 /* SE TIENE QUE HACER DESDE AQUI PERO NO SE ENCUENTRA LA FK */
                 WHERE fk_idtramite_estado = ".$idtramite_estado."
@@ -104,6 +106,20 @@ class Tramite extends Model
         $lstRetorno = DB::select($sql);
 
         return $lstRetorno;
+    }
+
+    public function procesar() {
+        $sql = "UPDATE tramites SET
+                fk_idtramite_estado= " . TRAMITE_EN_PROCESO ."
+            WHERE idtramite=?";
+        $affected = DB::update($sql, [$this->idtramite]);
+    }
+
+    public function finalizar() {
+        $sql = "UPDATE tramites SET
+                fk_idtramite_estado= " . TRAMITE_FINALIZADO ."
+            WHERE idtramite=?";
+        $affected = DB::update($sql, [$this->idtramite]);
     }
 
 }

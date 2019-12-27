@@ -32,7 +32,7 @@ Class ControladorPoderesEspeciales extends Controller{
             } else {
                 $poderEspecial = new PoderEspecial();
                 $poderEspecial->obtenerPorId($id);
-//print_r($poderEspecial);exit;
+        //print_r($poderEspecial);exit;
                 return view('tramites.poderesespeciales-nuevo', compact('poderEspecial', 'titulo'));
             }
         } else {
@@ -50,7 +50,7 @@ Class ControladorPoderesEspeciales extends Controller{
             //validaciones
             if ($poderEspecial->nombrepoderdante == "") {
                 $msg["ESTADO"] = MSG_ERROR;
-                $msg["MSG"] = "Ingrese el nombre del apoderante";
+                $msg["MSG"] = "Ingrese el nombre del Poderdante";
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
@@ -90,7 +90,7 @@ Class ControladorPoderesEspeciales extends Controller{
         $poderEspecial = new PoderEspecial();
         $poderEspecial->obtenerPorId($id);
 
-        return view('tramites.poderesespeciales-nuevo', compact('msg', 'poderesespeciales', 'titulo')) . '?id=' . $poderEspecial->idvalor;
+        return view('tramites.poderesespeciales-nuevo', compact('msg', 'poderespecial', 'titulo')) . '?id=' . $poderEspecial->idvalor;
     }
 
 } 

@@ -17,9 +17,9 @@
 </ol>
 @endsection
 @section('contenido')
+<div id = "msg"></div>
 <?php
 if (isset($msg)) {
-    echo '<div id = "msg"></div>';
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
@@ -27,9 +27,12 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Razon Social</th>
+            <th>Documento</th>
             <th>Estado</th>
             <th>Fecha de Inicio</th>
             <th>Rectificativa</th>
+            <th>Accion</th>
         </tr>
     </thead>
 </table> 
@@ -44,5 +47,31 @@ if (isset($msg)) {
         "order": [[ 2, "asc" ]],
 	    "ajax": "{{ route('tramitesiniciados.cargarGrilla') }}"
 	});
+
+    function fTramiteProcesar(idTramite){
+        $.ajax({
+	            type: "GET",
+	            url: "{{ asset('tramite/tramiteProcesar') }}",
+	            data: { id:idTramite },
+	            async: true,
+	            dataType: "json",
+	            success: function (respuesta) {
+	                 msgShow(respuesta.MSG, respuesta.ESTADO);
+	            }
+        });
+    }
+    
+    function fTramiteFinalizar(idTramite){
+        $.ajax({
+	            type: "GET",
+	            url: "{{ asset('tramite/tramiteFinalizar') }}",
+	            data: { id:idTramite },
+	            async: true,
+	            dataType: "json",
+	            success: function (respuesta) {
+	                 msgShow(respuesta.MSG, respuesta.ESTADO);
+	            }
+	    });
+	}
 </script>
 @endsection

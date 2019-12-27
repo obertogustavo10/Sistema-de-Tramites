@@ -14,7 +14,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/cliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -53,8 +53,10 @@ if (isset($msg)) {
                     <label>Persona:</label>
                     <select id="lstPersona" name="lstPersona" class="form-control">
                     <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Persona Física</option>
+                        <option value="1">Persona Natural</option>
                         <option value="2">Persona Jurídica</option>
+                        <option value="3">Sociedad Anónima</option>
+                        <option value="4">Compañía Anónima</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -67,11 +69,12 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Tipo de Documento:</label>
-                    <select id="lstTipoDocumento" name="lstTipoDocumento" class="form-control" required>
+                    <select id="lstTipoDocumento" name="lstTipoDocumento" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
                         <option value="1">CUIT/CUIL</option>
                         <option value="2">RIF</option>
                         <option value="3">DNI</option>
+                        <option value="4">Cédula de Identidad</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -84,11 +87,11 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Tipo de Domicilio:</label>
-                    <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control" required>
+                    <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Real</option>
-                        <option value="2">Legal</option>
-                        <option value="3">Comercial</option>
+                        <option value="4">Real</option>
+                        <option value="5">Legal</option>
+                        <option value="6">Comercial</option>
                     </select>
                 </div>
                  <div class="form-group col-lg-6">

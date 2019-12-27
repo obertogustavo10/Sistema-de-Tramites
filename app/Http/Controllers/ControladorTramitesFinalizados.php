@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;;
 use App\Entidades\Tramite\Tramite;
+use App\Entidades\Tramite\TramiteMovimiento;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -181,5 +182,23 @@ class ControladorTramitesFinalizados extends Controller{
 
         return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $menu->idmenu;
 
+    }
+
+    public function tramiteFinalizar(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->finalizar();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_FINALIZADO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite finalizado correctamente";
+
+        echo json_encode($msg);
     }
 }    

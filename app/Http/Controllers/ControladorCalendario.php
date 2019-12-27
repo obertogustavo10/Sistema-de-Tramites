@@ -6,7 +6,7 @@ use App\Evento;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+// use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -31,7 +31,38 @@ class ControladorCalendario extends Controller
                  {
                     foreach ($data as $key => $value) 
                     {
-                        $eventos[] = Calendar::event(
+<<<<<<< HEAD
+<<<<<<< HEAD
+                          // $eventos[] = Calendar::event(
+                           // $value->title,
+                           // true,
+                            //new \DateTime($value->start_date),
+                           // new \DateTime($value->end_date.'+1 day'),
+                           // null,
+                            // Add color
+                         //[
+                         //    'color' => '#000000',
+                          //   'textColor' => '#008000',
+                      //   ]
+                     //   );
+                  //  }
+              //  }
+               // $calendar = Calendar::addEvents($eventos);
+               
+              //  return view('calendario.calendario', compact('calendar'));
+           // }
+       // } else {
+         //   return redirect('login');
+      //  }
+   // }
+//}
+    
+=======
+                     $eventos[] = Calendar::event(
+>>>>>>> f6ac5746ccb30e058afb9a253660209051921466
+=======
+               /*         $eventos[] = Calendar::event(
+>>>>>>> 3e671ec24182e957b06c51fd5ee46661885b643f
                             $value->title,
                             true,
                             new \DateTime($value->start_date),
@@ -45,7 +76,8 @@ class ControladorCalendario extends Controller
                         );
                     }
                 }
-                $calendar = Calendar::addEvents($eventos);
+                $calendar = Calendar::addEvents($eventos); */
+            }
                
                 return view('calendario.calendario', compact('calendar'));
             }
@@ -54,3 +86,5 @@ class ControladorCalendario extends Controller
         }
     }
 }
+        
+>>>>>>> 3e671ec24182e957b06c51fd5ee46661885b643f

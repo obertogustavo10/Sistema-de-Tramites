@@ -51,11 +51,11 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>URL: *</label>
-                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
+                    <input type="text" id="txtURL" name="txtURL" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
                 </div>
             </div>
         </form>
@@ -95,7 +95,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
+            url: "<?php echo e(asset('configuracion/formulario/eliminar/')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",
