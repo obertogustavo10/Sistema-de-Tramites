@@ -47,8 +47,8 @@ if (isset($msg)) {
         <textarea name="txtMensajeRechazo" id="txtMensajeRechazo" cols="30" style="height: 115px !important;" class="form-control"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="fProcesarRechazo()">Rechazar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -109,6 +109,24 @@ if (isset($msg)) {
 
     function fTramiteRechazar(){
         $("#modalRechazar").modal('toggle');
+    }
+
+    function fProcesarRechazo(){
+        mensaje = $("#txtMensajeRechazo").val();
+        $.ajax({
+	            type: "GET",
+	            url: "<?php echo e(asset('tramite/tramiteRechazar')); ?>",
+	            data: { 
+                    id:idTramite,
+                    mensaje:mensaje
+                },
+	            async: true,
+	            dataType: "json",
+	            success: function (respuesta) {
+                    $("#grilla").DataTable().ajax.reload()
+	                 msgShow(respuesta.MSG, respuesta.ESTADO);
+	            }
+	    });
     }
 	
 </script>
