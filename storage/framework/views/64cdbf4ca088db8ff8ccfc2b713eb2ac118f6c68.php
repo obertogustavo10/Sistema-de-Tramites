@@ -34,6 +34,25 @@ if (isset($msg)) {
         </tr>
     </thead>
 </table> 
+<div id="modalRechazar" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Rechazar trámite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea name="txtMensajeRechazo" id="txtMensajeRechazo" cols="30" style="height: 115px !important;" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 	var dataTable = $('#grilla').DataTable({
 	    "processing": true,
@@ -53,8 +72,9 @@ if (isset($msg)) {
 	            data: { id:idTramite },
 	            async: true,
 	            dataType: "json",
-	            success: function (respuesta) {
-	                 msgShow(respuesta.MSG, respuesta.ESTADO);
+	            success: function (respuesta){
+                    $("#grilla").DataTable().ajax.reload();
+	                msgShow(respuesta.MSG, respuesta.ESTADO);
 	            }
         });
     }
@@ -67,10 +87,30 @@ if (isset($msg)) {
 	            async: true,
 	            dataType: "json",
 	            success: function (respuesta) {
+                    $("#grilla").DataTable().ajax.reload()
 	                 msgShow(respuesta.MSG, respuesta.ESTADO);
 	            }
 	    });
-	}
+    }
+
+    function fTramiteAnular(idTramite){
+        $.ajax({
+	            type: "GET",
+	            url: "<?php echo e(asset('tramite/tramiteAnular')); ?>",
+	            data: { id:idTramite },
+	            async: true,
+	            dataType: "json",
+	            success: function (respuesta) {
+                    $("#grilla").DataTable().ajax.reload()
+	                 msgShow(respuesta.MSG, respuesta.ESTADO);
+	            }
+	    });
+    }
+
+    function fTramiteRechazar(){
+        $("#modalRechazar").modal('toggle');
+    }
+	
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

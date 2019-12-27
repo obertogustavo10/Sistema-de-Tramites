@@ -191,7 +191,9 @@ Route::get('/tramites/borrador','ControladorTramitesEnBorrador@index');
 Route::get('/tramites/borrador/cargarGrilla', 'ControladorTramitesEnBorrador@cargarGrilla')->name('tramitesenborrador.cargarGrilla');
 
 Route::get('/tramite/tramiteProcesar','ControladorTramitesIniciados@tramiteProcesar');
-Route::get('/tramite/tramiteFinalizar','ControladorTramitesFinalizados@tramiteFinalizar');
+Route::get('/tramite/tramiteFinalizar','ControladorTramitesIniciados@tramiteFinalizar');
+Route::get('/tramite/tramiteAnular','ControladorTramitesIniciados@tramiteAnular');
+Route::get('/tramite/tramiteRechazar','ControladorTramitesIniciados@tramiteRechazar');
 
 
 
