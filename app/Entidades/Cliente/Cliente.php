@@ -76,13 +76,7 @@ class Cliente extends Model{
         $affected = DB::delete($sql, [$this->idcliente]);
     }
     public function obtenerFiltrado() {
-        $request = $_REQUEST;
-        $columns = array(
-           0 => 'A.nombre',
-           1 => 'A.razon_social',
-           2 => 'A.documento',
-           3 => 'A.mail'
-            );
+        
         $sql = "SELECT
                     A.idcliente,
                     A.nombre,
@@ -90,23 +84,15 @@ class Cliente extends Model{
                     A.documento,
                     A.telefono,
                     A.mail,
-                    B.idtipocliente,
-                    C.nombre AS tipodocumento,
+                    A.fk_idtipocliente,
+                    B.nombre AS tipocliente,
+                    A.fk_idtipodocumento,
+                    C.nombre AS tipodocumento
                     FROM clientes A
-                    INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
-                    INNER JOIN tipo_documentos C ON A.fk_idtipodocumento = C.nombre
-                WHERE 1=1
+                    LEFT JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
+                    LEFT JOIN tipo_documentos C ON A.fk_idtipodocumento = C.idtipodocumento
+                    WHERE 1=1
                 ";
-
-        //Realiza el filtrado
-        if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR A.razon_social LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR A.documento LIKE '%" . $request['search']['value'] . "%' )";
-            $sql.=" OR A.mail LIKE '%" . $request['search']['value'] . "%' )";
-        }
-        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
-
         $lstRetorno = DB::select($sql);
 
         return $lstRetorno;

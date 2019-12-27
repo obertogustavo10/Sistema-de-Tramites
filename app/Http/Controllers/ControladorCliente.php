@@ -8,6 +8,8 @@ use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Cliente\Cliente;
 use App\Entidades\Cliente\Domicilio;
+use App\Entidades\Cliente\TipoCliente;
+use App\Entidades\Cliente\TipoDomicilio;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -16,7 +18,17 @@ class ControladorCliente extends Controller{
 
     public function nuevo(){
         $titulo = "Cliente nuevo";
-        return view("clientes.cliente-nuevo", compact('titulo'));
+
+        //SE CREAN EL ARRAY PARA OBTENER LAS COLUMNAS DE LA TABLA TIPO CLIENTE
+        $entidadTipoCliente = new TipoCliente;
+        $aTipoClientes = $entidadTipoCliente->obtenerFiltrado();
+
+        //SE CREAN EL ARRAY PARA OBTENER LAS COLUMNAS DE LA TABLA TIPO DOMICILIO
+        $entidadTipoDomicilio = new TipoDomicilio;
+        $aTipoDomicilios = $entidadTipoDomicilio->obtenerFiltrado();
+
+        return view("clientes.cliente-nuevo", compact('titulo', 'aTipoClientes', 'entidadTipoCliente',
+                                                      'aTipoDomicilios', 'entidadTipoDomicilio'  ));
 
         
     

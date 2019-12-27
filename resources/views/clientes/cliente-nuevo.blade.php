@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($cliente->idcliente) && $cliente->idcliente > 0 ? $cliente->idcliente : 0; ?>';
+    <?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0"; ?>
 
 </script>
 @endsection
@@ -53,10 +53,13 @@ if (isset($msg)) {
                     <label>Persona:</label>
                     <select id="lstPersona" name="lstPersona" class="form-control">
                     <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Persona Natural</option>
-                        <option value="2">Persona Jurídica</option>
-                        <option value="3">Sociedad Anónima</option>
-                        <option value="4">Compañía Anónima</option>
+                    @for ($i = 0; $i < count($aTipoClientes); $i++)
+                    @if (isset($aTipoClientes))
+                        <option value="{{ $aTipoClientes[$i]->idtipocliente }}">{{ $aTipoClientes[$i]->nombre }}</option>
+                    @else
+                    <option value="" disabled selected>Seleccionar</option>
+                    @endif
+                    @endfor
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -89,9 +92,13 @@ if (isset($msg)) {
                     <label>Tipo de Domicilio:</label>
                     <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="4">Real</option>
-                        <option value="5">Legal</option>
-                        <option value="6">Comercial</option>
+                        @for ($i = 0; $i < count($aTipoDomicilios); $i++)
+                        @if (isset($aTipoDomicilios))
+                        <option value="{{ $aTipoDomicilios[$i]->idtipodomicilios }}">{{ $aTipoDomicilios[$i]->nombre }}</option>
+                        @else
+                        <option value="" disabled selected>Seleccionar</option>
+                        @endif
+                        @endfor
                     </select>
                 </div>
                  <div class="form-group col-lg-6">
