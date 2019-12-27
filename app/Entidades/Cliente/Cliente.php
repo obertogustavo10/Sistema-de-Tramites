@@ -75,7 +75,7 @@ class Cliente extends Model{
             idcliente=?";
         $affected = DB::delete($sql, [$this->idcliente]);
     }
-    public function obtenerFiltrado() {
+    public function obtenerFiltradoCliente() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'A.nombre',
@@ -90,10 +90,10 @@ class Cliente extends Model{
                     A.documento,
                     A.telefono,
                     A.mail,
-                    B.idtipocliente,
-                    C.nombre AS tipodocumento,
+                    B.nombre AS tipocliente,
+                    C.nombre AS tipodocumento
                     FROM clientes A
-                    INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
+                    INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.nombre
                     INNER JOIN tipo_documentos C ON A.fk_idtipodocumento = C.nombre
                 WHERE 1=1
                 ";
@@ -107,9 +107,9 @@ class Cliente extends Model{
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
-        $lstRetorno = DB::select($sql);
+        $lstRetornoCliente = DB::select($sql);
 
-        return $lstRetorno;
+        return $lstRetornoCliente;
     }
     public function obtenerPorIdCliente($id){
         $sql = "SELECT

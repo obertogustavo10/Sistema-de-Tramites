@@ -8,6 +8,10 @@ use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Cliente\Cliente;
 use App\Entidades\Cliente\Domicilio;
+use App\Entidades\Cliente\TipoDocumento;
+use App\Entidades\Cliente\TipoCliente;
+use App\Http\Controllers\Exception;
+
 
 require app_path().'/start/constants.php';
 use Session;
@@ -16,9 +20,18 @@ class ControladorCliente extends Controller{
 
     public function nuevo(){
         $titulo = "Cliente nuevo";
-        return view("clientes.cliente-nuevo", compact('titulo'));
+        $entidadTipoCliente = new TipoCliente;
+        $aTipoClientes = $entidadTipoCliente->obtenerFiltrado();
 
-        
+        $entidadTipoDocumento = new TipoDocumento;
+        $entidadTipoDocumento = $entidadTipoDocumento->obtenerFiltrado();
+        return view("clientes.cliente-nuevo", compact('titulo', 'aTipoClientes', 'entidadTipoCliente', 'aTipodocumento', 'entidadTipoDocumento', 'aTipoDomicilios', 'entidadTipoDomicilios'));
+
+
+
+
+
+
     
     }
     public function guardar(Request $request){
@@ -85,7 +98,7 @@ class ControladorCliente extends Controller{
         $request = $_REQUEST;
 
         $entidadCliente = new Cliente();
-        $aCliente = $entidadCliente->obtenerFiltrado();
+        $aCliente = $entidadCliente->obtenerFiltradoCliente();
 
         $data = array();
 
@@ -97,15 +110,12 @@ class ControladorCliente extends Controller{
             for ($i=$inicio; $i < count($aCliente) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = '<a href="/cliente/listar/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
-                $row[] = $aCliente[$i]->nombre;
                 $row[] = $aCliente[$i]->razon_social;
                 $row[] = $aCliente[$i]->documento;
                 $row[] = $aCliente[$i]->tipodocumento;
                 $row[] = $aCliente[$i]->tipodepersona;
                 $row[] = $aCliente[$i]->telefono;
                 $row[] = $aCliente[$i]->mail;
-                $row[] = $aCliente[$i]->domicilio;
-                $row[] = $aCliente[$i]->tipodedomicilio;
                 $cont++;
                 $data[] = $row;
             }
