@@ -138,7 +138,9 @@ Route::get('/tramite/calculo_utilidades/{id}','ControladorCalculoUtlidades@edita
 
 Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@nuevo');
 Route::post('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viajecargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viaje/{id}','ControladorAutorizacionViajes@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR CLIENTE                           */
@@ -203,7 +205,9 @@ Route::get('/tramites/borrador','ControladorTramitesEnBorrador@index');
 Route::get('/tramites/borrador/cargarGrilla', 'ControladorTramitesEnBorrador@cargarGrilla')->name('tramitesenborrador.cargarGrilla');
 
 Route::get('/tramite/tramiteProcesar','ControladorTramitesIniciados@tramiteProcesar');
-Route::get('/tramite/tramiteFinalizar','ControladorTramitesFinalizados@tramiteFinalizar');
+Route::get('/tramite/tramiteFinalizar','ControladorTramitesIniciados@tramiteFinalizar');
+Route::get('/tramite/tramiteAnular','ControladorTramitesIniciados@tramiteAnular');
+Route::get('/tramite/tramiteRechazar','ControladorTramitesIniciados@tramiteRechazar');
 
 
 

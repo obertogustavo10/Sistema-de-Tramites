@@ -18,7 +18,6 @@ class AutorizacionViaje extends Model{
         "pais" => 21,
         "tiempo" => 22,
         "viajaacompañado" => 32,
-
     );
 
 	protected $fillable = [
@@ -26,15 +25,16 @@ class AutorizacionViaje extends Model{
 	];
 
     protected $hidden = ['idtramite'];
+    //protected $affected =´['fk_idtramite'];
 	
-	public function cargarDesdeRequest($request) {
+	 function cargarDesdeRequest($request) {
         $this->idtramite = $request->input('id')!= "0" ? $request->input('id') : $this->idtramite;
         $this->nombremadre = $request->input('txtNombreMadre');
         $this->nombrepadre = $request->input('txtNombrePadre');
         $this->nombremenor = $request->input('txtNombreMenor');
         $this->pais = $request->input('lstPais');
         $this->tiempo = $request->input('txtTiempo');
-        $this->viajaacompañado = $request->input('txtViajaAcompañado');
+        $this->viajaacompañado = $request->input('lstAcomp');
     }
 
     public function obtenerPorId($id){
@@ -58,7 +58,7 @@ class AutorizacionViaje extends Model{
             return $this;
         }
         return null;
-    }
+    } 
 
    public function insertar() {
         foreach($this->fillable as $campo){
