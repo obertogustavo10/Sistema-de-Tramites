@@ -15,9 +15,9 @@
 </ol>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
-<div id = "msg"></div>
 <?php
 if (isset($msg)) {
+    echo '<div id = "msg"></div>';
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
@@ -25,12 +25,9 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Razon Social</th>
-            <th>Documento</th>
             <th>Estado</th>
-            <th>Fecha de Inicio</th>
+            <th>Fecha de inicio</th>
             <th>Rectificativa</th>
-            <th>Accion</th>
         </tr>
     </thead>
 </table> 
@@ -43,34 +40,8 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 2, "asc" ]],
-	    "ajax": "<?php echo e(route('tramitesiniciados.cargarGrilla')); ?>"
+	    "ajax": "<?php echo e(route('tramitesenproceso.cargarGrilla')); ?>"
 	});
-
-    function fTramiteProcesar(idTramite){
-        $.ajax({
-	            type: "GET",
-	            url: "<?php echo e(asset('tramite/tramiteProcesar')); ?>",
-	            data: { id:idTramite },
-	            async: true,
-	            dataType: "json",
-	            success: function (respuesta) {
-	                 msgShow(respuesta.MSG, respuesta.ESTADO);
-	            }
-        });
-    }
-    
-    function fTramiteFinalizar(idTramite){
-        $.ajax({
-	            type: "GET",
-	            url: "<?php echo e(asset('tramite/tramiteFinalizar')); ?>",
-	            data: { id:idTramite },
-	            async: true,
-	            dataType: "json",
-	            success: function (respuesta) {
-	                 msgShow(respuesta.MSG, respuesta.ESTADO);
-	            }
-	    });
-	}
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -47,14 +47,10 @@ if (isset($msg)) {
                 <div class="col-sm-4">
                     <label for="tipoDePoder">Tipo de Poder</label>
                     <select class="form-control" name="tipoDePoder" id="tipoDePoder">
-                    <?php if(isset($poderEspecial->tipopoder)): ?>
-                        <option selected disabled><?php echo e($poderEspecial->tipopoder); ?></option>
-                    <?php else: ?>
                         <option selected disabled>Seleccionar</option>
-                    <?php endif; ?>
-                        <option value="Venta">Venta</option>
-                        <option value="Adminitracion y Disposicion">Adminitracion y Disposicion</option>
-                        <option value="Judicial">Judicial</option>
+                        <option value="1">Venta</option>
+                        <option value="2">Adminitracion y Disposicion</option>
+                        <option value="3">Judicial</option>
                     </select>
                 </div>
             </div>
@@ -87,14 +83,10 @@ if (isset($msg)) {
                 <div class="col">
                     <label for="estadoCivilPoderdante">Estado Civil</label>
                     <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante" value="<?php echo e(isset($poderEspecial->estadocivilpoderdante) ? $poderEspecial->estadocivilpoderdante : ''); ?>">
-                    <?php if(isset($poderEspecial->estadocivilpoderdante)): ?>
-                        <option selected disabled><?php echo e($poderEspecial->estadocivilpoderdante); ?></option>
-                    <?php else: ?>
                         <option selected disabled>Seleccionar</option>
-                    <?php endif; ?>
-                        <option value="Casado">Casado</option>
-                        <option value="Soltero">Soltero</option>
-                        <option value="Viudo">Viudo</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
@@ -143,14 +135,10 @@ if (isset($msg)) {
                 <div class="col">
                     <label for="estadoCivilApoderado">Estado Civil</label>
                     <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado" value="<?php echo e(isset($poderEspecial->estadocivilapoderado) ? $poderEspecial->estadocivilapoderado : ''); ?>">
-                    <?php if(isset($poderEspecial->estadocivilapoderado)): ?>
-                        <option selected disabled><?php echo e($poderEspecial->estadocivilapoderado); ?></option>
-                    <?php else: ?>
                         <option selected disabled>Seleccionar</option>
-                    <?php endif; ?>
-                        <option value="Casado">Casado</option>
-                        <option value="Soltero">Soltero</option>
-                        <option value="Viudo">Viudo</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero</option>
+                        <option value="3">Viudo</option>
                     </select>
                 </div>
                 <div class="col">

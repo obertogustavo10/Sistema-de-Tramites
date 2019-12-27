@@ -1,4 +1,4 @@
-<?php $__env->startSection('titulo', $titulo); ?>
+<?php $__env->startSection('titulo', "$titulo"); ?>
 
 <?php $__env->startSection('scripts'); ?>
 <link href="<?php echo e(asset('css/datatables.min.css')); ?>" rel="stylesheet">
@@ -10,8 +10,8 @@
     <li class="breadcrumb-item active">Men&uacute;</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/sistema/menu");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/cliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/cliente/listar");'><span>Recargar</span></a></li>
 </ol>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
@@ -25,9 +25,14 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Padre</th>
-            <th>URL</th>
-            <th>Activo</th>
+            <th>Razon Social</th>
+            <th>Documento</th>
+            <th>Tipo de Documento</th>
+            <th>Tipo de persona</th>
+            <th>Teléfono</th>
+            <th>Mail</th>
+            <th>Domicilio</th>
+            <th>Tipo de Domicilio</th>
         </tr>
     </thead>
 </table> 
@@ -39,11 +44,9 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 2, "asc" ]],
-	    "ajax": "<?php echo e(route('tramitesfinalizados.cargarGrilla')); ?>"
-    });
-    
-    
+        "order": [[ 0, "asc" ]],
+	    "ajax": "<?php echo e(route('cliente.cargarGrilla')); ?>"
+	});
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -16,8 +16,8 @@ class ControladorTipoCliente extends Controller{
         $titulo = "Tipo de clientes";
         if(Usuario::autenticado() == true)
         {
-            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if(!Patente::autorizarOperacion("TIPOCLIENTECONSULTA")) {
+                $codigo = "TIPOCLIENTECONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {

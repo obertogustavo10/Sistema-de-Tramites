@@ -238,6 +238,7 @@ class ControladorPermiso extends Controller
             //Define la entidad servicio
             $entidad = new Familia();
             $entidad->cargarDesdeRequest($request);
+            $titulo= "Permisos";
 
             //validaciones
             if ($entidad->nombre == "") {
