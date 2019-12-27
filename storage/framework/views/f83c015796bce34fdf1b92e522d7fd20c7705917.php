@@ -52,10 +52,13 @@ if (isset($msg)) {
                     <label>Persona:</label>
                     <select id="lstPersona" name="lstPersona" class="form-control">
                     <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Persona Natural</option>
-                        <option value="2">Persona Jurídica</option>
-                        <option value="3">Sociedad Anónima</option>
-                        <option value="4">Compañía Anónima</option>
+                    <?php for($i = 0; $i < count($aTipoClientes); $i++): ?>
+                    <?php if(isset($aTipoClientes)): ?>
+                        <option value="<?php echo e($aTipoClientes[$i]->idtipocliente); ?>"><?php echo e($aTipoClientes[$i]->nombre); ?></option>
+                    <?php else: ?>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <?php endif; ?>
+                    <?php endfor; ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -88,9 +91,13 @@ if (isset($msg)) {
                     <label>Tipo de Domicilio:</label>
                     <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="4">Real</option>
-                        <option value="5">Legal</option>
-                        <option value="6">Comercial</option>
+                        <?php for($i = 0; $i < count($aTipoDomicilios); $i++): ?>
+                        <?php if(isset($aTipoDomicilios)): ?>
+                        <option value="<?php echo e($aTipoDomicilios[$i]->idtipodomicilios); ?>"><?php echo e($aTipoDomicilios[$i]->nombre); ?></option>
+                        <?php else: ?>
+                        <option value="" disabled selected>Seleccionar</option>
+                        <?php endif; ?>
+                        <?php endfor; ?>
                     </select>
                 </div>
                  <div class="form-group col-lg-6">

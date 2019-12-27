@@ -95,13 +95,14 @@ if (isset($msg)) {
                     <label>Tipo de Domicilio:</label>
                     <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                     <option value="" disabled selected>Seleccionar</option>
-                    @for ($i = 0; $i < count($aTipoDomicilios); $i++)
-                    @if (isset($aTipoDomicilios))
+                        <option value="" disabled selected>Seleccionar</option>
+                        @for ($i = 0; $i < count($aTipoDomicilios); $i++)
+                        @if (isset($aTipoDomicilios))
                         <option value="{{ $aTipoDomicilios[$i]->idtipodomicilios }}">{{ $aTipoDomicilios[$i]->nombre }}</option>
-                    @else
-                    <option value="" disabled selected>Seleccionar</option>
-                    @endif
-                    @endfor
+                        @else
+                        <option value="" disabled selected>Seleccionar</option>
+                        @endif
+                        @endfor
                     </select>
                 </div>
                  <div class="form-group col-lg-6">

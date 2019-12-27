@@ -11,7 +11,7 @@ use App\Entidades\Cliente\Domicilio;
 use App\Entidades\Cliente\TipoDocumento;
 use App\Entidades\Cliente\TipoCliente;
 use App\Http\Controllers\Exception;
-
+use App\Entidades\Cliente\TipoDomicilio;
 
 require app_path().'/start/constants.php';
 use Session;
@@ -20,17 +20,21 @@ class ControladorCliente extends Controller{
 
     public function nuevo(){
         $titulo = "Cliente nuevo";
+
+        //SE CREAN EL ARRAY PARA OBTENER LAS COLUMNAS DE LA TABLA TIPO CLIENTE
         $entidadTipoCliente = new TipoCliente;
         $aTipoClientes = $entidadTipoCliente->obtenerFiltrado();
 
-        $entidadTipoDocumento = new TipoDocumento;
-        $entidadTipoDocumento = $entidadTipoDocumento->obtenerFiltrado();
-        return view("clientes.cliente-nuevo", compact('titulo', 'aTipoClientes', 'entidadTipoCliente', 'aTipodocumento', 'entidadTipoDocumento', 'aTipoDomicilios', 'entidadTipoDomicilios'));
+        //SE CREAN EL ARRAY PARA OBTENER LAS COLUMNAS DE LA TABLA TIPO DOMICILIO
+        $entidadTipoDomicilio = new TipoDomicilio;
+        $aTipoDomicilios = $entidadTipoDomicilio->obtenerFiltrado();
 
+         //SE CREAN EL ARRAY PARA OBTENER LAS COLUMNAS DE LA TABLA TIPO DOCUMENTO
+         $entidadTipoDocumento = new TipoDocumento;
+         $aTipoDocumento = $entidadTipoDocumento->obtenerFiltrado();
 
-
-
-
+        return view("clientes.cliente-nuevo", compact('titulo', 'aTipoClientes', 'entidadTipoCliente',
+                                                      'aTipoDomicilios', 'entidadTipoDomicilio', 'aTipoDocumento', 'entidadTipoDocumento'  ));
 
     
     }

@@ -95,7 +95,16 @@ if (isset($msg)) {
       });
 
     </script>
-
+<script type="text/javascript">  
+        $('#startdate').datepicker({ 
+            autoclose: true,   
+            format: 'yyyy-mm-dd'  
+         });
+         $('#enddate').datepicker({ 
+            autoclose: true,   
+            format: 'yyyy-mm-dd'
+         }); 
+    </script>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('plantilla', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -15,7 +15,7 @@ use DateTime;
 class ControladorAutorizacionViajes extends Controller{
 	
     public function nuevo(){
-		$titulo = "Datos Autorización de Viajes";
+		$titulo = "Nueva Autorización de Viajes";
 		return view ("tramites.autorizacionviaje-nuevo", compact('titulo'));
 	}
 
@@ -29,7 +29,9 @@ class ControladorAutorizacionViajes extends Controller{
             } else {
                 $autorizacionViaje = new AutorizacionViaje();
                 $autorizacionViaje->obtenerPorId($id);
-//print_r($poderEspecial);exit;
+                
+                $autorizacionViaje->eliminar();
+//print_r($autorizacionViaje);exit;
                 return view('tramites.autorizacionviaje-nuevo', compact('autorizacionViaje', 'titulo'));
             }
         } else {
@@ -39,7 +41,7 @@ class ControladorAutorizacionViajes extends Controller{
     public function guardar(Request $request){
     try {
         //Define la entidad servicio
-        $titulo = "Nueva Autorización de Viaje";
+        $titulo = "Modificar Autorización de Viaje";
         $autorizacionViaje = new AutorizacionViaje();
         $autorizacionViaje->cargarDesdeRequest($request);
 
@@ -62,6 +64,7 @@ class ControladorAutorizacionViajes extends Controller{
                     $tramite->fecha_inicio = $fechaActual;
                     $tramite->fk_idcliente = Session::get('usuario_id');//Persona q inica el tramite
                     $tramite->fk_idformulario = 5;
+                    $tramite->fk_formulario_url = "/tramite/autorizacion_viaje";
                     $tramite->fk_idtramite_estado = 1;
                     $tramite->idtramite = $tramite->insertar();
 
@@ -82,10 +85,10 @@ class ControladorAutorizacionViajes extends Controller{
 
     $id = $autorizacionViaje->idtramite;
     $autorizacionViaje = new AutorizacionViaje();
-    //$autorizacionViaje->obtenerPorId($id);
+    $autorizacionViaje->obtenerPorId($id);
     
 
-    return view('tramites.autorizacionviaje-nuevo', compact('msg', 'autorizacionviaje', 'titulo')) . '?id=' . $autorizacionViaje->idvalor;
+    return view('tramites.autorizacionviaje-nuevo', compact('msg', 'autorizacionViaje', 'titulo')) . '?id=' . $autorizacionViaje->idvalor;
     }
 }
 

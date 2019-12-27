@@ -10,11 +10,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
     <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
-<<<<<<< HEAD
-    <li class="breadcrumb-item"><a href="/configuracion/formularios">formulario</a></li>
-=======
     <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
->>>>>>> e95d962520e6246f0a9e85fa9fe125ad1780122d
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -55,11 +51,11 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>URL: *</label>
-                    <input type="text" id="txtURL" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
+                    <input type="text" id="txtURL" name="txtURL" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
                 </div>
             </div>
         </form>
@@ -99,7 +95,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
+            url: "<?php echo e(asset('configuracion/formulario/eliminar/')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",

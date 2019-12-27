@@ -138,7 +138,9 @@ Route::get('/tramite/calculo_utilidades/{id}','ControladorCalculoUtlidades@edita
 
 Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@nuevo');
 Route::post('/tramite/autorizacion_viaje', 'ControladorAutorizacionViajes@guardar');
-Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viajecargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla')->name('autorizacionviajes.cargarGrilla');
+Route::get('/tramite/autorizacion_viaje/{id}','ControladorAutorizacionViajes@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR CLIENTE                           */
@@ -147,11 +149,10 @@ Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViajes@cargarGrilla'
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
 Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
 Route::post('/cliente/nuevo/{id}', 'ControladorCliente@guardar');
-Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
-Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
-Route::get('/clientes', 'ControladorCliente@cargarGrilla')->name('clientes.cargarGrilla');
+Route::get('/cliente/nuevo/eliminar', 'ControladorCliente@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CONFIGURACION                     */
@@ -172,8 +173,10 @@ Route::get('/configuracion/formulario/eliminar', 'ControladorConfiguracionFormul
 
 Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramite/poderes_especialescargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
 Route::get('/tramite/poderes_especiales/{id}','ControladorPoderesEspeciales@editar');
+Route::post('/tramite/poderes_especiales/{id}','ControladorPoderesEspeciales@editar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR NUEVO TRAMITE                     */
@@ -202,7 +205,9 @@ Route::get('/tramites/borrador','ControladorTramitesEnBorrador@index');
 Route::get('/tramites/borrador/cargarGrilla', 'ControladorTramitesEnBorrador@cargarGrilla')->name('tramitesenborrador.cargarGrilla');
 
 Route::get('/tramite/tramiteProcesar','ControladorTramitesIniciados@tramiteProcesar');
-Route::get('/tramite/tramiteFinalizar','ControladorTramitesFinalizados@tramiteFinalizar');
+Route::get('/tramite/tramiteFinalizar','ControladorTramitesIniciados@tramiteFinalizar');
+Route::get('/tramite/tramiteAnular','ControladorTramitesIniciados@tramiteAnular');
+Route::get('/tramite/tramiteRechazar','ControladorTramitesIniciados@tramiteRechazar');
 
 
 

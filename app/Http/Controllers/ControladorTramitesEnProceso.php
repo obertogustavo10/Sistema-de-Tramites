@@ -15,8 +15,8 @@ class ControladorTramitesEnProceso extends Controller{
     public function index(){
         $titulo = "Tramites En Proceso";
         if(Usuario::autenticado() == true){
-            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if(!Patente::autorizarOperacion("LISTARTRAMITEENPROCESO")) {
+                $codigo = "LISTARTRAMITEENPROCESO";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {

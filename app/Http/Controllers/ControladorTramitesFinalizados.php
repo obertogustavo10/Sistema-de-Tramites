@@ -30,8 +30,7 @@ class ControladorTramitesFinalizados extends Controller{
         $request = $_REQUEST;
 
         $entidadTramite = new Tramite();
-        $idtramite_estado = 3; //fila de tramites en proceso de la base de datos
-        $aTramites = $entidadTramite->obtenerFiltrado($idtramite_estado);
+        $aTramites = $entidadTramite->obtenerFiltradoFinalizado();
 
         $data = array();
 
@@ -198,6 +197,24 @@ class ControladorTramitesFinalizados extends Controller{
       
         $msg["ESTADO"] = MSG_SUCCESS;
         $msg["MSG"] = "Trámite finalizado correctamente";
+
+        echo json_encode($msg);
+    }
+
+    public function tramiteAnular(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->finalizar();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_ANULADO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite Anulado correctamente";
 
         echo json_encode($msg);
     }

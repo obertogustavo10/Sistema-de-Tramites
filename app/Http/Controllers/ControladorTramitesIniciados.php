@@ -218,4 +218,58 @@ class ControladorTramitesIniciados extends Controller{
 
         echo json_encode($msg);
     }
+
+        public function tramiteFinalizar(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->finalizar();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_FINALIZADO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite finalizado correctamente";
+
+        echo json_encode($msg);
+    }
+
+    public function tramiteAnular(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->anular();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_ANULADO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite Anulado correctamente";
+
+        echo json_encode($msg);
+    }
+
+    public function tramiteRechazar(Request $request){
+        $id = $request->input('id');
+        $entidad = new Tramite();
+        $entidad->idtramite = $id;
+        $entidad->anular();
+
+        //Registra el movimiento
+        $tramiteMovimiento = new TramiteMovimiento();
+        $tramiteMovimiento->fk_idtramite = $id;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_ANULADO;
+        $tramiteMovimiento->insertar();
+      
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Trámite Anulado correctamente";
+
+        echo json_encode($msg);
+    }
 }
