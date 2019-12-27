@@ -127,16 +127,16 @@ class ControladorUsuario extends Controller
                     $entidadUsuario->guardar();
 
                     //Actualiza en datos personales
-                    $legajo = new Personal();
-                    $legajo->guardarDesdeUsuario($entidadUsuario);
+                    //$legajo = new Personal();
+                    //$legajo->guardarDesdeUsuario($entidadUsuario);
 
                 } else {
                     //Inserta en datos personales
-                    $legajo = new Personal();
-                    $legajo->insertarDesdeUsuario($entidadUsuario);
+                    //$legajo = new Personal();
+                    //$legajo->insertarDesdeUsuario($entidadUsuario);
 
                     //Es nuevo
-                    $entidadUsuario->fk_idlegajo = $legajo->idlegajo;
+                    //$entidadUsuario->fk_idlegajo = $legajo->idlegajo;
                     $entidadUsuario->insertar();
                     $_POST["id"] = $entidadUsuario->idusuario;
                 }

@@ -194,9 +194,6 @@ Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramitesIniciados@car
 Route::get('/tramites/finalizados', 'ControladorTramitesFinalizados@index');
 Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramitesFinalizados@cargarGrilla')->name('tramitesfinalizados.cargarGrilla');
 
-Route::get('/tramites/finalizados', 'ControladorTramite@index');
-Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
-
 Route::get('/tramites/enproceso','ControladorTramitesEnProceso@index');
 Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramitesEnProceso@cargarGrilla')->name('tramitesenproceso.cargarGrilla');
 

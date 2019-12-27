@@ -165,4 +165,11 @@ class Tramite extends Model{
         $affected = DB::update($sql, [$this->idtramite]);
     }
 
+    public function rechazar() {
+        $sql = "UPDATE tramites SET
+                fk_idtramite_estado= " . TRAMITE_RECTIFICAR ."
+            WHERE idtramite=?";
+        $affected = DB::update($sql, [$this->idtramite]);
+    }
+
 }

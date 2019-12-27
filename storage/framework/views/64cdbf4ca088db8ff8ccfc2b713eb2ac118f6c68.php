@@ -39,6 +39,7 @@ if (isset($msg)) {
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Rechazar trámite</h5>
+        <input type="hidden" id="txtIdTramite">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,8 +48,8 @@ if (isset($msg)) {
         <textarea name="txtMensajeRechazo" id="txtMensajeRechazo" cols="30" style="height: 115px !important;" class="form-control"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="fProcesarRechazo()">Rechazar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -107,8 +108,29 @@ if (isset($msg)) {
 	    });
     }
 
-    function fTramiteRechazar(){
+    function fTramiteRechazar(idTramite){
+        $("#txtIdTramite").val(idTramite);
         $("#modalRechazar").modal('toggle');
+    }
+
+    function fProcesarRechazo(){
+        idTramite = $("#txtIdTramite").val();
+        mensaje = $("#txtMensajeRechazo").val();
+        $.ajax({
+	            type: "GET",
+	            url: "<?php echo e(asset('tramite/tramiteRechazar')); ?>",
+	            data: { 
+                    id:idTramite,
+                    mensaje:mensaje
+                },
+	            async: true,
+	            dataType: "json",
+	            success: function (respuesta) {
+                    $("#grilla").DataTable().ajax.reload()
+                    msgShow(respuesta.MSG, respuesta.ESTADO);
+                    $("#modalRechazar").modal('toggle');
+	            }
+	    });
     }
 	
 </script>

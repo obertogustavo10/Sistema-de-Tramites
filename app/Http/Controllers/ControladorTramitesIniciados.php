@@ -7,6 +7,7 @@ use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Tramite\Tramite;
 use App\Entidades\Tramite\TramiteMovimiento;
+use App\Entidades\Tramite\MensajeTramite;
 
 
 require app_path().'/start/constants.php';
@@ -257,18 +258,24 @@ class ControladorTramitesIniciados extends Controller{
 
     public function tramiteRechazar(Request $request){
         $id = $request->input('id');
+        $mensaje = $request->input('mensaje');
         $entidad = new Tramite();
         $entidad->idtramite = $id;
-        $entidad->anular();
+        $entidad->rechazar();
+
+        $tramiteMensaje = new MensajeTramite();
+        $tramiteMensaje->fk_idtramite = $id;
+        $tramiteMensaje->mensaje = $mensaje;
+        $tramiteMensaje->insertar();
 
         //Registra el movimiento
         $tramiteMovimiento = new TramiteMovimiento();
         $tramiteMovimiento->fk_idtramite = $id;
-        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_ANULADO;
+        $tramiteMovimiento->fk_idtramite_estado = TRAMITE_RECTIFICAR;
         $tramiteMovimiento->insertar();
       
         $msg["ESTADO"] = MSG_SUCCESS;
-        $msg["MSG"] = "Trámite Anulado correctamente";
+        $msg["MSG"] = "Trámite Rechazado correctamente";
 
         echo json_encode($msg);
     }
