@@ -88,7 +88,7 @@ Class ControladorPoderesEspeciales extends Controller{
 
         $id = $poderEspecial->idtramite;
         $poderEspecial = new PoderEspecial();
-        //$poderEspecial->obtenerPorId($id);
+        $poderEspecial->obtenerPorId($id);
 
         return view('tramites.poderesespeciales-nuevo', compact('msg', 'poderespecial', 'titulo')) . '?id=' . $poderEspecial->idvalor;
     }
