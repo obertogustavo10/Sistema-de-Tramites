@@ -114,10 +114,7 @@ if (isset($msg)) {
     }
 
     function fProcesarRechazo(){
-<<<<<<< HEAD
-=======
         idTramite = $("#txtIdTramite").val();
->>>>>>> e5fabc1ffe5f2641ab0bf1d23b1654c1b51658ac
         mensaje = $("#txtMensajeRechazo").val();
         $.ajax({
 	            type: "GET",
@@ -130,12 +127,8 @@ if (isset($msg)) {
 	            dataType: "json",
 	            success: function (respuesta) {
                     $("#grilla").DataTable().ajax.reload()
-<<<<<<< HEAD
-	                 msgShow(respuesta.MSG, respuesta.ESTADO);
-=======
                     msgShow(respuesta.MSG, respuesta.ESTADO);
                     $("#modalRechazar").modal('toggle');
->>>>>>> e5fabc1ffe5f2641ab0bf1d23b1654c1b51658ac
 	            }
 	    });
     }
