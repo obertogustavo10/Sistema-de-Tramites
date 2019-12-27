@@ -104,10 +104,9 @@ Route::get('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@nuevo');
 Route::post('configuracion/tipodecliente/nuevo', 'ControladorTipoCliente@guardar');
 Route::get('/configuracion/tipodeclientes', 'ControladorTipocliente@index');
 Route::get('/configuracion/tipodeclientes/cargargrilla', 'ControladorTipoCliente@cargarGrilla')->name('tipodeclientes.cargarGrilla');
-Route::get('/configuracion/tipodecliente/nuevo/eliminar', 'ControladorTipoCliente@eliminar');
-Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
-Route::post('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@guardar');
-Route::get('/configuracion/tipodecliente/{id}', 'ControladorTipoCliente@editar');
+Route::get('/configuracion/tipodecliente/nuevo/{id}', 'ControladorTipoCliente@editar');
+Route::post('/configuracion/tipodecliente/nuevo/{id}', 'ControladorTipoCliente@guardar');
+Route::get('/configuracion/tipodecliente/eliminar', 'ControladorTipoCliente@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE VACACIONES             */
@@ -142,6 +141,9 @@ Route::get('/tramite/autorizacion_viaje/{id}','ControladorAutorizacionViajes@edi
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
 Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
+Route::post('/cliente/nuevo/{id}', 'ControladorCliente@guardar');
+Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
 Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 Route::get('/clientes', 'ControladorCliente@cargarGrilla')->name('clientes.cargarGrilla');
 
@@ -156,7 +158,7 @@ Route::get('/configuracion/formulario/cargarGrilla', 'ControladorconfiguracionFo
 Route::get('/configuracion/formulario/nuevo/eliminar', 'ControladorConfiguracionFormularios@eliminar');
 Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
 Route::post('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@guardar');
-Route::get('/configuracion/formulario/nuevo/{id}', 'ControladorConfiguracionFormularios@editar');
+Route::get('/configuracion/formulario/eliminar', 'ControladorConfiguracionFormularios@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR PODERES ESPECIALES                */

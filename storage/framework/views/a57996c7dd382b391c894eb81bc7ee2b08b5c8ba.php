@@ -1,4 +1,4 @@
-<?php $__env->startSection('titulo', "Listado del Formularios"); ?>
+<?php $__env->startSection('titulo', "$titulo"); ?>
 
 <?php $__env->startSection('scripts'); ?>
 <link href="<?php echo e(asset('css/datatables.min.css')); ?>" rel="stylesheet">
@@ -7,12 +7,11 @@
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
-    <li class="breadcrumb-item active">Formularios</a></li>
+    <li class="breadcrumb-item active">Men&uacute;</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/configuracion/formularios");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/sistema/menu");'><span>Recargar</span></a></li>
 </ol>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('contenido'); ?>
@@ -26,8 +25,9 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Descripción</th>
-            <th>URL</th>
+            <th>Estado</th>
+            <th>Fecha de Inicio</th>
+            <th>Rectificativa</th>
         </tr>
     </thead>
 </table> 
@@ -40,7 +40,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 2, "asc" ]],
-	    "ajax": "<?php echo e(route('formulario.cargarGrilla')); ?>"
+	    "ajax": "<?php echo e(route('tramitesiniciados.cargarGrilla')); ?>"
 	});
 </script>
 <?php $__env->stopSection(); ?>

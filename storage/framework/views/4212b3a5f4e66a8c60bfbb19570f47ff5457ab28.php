@@ -1,20 +1,19 @@
 <?php $__env->startSection('titulo', "$titulo"); ?>
 <?php $__env->startSection('scripts'); ?>
 <script>
-    globalId = '<?php echo isset($formulario->idformulario) && $formulario->idformulario > 0 ? $formulario->idformulario : 0; ?>';
-    <?php $globalId = isset($formulario->idformulario) ? $formulario->idformulario : "0"; ?>
+    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
+    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
 
 </script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('breadcrumb'); ?>
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/home">Configuración</a></li>
-    <li class="breadcrumb-item"><a href="/configuracion/formularios">Formulario</a></li>
-    <li class="breadcrumb-item active">Modificar</li>
+    <li class="breadcrumb-item"><a href="/tramite/nuevo">Trámites</a></li>
+    <li class="breadcrumb-item active">Nuevo Calculo de Vacaciones</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/configuracion/formulario/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/tramite/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -23,7 +22,7 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/configuracion/formularios";
+    location.href ="/Tramites/iniciados";
 }
 </script>
 <?php $__env->stopSection(); ?>
@@ -46,16 +45,39 @@ if (isset($msg)) {
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
-                    <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo e(isset($formulario->nombre) ? $formulario->nombre : ''); ?>" required>
+                    <label>Nombre y Apellido del Trabajador: *</label>
+                    <input type="text" id="txtNombre" name="txtNombreTrabajador" class="form-control" 
+                    value="<?php echo e(isset($calculoVacaciones->nombreyapellidodeltrabajor) ? $calculoVacaciones->nombreyapellidodeltrabajor : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="<?php echo e(isset($formulario->descripcion) ? $formulario->descripcion : ''); ?>" required>
+                    <label>No. Cedula de Identidad del Trabajador: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtCedula" id="txtCedula"
+                    value="<?php echo e(isset($calculoVacaciones->numerodeceduladeidentidad) ? $calculoVacaciones->numerodeceduladeidentidad : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>URL: *</label>
-                    <input type="text" id="txtURL" name="txtURL" class="form-control" value="<?php echo e(isset($formulario->url) ? $formulario->url : ''); ?>" required>
+                    <label>Cargo que ocupa en la empresa: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtCargo" id="txtCargo"
+                    value="<?php echo e(isset($calculoVacaciones->cargoqueocupaenlaempresa) ? $calculoVacaciones->cargoqueocupaenlaempresa : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Fecha de Ingreso: *</label>
+                    <input class="form-control" type="date" placeholder="" name="txtFechaIngreso" id="txtFechaIngreso"
+                    value="<?php echo e(isset($calculoVacaciones->fechadeingreso) ? $calculoVacaciones->fechadeingreso : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Fecha de Salida de Vacaciones: *</label>
+                    <input class="form-control" type="date" placeholder="" name="txtFechaSalida" id="txtFechaSalida"
+                    value="<?php echo e(isset($calculoVacaciones->fechadesalidadevacaciones) ? $calculoVacaciones->fechadesalidadevacaciones : ''); ?>" required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Ultimo Salario Devengado: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtUltimoSalario" id="txtUltimoSalario"
+                    value="<?php echo e(isset($calculoVacaciones->ultimosalariodevengado) ? $calculoVacaciones->ultimosalariodevengado : ''); ?>" required>
+                </div>
+                 <div class="form-group col-lg-6">
+                    <label>Nombre del Solicitante: *</label>
+                    <input class="form-control" type="text" placeholder="" name="txtNombreSolicitante" id="txtNombreSolicitante"
+                    value="<?php echo e(isset($calculoVacaciones->nombredelsolicitante) ? $calculoVacaciones->nombredelsolicitante : ''); ?>" required>
                 </div>
             </div>
         </form>
@@ -95,7 +117,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "<?php echo e(asset('configuracion/formulario/eliminar/')); ?>",
+            url: "<?php echo e(asset('sistema/menu/eliminar')); ?>",
             data: { id:globalId },
             async: true,
             dataType: "json",
