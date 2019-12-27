@@ -28,8 +28,7 @@ class Usuario_familia extends Model
     }
 
     public function eliminarPorUsuario($idUsuario) {
-        $sql = "DELETE FROM sistema_usuario_familia A
-        WHERE A.fk_idusuario=$idUsuario";
+        $sql = "DELETE FROM sistema_usuario_familia WHERE fk_idusuario=$idUsuario";
         $deleted = DB::delete($sql);
     }
 
