@@ -114,6 +114,7 @@ class ControladorUsuario extends Controller
     public function guardar(Request $request){
         try {
             //Define la entidad servicio
+            $titulo = "Usuario";
             $entidadUsuario = new Usuario();
             $entidadUsuario->cargarDesdeRequest($request);
 

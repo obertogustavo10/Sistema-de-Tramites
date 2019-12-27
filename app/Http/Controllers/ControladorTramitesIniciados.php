@@ -33,8 +33,7 @@ class ControladorTramitesIniciados extends Controller{
         $request = $_REQUEST;
 
         $entidadTramite = new Tramite();
-        $idtramite_estado = 1; //fila de tramites en proceso de la base de datos
-        $aTramites = $entidadTramite->obtenerFiltrado($idtramite_estado);
+        $aTramites = $entidadTramite->obtenerFiltradoIniciados();
 
         $data = array();
 
@@ -62,6 +61,7 @@ class ControladorTramitesIniciados extends Controller{
                             <a class="dropdown-item" href="#" onclick="fTramiteRechazar('.$aTramites[$i]->idtramite.');">Rechazar</a>
                             <a class="dropdown-item" href="#" onclick="fTramiteRectificar('.$aTramites[$i]->idtramite.');">Rectificar</a>
                             <a class="dropdown-item" href="#" onclick="fTramiteAnular('.$aTramites[$i]->idtramite.');">Anular</a>
+                            <a class="dropdown-item" href="/tramite/mesajes/'.$aTramites[$i]->idtramite.'">Ver mensajes</a>
                         </div>
                         </div>';
                 $cont++;
