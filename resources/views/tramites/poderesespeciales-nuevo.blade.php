@@ -48,10 +48,14 @@ if (isset($msg)) {
                 <div class="col-sm-4">
                     <label for="tipoDePoder">Tipo de Poder</label>
                     <select class="form-control" name="tipoDePoder" id="tipoDePoder">
+                    @if (isset($poderEspecial->tipopoder))
+                        <option selected disabled>{{ $poderEspecial->tipopoder }}</option>
+                    @else
                         <option selected disabled>Seleccionar</option>
-                        <option value="1">Venta</option>
-                        <option value="2">Adminitracion y Disposicion</option>
-                        <option value="3">Judicial</option>
+                    @endif
+                        <option value="Venta">Venta</option>
+                        <option value="Adminitracion y Disposicion">Adminitracion y Disposicion</option>
+                        <option value="Judicial">Judicial</option>
                     </select>
                 </div>
             </div>
@@ -84,10 +88,14 @@ if (isset($msg)) {
                 <div class="col">
                     <label for="estadoCivilPoderdante">Estado Civil</label>
                     <select class="form-control" name="estadoCivilPoderdante" id="estadoCivilPoderdante" value="{{ $poderEspecial->estadocivilpoderdante or ''}}">
+                    @if (isset($poderEspecial->estadocivilpoderdante))
+                        <option selected disabled>{{ $poderEspecial->estadocivilpoderdante }}</option>
+                    @else
                         <option selected disabled>Seleccionar</option>
-                        <option value="1">Casado</option>
-                        <option value="2">Soltero</option>
-                        <option value="3">Viudo</option>
+                    @endif
+                        <option value="Casado">Casado</option>
+                        <option value="Soltero">Soltero</option>
+                        <option value="Viudo">Viudo</option>
                     </select>
                 </div>
                 <div class="col">
@@ -136,10 +144,14 @@ if (isset($msg)) {
                 <div class="col">
                     <label for="estadoCivilApoderado">Estado Civil</label>
                     <select class="form-control" name="estadoCivilApoderado" id="estadoCivilApoderado" value="{{ $poderEspecial->estadocivilapoderado or ''}}">
+                    @if (isset($poderEspecial->estadocivilapoderado))
+                        <option selected disabled>{{ $poderEspecial->estadocivilapoderado }}</option>
+                    @else
                         <option selected disabled>Seleccionar</option>
-                        <option value="1">Casado</option>
-                        <option value="2">Soltero</option>
-                        <option value="3">Viudo</option>
+                    @endif
+                        <option value="Casado">Casado</option>
+                        <option value="Soltero">Soltero</option>
+                        <option value="Viudo">Viudo</option>
                     </select>
                 </div>
                 <div class="col">

@@ -117,13 +117,21 @@ Route::post('/tramite/calculo_vacaciones','ControladorCalculoVacaciones@guardar'
 Route::get('/tramite/calculo_vacacionescargarGrilla', 'ControladorCalculoVacaciones@cargarGrilla')->name('calculovacaciones.cargarGrilla');
 Route::get('/tramite/calculo_vacaciones/{id}','ControladorCalculoVacaciones@editar');
 
+
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@nuevo');
+Route::get('/tramite/autorizacion_viaje', 'ControladorAutorizacionViaje@guardar');
+Route::get('/tramite/cargarGrilla', 'ControladorAutorizacionViaje@cargarGrilla')->name('menu.cargarGrilla');
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@nuevo');
+Route::get('/tramite/autorizacionviaje', 'ControladorAutorizacionViaje@guardar');
+
 /* --------------------------------------------- */
 /* CONTROLADOR CALCULO DE UTILIDADES             */
 /* --------------------------------------------- */
 
 Route::get('/tramite/calculo_utilidades', 'ControladorCalculoUtlidades@nuevo');
 Route::post('/tramite/calculo_utilidades', 'ControladorCalculoUtlidades@guardar');
-
+Route::get('/tramite/calculo_utilidades', 'ControladorCalculoUtlidades@cargarGrilla')->name('CalculodeUtilidades.cargarGrilla');
+Route::get('/tramite/calculo_utilidades/{id}','ControladorCalculoUtlidades@editar');
 /* --------------------------------------------- */
 /* CONTROLADOR AUTORIZACION DE VIAJE             */
 /* --------------------------------------------- */
@@ -184,10 +192,18 @@ Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramitesIniciados@car
 Route::get('/tramites/finalizados', 'ControladorTramitesFinalizados@index');
 Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramitesFinalizados@cargarGrilla')->name('tramitesfinalizados.cargarGrilla');
 
+Route::get('/tramites/finalizados', 'ControladorTramite@index');
+Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
+
 Route::get('/tramites/enproceso','ControladorTramitesEnProceso@index');
 Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramitesEnProceso@cargarGrilla')->name('tramitesenproceso.cargarGrilla');
 
 Route::get('/tramites/borrador','ControladorTramitesEnBorrador@index');
 Route::get('/tramites/borrador/cargarGrilla', 'ControladorTramitesEnBorrador@cargarGrilla')->name('tramitesenborrador.cargarGrilla');
+
+Route::get('/tramite/tramiteProcesar','ControladorTramitesIniciados@tramiteProcesar');
+Route::get('/tramite/tramiteFinalizar','ControladorTramitesFinalizados@tramiteFinalizar');
+
+
 
 });

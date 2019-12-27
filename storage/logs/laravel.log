@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2019-12-26 12:44:21] local.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM tipo_clientes WHERE idtipocliente = '2'' at line 4 (SQL: SELECT
                 idtipocliente,
                 nombre,
@@ -691,3 +692,5 @@
 #53 C:\\xamppp\\htdocs\\sistema\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #54 {main}
 "} 
+=======
+>>>>>>> e0d56809e633e2eaa7cb70b3dfeac321f7a30abb

@@ -25,26 +25,28 @@ class ControladorCliente extends Controller{
         try {
             //Define la entidad servicio
             $titulo = "Modificar Cliente";
-            $entidad = new Cliente();
-            $entidad = new Domicilio();
-            $entidad->cargarDesdeRequest($request);
+            $entidadCliente = new Cliente();
+            $entidadDomicilio = new Domicilio();
+            $entidadCliente->cargarDesdeRequest($request);
+            $entidadDomicilio->cargarDesdeRequest($request);
 
             //validaciones
-            if ($entidad->nombre == "") {
+            if ($entidadCliente->nombre == "") {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = FALTANOMBRE; //ARREGLAR
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
-                    $entidad->guardarCliente();
-                    $entidad->guardarDomicilio();
+                    $entidadCliente->guardarCliente();
+                    $entidadDomicilio->guardarDomicilio();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 } else {
                     //Es nuevo
-                    $entidad->insertarCliente();
-                    $entidad->insertarDomicilio();
+                    $entidadCliente->insertarCliente();
+                    $entidadDomicilio->fk_idcliente = $entidadCliente->idcliente;
+                    $entidadDomicilio->insertarDomicilio();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
@@ -56,7 +58,7 @@ class ControladorCliente extends Controller{
             $msg["MSG"] = ERRORINSERT;
         }
 
-        $id = $entidad->idcliente;
+        $id = $entidadCliente->idcliente;
         $cliente = new Cliente();
         $cliente->obtenerPorIdCliente($id);
 
