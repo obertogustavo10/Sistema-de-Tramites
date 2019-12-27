@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
-use App\Entidades\Sistema\Patente;;
+use App\Entidades\Sistema\Patente;
 use App\Entidades\Tramite\Tramite;
 use App\Entidades\Tramite\TramiteMovimiento;
 
@@ -15,8 +15,8 @@ class ControladorTramitesFinalizados extends Controller{
     public function index(){
         $titulo = "Tramites Finalizados";
         if(Usuario::autenticado() == true){
-            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if(!Patente::autorizarOperacion("LISTARTRAMITEFINALIZADO")) {
+                $codigo = "LISTARTRAMITEFINALIZADO";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
