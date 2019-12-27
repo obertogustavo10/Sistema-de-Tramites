@@ -66,7 +66,7 @@ class Domicilio extends Model{
                         A.domicilio,
                         B.nombre 
                         FROM domicilios A
-                         INNER JOIN tipo_domicilios B ON A.fk_idtipodomicilio = D.nombre 
+                         INNER JOIN tipo_domicilios B ON A.fk_idtipodomicilio = B.nombre 
                     WHERE 1=1
                     ";
     
@@ -76,9 +76,9 @@ class Domicilio extends Model{
             }
             $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
     
-            $lstRetorno = DB::select($sql);
+            $lstRetornoDomicilio = DB::select($sql);
     
-            return $lstRetorno;
+            return $lstRetornoDomicilio;
         }
         
     }

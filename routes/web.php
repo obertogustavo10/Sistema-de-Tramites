@@ -149,11 +149,10 @@ Route::get('/tramite/autorizacion_viaje/{id}','ControladorAutorizacionViajes@edi
 Route::get('/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/cliente/nuevo', 'ControladorCliente@guardar');
 Route::get('/cliente/listar', 'ControladorCliente@index');
+Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
 Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
 Route::post('/cliente/nuevo/{id}', 'ControladorCliente@guardar');
-Route::get('/cliente/nuevo/{id}', 'ControladorCliente@editar');
-Route::get('/cliente/listar/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
-Route::get('/clientes', 'ControladorCliente@cargarGrilla')->name('clientes.cargarGrilla');
+Route::get('/cliente/nuevo/eliminar', 'ControladorCliente@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CONFIGURACION                     */
@@ -174,8 +173,10 @@ Route::get('/configuracion/formulario/eliminar', 'ControladorConfiguracionFormul
 
 Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@nuevo');
 Route::post('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
+Route::get('/tramite/poderes_especiales','ControladorPoderesEspeciales@guardar');
 Route::get('/tramite/poderes_especialescargarGrilla', 'ControladorPoderesEspeciales@cargarGrilla')->name('poderesespeciales.cargarGrilla');
 Route::get('/tramite/poderes_especiales/{id}','ControladorPoderesEspeciales@editar');
+Route::post('/tramite/poderes_especiales/{id}','ControladorPoderesEspeciales@editar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR NUEVO TRAMITE                     */
@@ -193,9 +194,6 @@ Route::get('/tramites/iniciados/cargarGrilla', 'ControladorTramitesIniciados@car
 
 Route::get('/tramites/finalizados', 'ControladorTramitesFinalizados@index');
 Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramitesFinalizados@cargarGrilla')->name('tramitesfinalizados.cargarGrilla');
-
-Route::get('/tramites/finalizados', 'ControladorTramite@index');
-Route::get('/tramites/finalizados/cargarGrilla', 'ControladorTramite@cargarGrilla')->name('tramitefinalizado.cargarGrilla');
 
 Route::get('/tramites/enproceso','ControladorTramitesEnProceso@index');
 Route::get('/tramites/enproceso/cargarGrilla', 'ControladorTramitesEnProceso@cargarGrilla')->name('tramitesenproceso.cargarGrilla');
