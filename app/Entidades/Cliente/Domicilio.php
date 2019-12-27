@@ -11,41 +11,43 @@ class Domicilio extends Model{
     public $timestamps = false;
 
     protected $fillable = [
-        'iddomicilio', 'domicilio'
+         'iddomicilio',  'domicilio', 'fk_tipodomicilio', 'fk_idcliente'
     ];
     protected $hidden =[
 
     ];
     public function cargarDesdeRequest($request) {
-        $this->iddomicilio = $request->input('iddomicilio')!= "0" ? $request->input('iddomicilio') : $this->iddomicilio;
+       $this->iddomicilio = $request->input('iddomicilio')!= "0" ? $request->input('iddomicilio') : $this->iddomicilio; 
         $this->domicilio =$request->input('txtDomicilio');
+        $this->fk_idtipodomicilio = $request->input('lstTipoDomicilio');
        
        
 
     }
 
     public function insertarDomicilio() {
-        $sql = "INSERT INTO domicilios (
-                iddomicilio,
-                domicilio
-           /* fk_idtipodomicilio */
+        $sql = "INSERT INTO domicilios ( 
+                domicilio,
+           fk_idtipodomicilio,
+           fk_idcliente
 
 
-            ) VALUES ( ?, ?/* , ? */);";
+            ) VALUES ( ? , ?, ? );";
 
     
        $result = DB::insert($sql, [
              
  
             $this->domicilio,
-            /* $this->fk_idtipodomicilio */
+             $this->fk_idtipodomicilio,
+             $this->fk_idcliente
         ]);
        return $this->iddomicilio = DB::getPdo()->lastInsertId();
     }
     public function guardarDomicilio() {
         $sql = "UPDATE domicilios SET
-            domicilio='$this->domicilio'/* ,
-            fk_idtipodomicilio='$this->fk_idtipodomicilio' */
+            domicilio='$this->domicilio' ,
+            fk_idtipodomicilio='$this->fk_idtipodomicilio' 
             WHERE iddomicilio=?";
         $affected = DB::update($sql, [$this->iddomicilio]);
     }
@@ -61,10 +63,10 @@ class Domicilio extends Model{
                 );
             $sql = "SELECT
                         A.iddomicilio,
-                        A.domicilio/* ,
-                        B.nombre */
+                        A.domicilio,
+                        B.nombre 
                         FROM domicilios A
-                       /*  INNER JOIN tipo_domicilios B ON A.fk_idtipodomicilio = D.nombre */
+                         INNER JOIN tipo_domicilios B ON A.fk_idtipodomicilio = D.nombre 
                     WHERE 1=1
                     ";
     

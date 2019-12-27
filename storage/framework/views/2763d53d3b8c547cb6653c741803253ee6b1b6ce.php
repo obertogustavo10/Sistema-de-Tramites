@@ -46,20 +46,20 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="<?php echo e($globalId); ?>" required>
                 <div class="form-group col-lg-6">
                     <label for="txtNombreMadre">Nombre de la Madre/Tutora:</label>
-                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="<?php echo e(isset($autorizacionViaje->txtNombreMadre) ? $autorizacionViaje->txtNombreMadre : ''); ?>" required>
+                    <input type="text" id="txtNombreMadre" name="txtNombreMadre" class="form-control" value="<?php echo e(isset($autorizacionViaje->nombremadre) ? $autorizacionViaje->nombremadre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtNombrePadre">Nombre del Padre/Tutor:</label>
-                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="<?php echo e(isset($autorizacionViaje->txtNombrePadre) ? $autorizacionViaje->txtNombrePadre : ''); ?>" required>
+                    <input type="text" id="txtNombrePadre" name="txtNombrePadre" class="form-control" value="<?php echo e(isset($autorizacionViaje->nombrepadre) ? $autorizacionViaje->nombrepadre : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtNombreMenor">Nombre del/la Menor:</label>
-                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="<?php echo e(isset($autorizacionViaje->txtNombreMenor) ? $autorizacionViaje->txtNombreMenor : ''); ?>" required>
+                    <input type="text" id="txtNombreMenor" name="txtNombreMenor" class="form-control" value="<?php echo e(isset($autorizacionViaje->nombremenor) ? $autorizacionViaje->nombremenor : ''); ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                 </select>
-                    <label for="lstAcomp">Viaja:</label>
-                    <select id="lstAcomp" name="lstAcomp" class="form-control" value="<?php echo e(isset($autorizacionViaje->lstAcomp) ? $autorizacionViaje->lstAcomp : ''); ?>" required>
+                    <label for="lstAcomp">Si Viaja:</label>
+                    <select id="lstAcomp" name="lstAcomp" class="form-control" value="<?php echo e(isset($autorizacionViaje->viajaacompañado) ? $autorizacionViaje->viajaacompañado : ''); ?>" required>
                         <option value="" disabled selected>Seleccionar</option>
                         <option value="1">Solo/a</option>
                         <option value="2">Acompañada/o del Padre, Madre y/o Tutor/a </option>
@@ -67,22 +67,24 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="lstPais">Viaja a:</label>
-                    <select id="lstPais" name="lstPais" class="form-control" value="<?php echo e(isset($autorizacionViaje->lstPais) ? $autorizacionViaje->lstPais : ''); ?>" required>
-                        <optgroup label="País">
+                    <select id="lstPais" name="lstPais" class="form-control" value="<?php echo e(isset($autorizacionViaje->pais) ? $autorizacionViaje->pais : ''); ?>" required>
+                        <optgroup label="País" name="lstPais" id="lstPais">
                             <option value="1">Todos los paises del mundo</option>
-                            <optgroup label="Seleccionar País">
-                                <option value="2">Argentina</option>
-                                <option value="3">Brasil</option>
-                            </optgroup>
                         </optgroup>
+                        <optgroup label="Seleccionar País" name="lstPais" id="lstPais">
+                            <option value="2">Argentina</option>
+                            <option value="3">Brasil</option>
+                        </optgroup>    
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtTiempo">Hasta:</label>
-                    <select name="txtTiempo" label="fecha" class="form-control" value="<?php echo e(isset($autorizacionViaje->txtTiempo) ? $autorizacionViaje->txtTiempo : ''); ?>" required>
-                        <option value="1">Hasta la mayoría de edad</option>
-                        <option value="2">Definir fecha</option><input type="text" name="fecha"></option>    
+                    <select name="txtTiempo" label="txtTiempo" class="form-control" value="<?php echo e(isset($autorizacionViaje->tiempo) ? $autorizacionViaje->tiempo : ''); ?>" required>
+                        <option value="1">Hasta la mayoría de edad</option>  
                     </select>
+                    <label for="txtTiempo2">Definir fecha</label>
+                        <option value="2"></option> 
+                        <input type="date" name="txtTiempo2" class="form-control" required value="<?php echo e(isset($autorizacionViaje->tiempo) ? $autorizacionViaje->tiempo : ''); ?>"> 
                 </div>
             </div>
             </div>

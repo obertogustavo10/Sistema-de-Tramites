@@ -15,8 +15,8 @@ class ControladorTramitesEnBorrador extends Controller{
     public function index(){
         $titulo = "Tramites En Borrador";
         if(Usuario::autenticado() == true){
-            if(!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if(!Patente::autorizarOperacion("LISTARTRAMITEENBORRADOR")) {
+                $codigo = "LISTARTRAMITEENBORRADOR";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view ('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {

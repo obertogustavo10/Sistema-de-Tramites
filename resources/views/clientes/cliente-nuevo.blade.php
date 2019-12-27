@@ -69,7 +69,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Tipo de Documento:</label>
-                    <select id="lstTipoDocumento" name="lstTipoDocumento" class="form-control" required>
+                    <select id="lstTipoDocumento" name="lstTipoDocumento" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
                         <option value="1">CUIT/CUIL</option>
                         <option value="2">RIF</option>
@@ -89,9 +89,9 @@ if (isset($msg)) {
                     <label>Tipo de Domicilio:</label>
                     <select id="lstTipoDomicilio" name="lstTipoDomicilio" class="form-control">
                         <option value="" disabled selected>Seleccionar</option>
-                        <option value="1">Real</option>
-                        <option value="2">Legal</option>
-                        <option value="3">Comercial</option>
+                        <option value="4">Real</option>
+                        <option value="5">Legal</option>
+                        <option value="6">Comercial</option>
                     </select>
                 </div>
                  <div class="form-group col-lg-6">

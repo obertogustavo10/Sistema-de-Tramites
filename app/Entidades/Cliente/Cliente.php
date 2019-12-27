@@ -11,7 +11,7 @@ class Cliente extends Model{
     public $timestamps = false;
 
     protected $fillable = [
-        'idcliente', 'razon_social', 'nombre', 'mail', 'documento', 'telefono', 'fk_idtipodomicilio', 'fk_idtipocliente', 'fk_idtipodocumento'
+        'idcliente', 'razon_social', 'nombre', 'mail', 'documento', 'telefono',  'fk_idtipocliente', 'fk_idtipodocumento'
     ];
     protected $hidden =[
 
@@ -21,10 +21,11 @@ class Cliente extends Model{
         $this->razon_social =$request->input('txtRazonSocial');
         $this->nombre =$request->input('txtNombre');
         $this->mail = $request->input('txtMail');
-        $this->documento = $request->input('txtDocumento');
+        $this->fk_idtipodocumento = $request->input('lstTipoDocumento');
         $this->telefono = $request->input('txtTel');
         $this->fk_idtipocliente = $request->input('lstPersona');
-        $this->fk_idtipodomicilio = $request->input('lstTipoDomicilio');
+        $this->documento = $request->input('txtDocumento');
+       
       
 
     }
@@ -38,11 +39,10 @@ class Cliente extends Model{
                 documento,
                 telefono,
                 fk_idtipocliente,
-                fk_idtipodomicilio,
                 fk_idtipodocumento
 
 
-            ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+            ) VALUES ( ?, ?, ?, ?, ?, ?, ?);";
 
     
        $result = DB::insert($sql, [
@@ -53,8 +53,8 @@ class Cliente extends Model{
             $this->documento,
             $this->telefono,
             $this->fk_idtipocliente,
-            $this->fk_idtidomicilio,
-            $this->fk_idtidocumento,
+            $this->fk_idtipodocumento
+            
         ]);
        return $this->idcliente = DB::getPdo()->lastInsertId();
     }
@@ -66,7 +66,6 @@ class Cliente extends Model{
             documento=$this->documento,
             telefono='$this->telefono',
             fk_idtipocliente='$this->fk_idtipocliente',
-            fk_idtipodomicilio='$this->fk_idtipodomicilio',
             fk_idtipodocumento='$this->fk_idtipodocumento'
             WHERE idcliente=?";
         $affected = DB::update($sql, [$this->idcliente]);
@@ -76,7 +75,7 @@ class Cliente extends Model{
             idcliente=?";
         $affected = DB::delete($sql, [$this->idcliente]);
     }
-    public function obtenerFiltradoCliente() {
+    public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'A.nombre',
@@ -91,13 +90,11 @@ class Cliente extends Model{
                     A.documento,
                     A.telefono,
                     A.mail,
-                    A.fk_idtipocliente,
+                    B.idtipocliente,
                     C.nombre AS tipodocumento,
-                    D.nombre AS tipodomicilio
                     FROM clientes A
                     INNER JOIN tipo_clientes B ON A.fk_idtipocliente = B.idtipocliente
                     INNER JOIN tipo_documentos C ON A.fk_idtipodocumento = C.nombre
-                    INNER JOIN tipo_domicilios D ON A.fk_idtipodomicilio = D.nombre
                 WHERE 1=1
                 ";
 
@@ -123,7 +120,6 @@ class Cliente extends Model{
                 documento,
                 telefono,
                 fk_idtipocliente,
-                fk_idtipodomicilio,
                 fk_idtipodocumento
               FROM clientes WHERE idcliente = $id";
       $lstRetorno = DB::select($sql);
